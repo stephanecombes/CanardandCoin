@@ -8,7 +8,7 @@ class Conf
         'hostname' => 'localhost',
         // A l'IUT, vous avez une BDD nommee comme votre login
         // Sur votre machine, vous devrez creer une BDD
-        'database' => 'canardandcoin    ',
+        'database' => 'canardandcoin',
         // A l'IUT, c'est votre login
         // Sur votre machine, vous avez surement un compte 'root'
         'login' => 'tilo',
@@ -45,6 +45,10 @@ class Conf
     public static function getPassword()
     {
         return self::$databases['password'];
+    }
+
+    public static function getPrefix(){
+        return self::$databases['prefix'];
     }
 
 }

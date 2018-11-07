@@ -38,44 +38,91 @@ class Model {
 		$class_name->$nomAttribut = $valeur;
 	}
 
-	public function create(){
+	public function select($primary_value){
+		$table_name = Conf::getPrefix() . static::$object;
+		$class_name = 'Model' . ucfirst(static::$object);
+		$primary_key = static::$primary;
 
-	}
-
-	public function select(){
-		
+		try{
+			$sql = "SELECT* FROM $table_name WHERE $primary_key = :id_tag";
+			$rep_prep = Model::$PDO->prepare($sql);
+			$values = array('id_tag' => $primary_key,);
+			$rep_prep->execute($values);
+			$rep_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
+			$tab = $rep_prep->fetchAll();
+			if(empty($tab){
+				return false;
+			}else{
+				return $tab[0];
+			}
+		}catch(PDOException $e) {
+			//affiche un message d'erreur.
+	 		echo $e->getMessage();
+	  		die();
+		}
 	}
 
 	public function selectAll(){
-		
+		$table_name = Conf::getPrefix() . static::$object;
+		$class_name = 'Model' . ucfirst(static::$object);
+
+		try{
+			$rep = Model::$PDO->query("SELECT* FROM $table_name");
+			$rep->setFetchMode(PDO::FETCH_CLASS, $class_name);
+			$tab = $rep->fetchAll();
+			return $tab;
+		}catch(PDOException $e) {
+			//affiche un message d'erreur.
+	 		echo $e->getMessage();
+	  		die();
+		}
 	}
 
-	public function update(){
-		
+	public function update($data){
+		$table_name = Conf::getPrefix() . static::$object;
+		$primary_key = static::$primary;
+
+		try{
+			$sql = "UPDATE $table_name SET ";
+			$sets = array();
+
+			foreach($data as $key=>$values){
+				if($key != $primary_key){
+					$sets[] = $key . ' = :' . $key;
+				}
+			}
+
+			$sql.= implode(', ', $sets) . ' WHERE ' . $primary_key . ' = :' . $primary_key;
+			$rep_prep = Model::$PDO->prepare($sql);
+			$rep_prep->execute($data);
+
+
+		}catch(PDOException $e) {
+			//affiche un message d'erreur
+	 		echo $e->getMessage();
+	  		die();
+		}
 	}
 
-	public function delete(){
-		
+	public function delete($primary_value){
+		$table_name = Conf::getPrefix() . static::$object;
+		$primary_key = static::$primary;
+
+		try{
+			$sql = "DELETE FROM $table_name WHERE $primary_key = :id_tag";
+			$rep_prep = Model::$PDO->prepare($sql);
+			$values = array('id_tag' => $primary_key,);
+			$rep_prep->execute($values);
+		}catch(PDOException $e) {
+			//affiche un message d'erreur
+	 		echo $e->getMessage();
+	  		die();
+		}
 	}
 
+	public function save(){
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	}
 }
 
 //initialisation du Model.
