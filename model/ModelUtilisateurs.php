@@ -13,7 +13,6 @@ class ModelUtilisateurs {
 	private $idRole;
 	protected static $object = 'utilisateurs';
 	protected static $primary = 'idUtilisateur';
-
 }
 
 ?>

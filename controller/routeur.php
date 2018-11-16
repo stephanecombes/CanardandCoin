@@ -1,10 +1,8 @@
 <?php
-  require_once FILE::build_path(array(controller, ControllerCommandes.php));
-  require_once FILE::build_path(array(controller, ControllerUtilisateurs.php));
-  require_once FILE::build_path(array(controller, ControllerProduits.php));
-  // On recupère l'action passée dans l'URL
-  $controller = $_GET['controller'];
-  $action = $_GET['action'];
+  require_once File::build_path(array(controller, ControllerCommandes.php));
+  require_once File::build_path(array(controller, ControllerUtilisateurs.php));
+  require_once File::build_path(array(controller, ControllerProduits.php));
+
   //test controller vide
   if(isset($_GET['controller'])){//si le controller n'est pas vide
     //on construit le controller
@@ -12,7 +10,7 @@
 
   }else{//si le controller est vide
     //on affiche une page par défaut
-    $controller = 'produits'
+    $controller = 'produits';
   }
 
   //On créer le nom du controller
@@ -33,7 +31,10 @@
     die();
   }
 
-  if(in_array($action, $controllerMethods)){//si la fonction appelée existe
+  if(in_array($_GET['action'], $controllerMethods)){//si la fonction appelée existe
+    //on récupère l'action
+    $action = $_GET['action'];
+
     //on execute l'action
     $controller_class::$action();
 
@@ -48,4 +49,5 @@
 
     die();
   }
+
 ?>

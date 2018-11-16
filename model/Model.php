@@ -4,6 +4,13 @@ class Model
 {
     public static $pdo;
 
+    public function __construct($data){
+      $class_name = 'Model' . ucfirst(static::$object);
+      foreach($data as $key => $values){
+        $this->$key = $values;
+      }
+    }
+
     public static function Init()
     {
         //Récupération des données nécéssaires à la connexion à la base de données.
