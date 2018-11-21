@@ -185,8 +185,6 @@ class Model
             foreach ($attr as $key => $values3) {
                 $vals[$values3] = $this->get($values3);
             }
-            var_dump($req_prep);
-            var_dump($vals);
             $req_prep->execute($vals);
         } catch (PDOException $e) {
             if (Conf::getDebug()) {

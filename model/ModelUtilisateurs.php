@@ -15,17 +15,22 @@ class ModelUtilisateurs extends Model{
 	protected static $object = 'utilisateurs';
 	protected static $primary = 'idUtilisateur';
 
-	public function get($attribute){
-		return $this->$attribute;
-	}
-
-
-	public function __construct($data){
+	public function __construct($data1, $data2, $data3, $data4, $data5, $data6){
+		/*
 		foreach($data as $key => $values){
 			$this->$key = $values;
 		}
-		var_dump($data);
-		}
-}
+		*/
+		$this->nomUtilisateur = $data1;
+		$this->prenomUtilisateur = $data2;
+		$this->mailUtilisateur = $data3;
+		$this->ageUtilisateur = $data4;
+		$this->mdpUtilisateur = $data5;
+		$this->idRole = $data6;
+	}
 
+	public function get($attribute){
+		return $this->$attribute;
+	}
+}
 ?>
