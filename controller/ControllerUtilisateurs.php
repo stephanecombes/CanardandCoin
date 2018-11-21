@@ -22,8 +22,7 @@ class ControllerUtilisateurs{
   }
 
   public static function created(){
-    var_dump($_POST);
-    $utilisateur = new ModelUtilisateurs($_POST['nomUtilisateur'], $_POST['prenomUtilisateur'], $_POST['mailUtilisateur'], $_POST['ageUtilisateur'], $_POST['mdpUtilisateur'], $_POST['idRole']);
+    $utilisateur = new ModelUtilisateurs($_POST);
     $utilisateur->save();
     ControllerUtilisateurs::readAll();
   }

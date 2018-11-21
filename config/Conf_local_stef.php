@@ -47,4 +47,8 @@ class Conf
         return self::$databases['password'];
     }
 
+    public static function getPrefix(){
+        return self::$databases['prefix'];
+    }
+
 }
