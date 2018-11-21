@@ -18,21 +18,15 @@ class ModelUtilisateurs extends Model
 
     public function __construct($data = null)
     {
-        /*
-        foreach($data as $key => $values){
-        $this->$key = $values;
-        }
-         */
-
         if (!is_null($data)) {
             $this->nomUtilisateur = $data['nomUtilisateur'];
             $this->prenomUtilisateur = $data['prenomUtilisateur'];
             $this->mailUtilisateur = $data['mailUtilisateur'];
             $this->ageUtilisateur = $data['ageUtilisateur'];
             $this->mdpUtilisateur = $data['mdpUtilisateur'];
-			$this->idRole = $data['idRole'];
-			$this->bloque = 0;
-		}
+			      $this->idRole = $data['idRole'];
+			      $this->bloque = 0;
+		  }
     }
 
     public function get($attribute)

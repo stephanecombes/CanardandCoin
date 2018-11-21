@@ -1,7 +1,6 @@
 <?php
 require_once File::build_path(array('config', 'Conf.php'));
 
-
 class Model
 {
     public static $PDO;

@@ -1,4 +1,5 @@
 <?php
+require_once File::build_path(array('model', 'ModelCommandes.php'));
 
 class ControllerCommandes{
   protected static $object = 'commandes';
@@ -13,7 +14,6 @@ class ControllerCommandes{
   }
 
   public static function readAll(){
-    $id = $_GET("primary_value");
     $commandes_tab = ModelCommandes::selectAll();
   }
 
@@ -22,7 +22,7 @@ class ControllerCommandes{
   }
 
   public static function created(){
-    $commande = new ModelCommandes($_POST['idCommande'], $_POST['idUtilisateur'], $_POST['dateCommande'], $_POST['idStatut'], $_POST['montantCommande'], $_POST['idAdresseLivraison'], $_POST['bloqué'], $_POST['idRole'])
+    $commande = new ModelCommandes($_POST);
     $commande->save();
     ControllerCommandes::readAll();
   }

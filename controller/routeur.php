@@ -1,13 +1,14 @@
 <?php
-  //require_once File::build_path(array('controller', 'ControllerCommandes.php'));
+  require_once File::build_path(array('controller', 'ControllerCommandes.php'));
   require_once File::build_path(array('controller', 'ControllerUtilisateurs.php'));
-  //require_once File::build_path(array('controller', 'ControllerProduits.php'));
+  require_once File::build_path(array('controller', 'ControllerProduits.php'));
+  require_once File::build_path(array('controller', 'ControllerCategories.php'));
+
 
   //test controller vide
   if(isset($_GET['controller'])){//si le controller n'est pas vide
     //on construit le controller
     $controller = $_GET['controller'];
-
   }else{//si le controller est vide
     //on affiche une page par défaut
     $controller = 'utilisateurs';
@@ -40,6 +41,7 @@
 
   }else{//si la fonction appelée n'existe pas
     //on renvoit la view erreur
+    var_dump($controller);
 
         /// A FAIRE
         /// A FAIRE

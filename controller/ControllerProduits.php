@@ -1,4 +1,5 @@
 <?php
+require_once File::build_path(array('model', 'ModelProduits.php'));
 
 class ControllerProduits{
   protected static $object = 'produits';
@@ -13,7 +14,6 @@ class ControllerProduits{
   }
 
   public static function readAll(){
-    $id = $_GET("primary_value");
     $produits_tab = ModelProduits::selectAll();
   }
 
@@ -22,7 +22,7 @@ class ControllerProduits{
   }
 
   public static function created(){
-    $produit = new ModelProduits($_POST['idProduit'], $_POST['nomProduit'], $_POST['idCategorie'], $_POST['couleurProduit'], $_POST['descriptionProduit'], $_POST['tailleProduit'], $_POST['poidsProduit'], $_POST['ageProduit']);
+    $produit = new ModelProduits($_POST);
     $produit->save();
     ControllerProduits::readAll();
   }
