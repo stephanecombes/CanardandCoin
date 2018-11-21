@@ -5,7 +5,7 @@
         <title> Créer un utilisateur </title>
     </head>
     <body>
-		<form method="post" action="../../controller/routeur.php?action=created">
+		<form method="post" action="index.php?action=created">
 			<fieldset>
 				<legend>Utilisateur :</legend>
 				<p>

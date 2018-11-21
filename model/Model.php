@@ -1,16 +1,18 @@
 <?php
+require_once File::build_path(array('config', 'Conf.php'));
+
 
 class Model
 {
-    public static $pdo;
-
+    public static $PDO;
+    /*
     public function __construct($data){
       $class_name = 'Model' . ucfirst(static::$object);
       foreach($data as $key => $values){
         $this->$key = $values;
       }
     }
-
+    */
     public static function Init()
     {
         //Récupération des données nécéssaires à la connexion à la base de données.
@@ -29,28 +31,29 @@ class Model
         }
 
         //connexion à la base de données.
-        self::$pdo = new PDO("mysql:host=$hostname;dbname=$database_name", $login, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        self::$PDO = new PDO("mysql:host=$hostname;dbname=$database_name", $login, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
         //On active le mode d'affichage des erreurs, et le lancement d'exception en cas d'erreurs.
-        self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        self::$PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     //getter générique.
-    public function get($nomAttribut)
+    /*
+    public static function get($nomAttribut)
     {
         $class_name = 'Model' . ucfirst(static::$object);
         return $class_name->$nomAttribut;
     }
-
+    */
     //setter générique.
-    public function set($nomAttribut, $valeur)
+    public static function set($nomAttribut, $valeur)
     {
         $class_name = 'Model' . ucfirst(static::$object);
         $class_name->$nomAttribut = $valeur;
     }
 
     // fonction pour avoir un object suivant sa clef primaire
-    public function select($primary_value)
+    public static function select($primary_value)
     {
         $table_name = Conf::getPrefix() . static::$object;
         $class_name = 'Model' . ucfirst(static::$object);
@@ -78,7 +81,7 @@ class Model
     }
 
     // Selectionne tout les objet du type courrant
-    public function selectAll()
+    public static function selectAll()
     {
         $table_name = Conf::getPrefix() . static::$object;
         $class_name = 'Model' . ucfirst(static::$object);
@@ -98,7 +101,7 @@ class Model
     }
 
     // Met à jour un objet
-    public function update($data)
+    public static function update($data)
     {
         $table_name = Conf::getPrefix() . static::$object;
         $primary_key = static::$primary;
@@ -127,7 +130,7 @@ class Model
     }
 
     // Efface un objet par sa clef primaire
-    public function delete($primary_value)
+    public static function delete($primary_value)
     {
         $table_name = Conf::getPrefix() . static::$object;
         $primary_key = static::$primary;
@@ -150,7 +153,7 @@ class Model
     public function save()
     {
         try {
-            $table_name = static::$object;
+            $table_name = Conf::getPrefix() . static::$object;
             $class_name = 'Model' . ucfirst(static::$object);
             $primary_key = static::$primary;
 
@@ -162,7 +165,7 @@ class Model
 
             foreach ($reflect as $values1) {
                 foreach ($values1 as $values2) {
-                    if ($values2 != $class_name) {
+                    if ($values2 != $class_name && $values2 != $primary_key) {
                         $attr[] = $values2;
                     }
                 }
@@ -177,12 +180,13 @@ class Model
             $valuesstring = rtrim($valuesstring, ', ');
 
             $sql = 'INSERT INTO ' . $table_name . '(' . $setstring . ') VALUES (' . $valuesstring . ')';
-            $req_prep = Model::$pdo->prepare($sql);
+            $req_prep = Model::$PDO->prepare($sql);
 
             foreach ($attr as $key => $values3) {
                 $vals[$values3] = $this->get($values3);
             }
-
+            var_dump($req_prep);
+            var_dump($vals);
             $req_prep->execute($vals);
         } catch (PDOException $e) {
             if (Conf::getDebug()) {

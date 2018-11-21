@@ -1,6 +1,7 @@
 <?php
+require_once File::build_path(array('model', 'Model.php'));
 
-class ModelCommandes {
+class ModelCommandes extends Model{
 
 	//attributs.
 	private $idCommande;

@@ -1,7 +1,7 @@
 <?php
-  require_once File::build_path(array(controller, ControllerCommandes.php));
-  require_once File::build_path(array(controller, ControllerUtilisateurs.php));
-  require_once File::build_path(array(controller, ControllerProduits.php));
+  //require_once File::build_path(array('controller', 'ControllerCommandes.php'));
+  require_once File::build_path(array('controller', 'ControllerUtilisateurs.php'));
+  //require_once File::build_path(array('controller', 'ControllerProduits.php'));
 
   //test controller vide
   if(isset($_GET['controller'])){//si le controller n'est pas vide
@@ -10,7 +10,7 @@
 
   }else{//si le controller est vide
     //on affiche une page par défaut
-    $controller = 'produits';
+    $controller = 'utilisateurs';
   }
 
   //On créer le nom du controller
@@ -39,7 +39,7 @@
     $controller_class::$action();
 
   }else{//si la fonction appelée n'existe pas
-    //on renvoit la viex erreur
+    //on renvoit la view erreur
 
         /// A FAIRE
         /// A FAIRE

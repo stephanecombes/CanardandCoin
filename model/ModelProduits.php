@@ -1,6 +1,7 @@
 <?php
+require_once File::build_path(array('model', 'Model.php'));
 
-class ModelProduits {
+class ModelProduits extends Model{
 
 	//attributs.
 	private $idProduit;

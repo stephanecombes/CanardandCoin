@@ -1,4 +1,5 @@
 <?php
+require_once File::build_path(array('model', 'ModelUtilisateurs.php'));
 
 class ControllerUtilisateurs{
   protected static $object = 'utilisateurs';
@@ -13,7 +14,6 @@ class ControllerUtilisateurs{
   }
 
   public static function readAll(){
-    $id = $_GET("primary_value");
     $user_tab = ModelUtilisateurs::selectAll();
   }
 
@@ -22,7 +22,7 @@ class ControllerUtilisateurs{
   }
 
   public static function created(){
-    $utilisateur = new ModelUtilisateurs($_POST['idUtilisateur'], $_POST['nomUtilisateur'], $_POST['prenomUtilisateur'], $_POST['mailUtilisateur'], $_POST['ageUtilisateur'], $_POST['mdpUtilisateur'], $_POST['idRole']);
+    $utilisateur = new ModelUtilisateurs($_POST);
     $utilisateur->save();
     ControllerUtilisateurs::readAll();
   }
