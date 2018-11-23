@@ -1,27 +1,42 @@
 <?php
 require_once File::build_path(array('model', 'ModelCommandes.php'));
 
-class ControllerCommandes{
+class ControllerCommandes
+{
   protected static $object = 'commandes';
 
-  public static function read(){
-    $id = $_GET("primary_value");
-    if(ModelCommandes::select($id) != false){
-      require File::build_path(array("view", "commandes", "details.php"));
+  public static function read()
+  {
+    $pagetitle = 'Détail de la commande';
+    $co = ModelCommandes::select($_GET['idCommande']);
+    if($co != false){
+      $view = 'detail';
+      require File::build_path(array('view', 'view.php'));
     }else{
-      require File::build_path(array("view", "commandes", "error.php"));
+      $view = 'error';
+      require File::build_path(array('view', 'view.php'));
     }
   }
 
-  public static function readAll(){
-    $commandes_tab = ModelCommandes::selectAll();
+  public static function readAll()
+  {
+    $pagetitle = 'Liste des commandes';
+    $tab = ModelCommandes::selectAll();
+    $view = 'list';
+    require_once File::build_path(array('view', 'view.php'));
   }
 
-  public static function create(){
-    require File::build_path(array("view", "commandes", "create.php"));
+  public static function create()
+  {
+    $pagetitle = 'Création d\'une commande';
+    $view = 'create';
+    require File::build_path(array('view', 'view.php'));
   }
 
-  public static function created(){
+  public static function created()
+  {
+    $pagetitle = 'Commande créée';
+    $view = 'created';
     $commande = new ModelCommandes($_POST);
     $commande->save();
     ControllerCommandes::readAll();

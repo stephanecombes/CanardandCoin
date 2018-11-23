@@ -1,6 +1,7 @@
 
 <?php
 foreach($tab as $key => $value){
-  echo('<p><a href="">$value</a></p>');
+  $nomProduit = htmlspecialchars($value->get('nomProduit'));
+  echo '<p><a href="">' . '$nomProduit' . '</a></p>';
 }
 ?>

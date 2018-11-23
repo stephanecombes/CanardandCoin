@@ -5,7 +5,7 @@
         <title> Créer un produit </title>
     </head>
     <body>
-		<form method="post" action="index.php?action=created">
+		<form method="post" action="index.php?controller=produits&action=created">
 			<fieldset>
 				<legend>Produit :</legend>
 				<p>

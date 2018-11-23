@@ -5,7 +5,7 @@
         <title> Créer une categorie </title>
     </head>
     <body>
-		<form method="post" action="index.php?action=created">
+		<form method="post" action="index.php?controller=categories&action=created">
 			<fieldset>
 				<legend>Categorie :</legend>
 				<p>

@@ -18,13 +18,13 @@ class ModelProduits extends Model{
 	public function __construct($data = null)
 	{
 			if (!is_null($data)) {
-					$this->nomProduit = $data['nomUtilisateur'];
-					$this->idCategorie = $data['prenomUtilisateur'];
-					$this->couleurProduit = $data['mailUtilisateur'];
-					$this->descriptionProduit = $data['ageUtilisateur'];
-					$this->tailleProduit = $data['mdpUtilisateur'];
-					$this->poidsProduit = $data['mdpUtilisateur'];
-					$this->ageProduit = $data['mdpUtilisateur'];
+					$this->nomProduit = $data['nomProduit'];
+					$this->idCategorie = $data['idCategorie'];
+					$this->couleurProduit = $data['couleurProduit'];
+					$this->descriptionProduit = $data['descriptionProduit'];
+					$this->tailleProduit = $data['tailleProduit'];
+					$this->poidsProduit = $data['poidsProduit'];
+					$this->ageProduit = $data['ageProduit'];
 			}
 	}
 

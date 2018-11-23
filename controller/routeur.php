@@ -41,7 +41,6 @@
 
   }else{//si la fonction appelée n'existe pas
     //on renvoit la view erreur
-    var_dump($controller);
 
         /// A FAIRE
         /// A FAIRE
