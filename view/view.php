@@ -4,14 +4,15 @@
     <meta charset="utf-8">
     <title>Titre de la page</title>
     <link rel="stylesheet" href="../css/style.css">
-    <script src="script.js"></script>
   </head>
   <header>
     <nav class="genericNav_class">
-      <a class="active" href="">Accueil</a>
-      <a href="">Produits</a>
-      <a href="">Commandes</a>
-      <a href="">Utilisateurs</a>
+      <a class="active" href="../index.php?controller=produits&action=readAll">Accueil</a>
+      <a href="../index.php?controller=produits&action=readAll">Produits</a>
+      <a href="../index.php?controller=commandes&action=readAll">Commandes</a>
+      <a href="../index.php?controller=Utilisateurs&action=readAll">Utilisateurs</a>
+      <a href="../index.php?controller=Utilisateurs&action=create">Inscription</a>
+      <a href="">Connexion</a>
     </nav>
   </header>
   <body>
