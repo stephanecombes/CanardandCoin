@@ -11,7 +11,7 @@
     $controller = $_GET['controller'];
   }else{//si le controller est vide
     //on affiche une page par défaut
-    $controller = 'utilisateurs';
+    $controller = 'produits';
   }
 
   //On créer le nom du controller
