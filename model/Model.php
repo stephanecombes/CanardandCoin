@@ -57,11 +57,10 @@ class Model
         $table_name = Conf::getPrefix() . static::$object;
         $class_name = 'Model' . ucfirst(static::$object);
         $primary_key = static::$primary;
-
         try {
             $sql = "SELECT* FROM $table_name WHERE $primary_key = :id_tag";
             $rep_prep = Model::$PDO->prepare($sql);
-            $values = array('id_tag' => $primary_key);
+            $values = array('id_tag' => $primary_value);
             $rep_prep->execute($values);
             $rep_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
             $tab = $rep_prep->fetchAll();
