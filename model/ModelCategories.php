@@ -14,7 +14,7 @@ class ModelCategories extends Model
     {
         if (!is_null($data)) {
             $this->nomCategorie = $data['nomCategorie'];
-		  }
+        }
     }
 
     public function get($attribute)

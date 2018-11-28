@@ -1,7 +1,6 @@
 <?php
 class Conf
 {
-
     private static $databases = array(
         // Le nom d'hote est webinfo a l'IUT
         // ou localhost sur votre machine
@@ -47,8 +46,8 @@ class Conf
         return self::$databases['password'];
     }
 
-    public static function getPrefix(){
+    public static function getPrefix()
+    {
         return self::$databases['prefix'];
     }
-
 }

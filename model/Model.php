@@ -6,12 +6,12 @@ class Model
     public static $PDO;
     /*
     public function __construct($data){
-      $class_name = 'Model' . ucfirst(static::$object);
-      foreach($data as $key => $values){
-        $this->$key = $values;
-      }
+    $class_name = 'Model' . ucfirst(static::$object);
+    foreach($data as $key => $values){
+    $this->$key = $values;
     }
-    */
+    }
+     */
     public static function Init()
     {
         //Récupération des données nécéssaires à la connexion à la base de données.
@@ -40,10 +40,10 @@ class Model
     /*
     public static function get($nomAttribut)
     {
-        $class_name = 'Model' . ucfirst(static::$object);
-        return $class_name->$nomAttribut;
+    $class_name = 'Model' . ucfirst(static::$object);
+    return $class_name->$nomAttribut;
     }
-    */
+     */
     //setter générique.
     public static function set($nomAttribut, $valeur)
     {

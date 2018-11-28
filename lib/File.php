@@ -1,5 +1,4 @@
 <?php
-
 class File
 {
     public static function build_path($path_array)

@@ -1,4 +1,3 @@
-
 <?php
 
 $DS = DIRECTORY_SEPARATOR;
@@ -11,5 +10,3 @@ if (!isset($_GET['action'])) {
 }
 
 require_once File::build_path(array('controller', 'routeur.php'));
-
-?>

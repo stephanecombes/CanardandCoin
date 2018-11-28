@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8">
-    <title><?php $pagetitle; ?></title>
+    <title><?php $pagetitle;?></title>
     <link rel="stylesheet" href="css/style.css">
   </head>
   <header>
@@ -18,9 +18,9 @@
   <body>
 
     <?php
-      $filepath = File::build_path(array("view", static::$object, "$view.php"));
-      require $filepath;
-    ?>
+$filepath = File::build_path(array("view", static::$object, "$view.php"));
+require $filepath;
+?>
 
   </body>
   <footer class="footer_class">

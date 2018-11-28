@@ -28,19 +28,17 @@ class ControllerProduits
 
     public static function create()
     {
-      $pagetitle = 'Création de produit';
-      $view = 'create';
+        $pagetitle = 'Création de produit';
+        $view = 'create';
         require File::build_path(array("view", "view.php"));
     }
 
     public static function created()
     {
-      $pagetitle = 'Produit créé';
-      $view = 'created';
+        $pagetitle = 'Produit créé';
+        $view = 'created';
         $produit = new ModelProduits($_POST);
         $produit->save();
         ControllerProduits::readAll();
     }
 }
-
-?>
