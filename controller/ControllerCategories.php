@@ -29,7 +29,7 @@ class ControllerCategories
     public static function create()
     {
         $pagetitle = 'Création d\'catégorie';
-        $view = 'create';
+        $view = 'update';
         require File::build_path(array("view", "view.php"));
     }
 
