@@ -41,4 +41,26 @@ class ControllerUtilisateurs
         $utilisateur->save();
         ControllerUtilisateurs::readAll();
     }
+
+    public static function connect()
+    {
+      $pagetitle = 'Connexion';
+      $view = 'connect';
+      require File::build_path(array("view", "view.php"));
+    }
+
+    public static function connected()
+    {
+      $idUser = $_POST['idUtilisateur'];
+      $user = ModelUtilisateurs::select($idUser);
+      if(!$user){
+        $pagetitle = 'connexion ratée';
+        $view = 'failConnect';
+        require File::build_path(array("view", "view.php"));
+      }else{
+        $pagetitle = 'Connexion réussie';
+        $view = 'connected';
+        require File::build_path(array("view", "view.php"));
+      }
+    }
 }

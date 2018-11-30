@@ -1,13 +1,13 @@
 <?php
 require_once File::build_path(array('model', 'ModelUtilisateurs.php'));
-$idc = '<p>ID de la commande : ' . $c->get('idUtilisateur') . '</p>';
-$iduc = '<p>Nom de l\'utilisateur : ' . $c->get('nomUtilisateur') . '</p>';
-$datec = '<p>Prénom de l\'utilisateur : ' . $c->get('prenomUtilisateur') . '</p>';
-$idsc = '<p>mail de l\'utilisateur : ' . $c->get('mailUtilisateur') . '</p>';
-$montantc = '<p>Age de l\'utilisateur : ' . $c->get('ageUtilisateur') . '</p>';
-$idadrlivc = '<p>Rôle de l\'utilisateur : ' . $c->get('idRole') . '</p>';
-$idadrfacc = '<p>Rôle de l\'utilisateur : ' . $c->get('idRole') . '</p>';
+$idc = '<p>ID de la commande : ' . $c->get('idCommande') . '</p>';
+$iduc = '<p>ID de l\'utilisateur : ' . $c->get('idUtilisateur') . '</p>';
+$datec = '<p>Date de la commande : ' . $c->get('dateCommande') . '</p>';
+$idsc = '<p>Id du statut : ' . $c->get('idStatut') . '</p>';
+$montantc = '<p>Montant de la commande : ' . $c->get('montantCommande') . '</p>';
+$idadrlivc = '<p>ID de l\'adresse de livraison : ' . $c->get('idAdresseLivraison') . '</p>';
+$idadrfacc = '<p>ID de l\'adresse de livraison : ' . $c->get('idAdresseFacturation') . '</p>';
 
-$detailutilisateur = $idu . $nomu . $prenomu . $mailu . $ageu . $roleu;
+$detailcommande = $idc . $iduc . $datec . $idsc . $montantc . $idadrlivc . $idadrfacc;
 
-echo '<p>' . $detailutilisateur . '</p>';
+echo '<p>' . $detailcommande . '</p>';

@@ -12,7 +12,7 @@
       <a href="index.php?controller=commandes&action=readAll">Commandes</a>
       <a href="index.php?controller=Utilisateurs&action=readAll">Utilisateurs</a>
       <a href="index.php?controller=Utilisateurs&action=create">Inscription</a>
-      <a href="">Connexion</a>
+      <a href="index.php?controller=Utilisateurs&action=connect">Connexion</a>
     </nav>
   </header>
   <body>
