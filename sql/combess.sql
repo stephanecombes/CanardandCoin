@@ -2,10 +2,10 @@
 -- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Nov 30, 2018 at 09:41 PM
--- Server version: 5.7.21
--- PHP Version: 5.6.35
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  sam. 01 déc. 2018 à 22:50
+-- Version du serveur :  5.7.21
+-- Version de PHP :  5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `combess`
+-- Base de données :  `combess`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cac_carnetadresses`
+-- Structure de la table `cac_carnetadresses`
 --
 
 DROP TABLE IF EXISTS `cac_carnetadresses`;
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `cac_carnetadresses` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cac_categories`
+-- Structure de la table `cac_categories`
 --
 
 DROP TABLE IF EXISTS `cac_categories`;
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `cac_categories` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cac_commandes`
+-- Structure de la table `cac_commandes`
 --
 
 DROP TABLE IF EXISTS `cac_commandes`;
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `cac_commandes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cac_galerieimage`
+-- Structure de la table `cac_galerieimage`
 --
 
 DROP TABLE IF EXISTS `cac_galerieimage`;
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `cac_galerieimage` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cac_images`
+-- Structure de la table `cac_images`
 --
 
 DROP TABLE IF EXISTS `cac_images`;
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `cac_images` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cac_lignecommande`
+-- Structure de la table `cac_lignecommande`
 --
 
 DROP TABLE IF EXISTS `cac_lignecommande`;
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `cac_lignecommande` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cac_produits`
+-- Structure de la table `cac_produits`
 --
 
 DROP TABLE IF EXISTS `cac_produits`;
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `cac_produits` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cac_roles`
+-- Structure de la table `cac_roles`
 --
 
 DROP TABLE IF EXISTS `cac_roles`;
@@ -149,12 +149,12 @@ CREATE TABLE IF NOT EXISTS `cac_roles` (
   `idRole` int(11) NOT NULL AUTO_INCREMENT,
   `nomRole` varchar(16) NOT NULL,
   PRIMARY KEY (`idRole`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cac_statut`
+-- Structure de la table `cac_statut`
 --
 
 DROP TABLE IF EXISTS `cac_statut`;
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `cac_statut` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cac_utilisateurs`
+-- Structure de la table `cac_utilisateurs`
 --
 
 DROP TABLE IF EXISTS `cac_utilisateurs`;
@@ -177,17 +177,17 @@ CREATE TABLE IF NOT EXISTS `cac_utilisateurs` (
   `prenomUtilisateur` varchar(32) NOT NULL,
   `mailUtilisateur` varchar(64) NOT NULL,
   `ageUtilisateur` int(11) NOT NULL,
-  `mdpUtilisateur` varchar(32) NOT NULL,
+  `mdpUtilisateur` varchar(64) NOT NULL,
   `bloque` tinyint(1) DEFAULT NULL,
   `idRole` int(11) NOT NULL,
   PRIMARY KEY (`idUtilisateur`),
   KEY `cac_fk_roles_utilisateurs` (`idRole`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cac_villes`
+-- Structure de la table `cac_villes`
 --
 
 DROP TABLE IF EXISTS `cac_villes`;
@@ -198,127 +198,19 @@ CREATE TABLE IF NOT EXISTS `cac_villes` (
   PRIMARY KEY (`idVille`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `passager`
---
-
-DROP TABLE IF EXISTS `passager`;
-CREATE TABLE IF NOT EXISTS `passager` (
-  `trajet_id` int(11) NOT NULL,
-  `utilisateur_login` varchar(32) NOT NULL,
-  PRIMARY KEY (`trajet_id`,`utilisateur_login`),
-  KEY `fk_passager_utilisateur` (`utilisateur_login`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `passager`
---
-
-INSERT INTO `passager` (`trajet_id`, `utilisateur_login`) VALUES
-(1, 'bert'),
-(4, 'dega'),
-(2, 'juju'),
-(5, 'oph'),
-(2, 'soso');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `trajet`
---
-
-DROP TABLE IF EXISTS `trajet`;
-CREATE TABLE IF NOT EXISTS `trajet` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `depart` varchar(32) NOT NULL,
-  `arrivee` varchar(32) NOT NULL,
-  `date` date NOT NULL,
-  `nbplaces` int(11) NOT NULL,
-  `prix` int(11) NOT NULL,
-  `conducteur_login` varchar(32) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `conducteur_login` (`conducteur_login`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `trajet`
---
-
-INSERT INTO `trajet` (`id`, `depart`, `arrivee`, `date`, `nbplaces`, `prix`, `conducteur_login`) VALUES
-(1, 'Montpellier', 'Sète', '2018-09-26', 2, 25, 'juju'),
-(2, 'Paris', 'Beziers', '2018-09-30', 0, 52, 'oph'),
-(3, 'Nimes', 'Marseille', '2018-10-08', 2, 3, 'bert'),
-(4, 'Graissessac', 'Bédarieux', '2018-10-31', 2, 3, 'dega'),
-(5, 'Narbonne', 'Gruissan', '2018-10-03', 1, 10, 'soso');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `utilisateur`
---
-
-DROP TABLE IF EXISTS `utilisateur`;
-CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `login` varchar(32) NOT NULL,
-  `nom` varchar(32) NOT NULL,
-  `prenom` varchar(32) NOT NULL,
-  PRIMARY KEY (`login`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `utilisateur`
---
-
-INSERT INTO `utilisateur` (`login`, `nom`, `prenom`) VALUES
-('bert', 'Deterre', 'Albert'),
-('dega', 'Gonzales', 'Dégadézo'),
-('juju', 'Gregoire', 'Josette'),
-('oph', 'Amarine', 'Aurélie'),
-('soso', 'Benoit', 'Célinex');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `voiture`
---
-
-DROP TABLE IF EXISTS `voiture`;
-CREATE TABLE IF NOT EXISTS `voiture` (
-  `immatriculation` varchar(8) NOT NULL,
-  `marque` varchar(25) NOT NULL,
-  `couleur` varchar(12) NOT NULL,
-  PRIMARY KEY (`immatriculation`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `voiture`
---
-
-INSERT INTO `voiture` (`immatriculation`, `marque`, `couleur`) VALUES
-('12345678', 'TotoCarV2', 'Verte'),
-('142AFD56', 'Tata', 'Vert'),
-('142AX456', 'Tesla', 'Noire'),
-('142FFA56', 'Fiat', 'Jaune'),
-('1A2AXA56', 'Peugeot', 'Rouge'),
-('1F2AX456', 'Citroên', 'Bleu'),
-('54-489-1', 'Tesla', 'Verte'),
-('AZEDREAR', 'Tata', 'Vert caca d\'');
-
---
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `cac_carnetadresses`
+-- Contraintes pour la table `cac_carnetadresses`
 --
 ALTER TABLE `cac_carnetadresses`
   ADD CONSTRAINT `cac_fk_utilisateurs_carnets` FOREIGN KEY (`idUtilisateur`) REFERENCES `cac_utilisateurs` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cac_fk_villes_carnets` FOREIGN KEY (`idVille`) REFERENCES `cac_villes` (`idVille`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `cac_commandes`
+-- Contraintes pour la table `cac_commandes`
 --
 ALTER TABLE `cac_commandes`
   ADD CONSTRAINT `cac_fk_carnetAdresseFacturation_commandes` FOREIGN KEY (`idAdresseFacturation`) REFERENCES `cac_carnetadresses` (`idCarnetAdresse`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -327,43 +219,30 @@ ALTER TABLE `cac_commandes`
   ADD CONSTRAINT `cac_fk_utilisateurs_commandes` FOREIGN KEY (`idUtilisateur`) REFERENCES `cac_utilisateurs` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `cac_galerieimage`
+-- Contraintes pour la table `cac_galerieimage`
 --
 ALTER TABLE `cac_galerieimage`
   ADD CONSTRAINT `cac_fk_images_galeries` FOREIGN KEY (`idImage`) REFERENCES `cac_images` (`idImage`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cac_fk_produits_galeries` FOREIGN KEY (`idProduit`) REFERENCES `cac_produits` (`idProduit`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `cac_lignecommande`
+-- Contraintes pour la table `cac_lignecommande`
 --
 ALTER TABLE `cac_lignecommande`
   ADD CONSTRAINT `cac_fk_commande_lignecommande` FOREIGN KEY (`idCommande`) REFERENCES `cac_commandes` (`idCommande`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cac_fk_produits_lignecommande` FOREIGN KEY (`idProduit`) REFERENCES `cac_produits` (`idProduit`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `cac_produits`
+-- Contraintes pour la table `cac_produits`
 --
 ALTER TABLE `cac_produits`
   ADD CONSTRAINT `cac_fk_categories_produits` FOREIGN KEY (`idCategorie`) REFERENCES `cac_categories` (`idCategorie`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `cac_utilisateurs`
+-- Contraintes pour la table `cac_utilisateurs`
 --
 ALTER TABLE `cac_utilisateurs`
   ADD CONSTRAINT `cac_fk_roles_utilisateurs` FOREIGN KEY (`idRole`) REFERENCES `cac_roles` (`idRole`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `passager`
---
-ALTER TABLE `passager`
-  ADD CONSTRAINT `fk_passager_trajet` FOREIGN KEY (`trajet_id`) REFERENCES `trajet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_passager_utilisateur` FOREIGN KEY (`utilisateur_login`) REFERENCES `utilisateur` (`login`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `trajet`
---
-ALTER TABLE `trajet`
-  ADD CONSTRAINT `fk_trajet_utilisateur` FOREIGN KEY (`conducteur_login`) REFERENCES `utilisateur` (`login`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

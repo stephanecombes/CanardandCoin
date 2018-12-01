@@ -1,5 +1,6 @@
 <?php
 require_once File::build_path(array('model', 'ModelUtilisateurs.php'));
+require_once File::build_path(array('lib', 'Security.php'));
 
 class ControllerUtilisateurs
 {
@@ -29,17 +30,26 @@ class ControllerUtilisateurs
     public static function create()
     {
         $pagetitle = 'Création d\'un utilisateur';
-        $view = 'create';
+        $view = 'update';
         require File::build_path(array("view", "view.php"));
     }
 
     public static function created()
     {
-        $pagetitle = 'Utilisateur créé';
-        $view = 'created';
-        $utilisateur = new ModelUtilisateurs($_POST);
-        $utilisateur->save();
-        ControllerUtilisateurs::readAll();
+        if ($_POST['mdpUtilisateur'] != $_POST['mdpUtilisateurC']) {
+            echo 'Erreur les deux mots de passe ne correspondent pas';
+            $pagetitle = 'Créer votre utilisateur';
+            $view = 'update';
+            require_once File::build_path(array('view', 'view.php'));
+        } else {
+            $_POST['mdpUtilisateur'] = Security::chiffrer($_POST['mdpUtilisateur']);
+            $utilisateur = new ModelUtilisateurs($_POST);
+            $utilisateur->save();
+            $pagetitle = 'Liste des utilisateurs';
+            $tab = ModelUtilisateurs::selectAll();
+            $view = 'created';
+            require_once File::build_path(array('view', 'view.php'));
+        }
     }
 
     public static function connect()

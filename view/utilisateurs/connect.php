@@ -1,6 +1,4 @@
 <?php
-var_dump($_SESSION['idUtilisateur']);
-
 if (isset($_SESSION['idUtilisateur'])) {
     echo 'déjà connecté';
 } else {
