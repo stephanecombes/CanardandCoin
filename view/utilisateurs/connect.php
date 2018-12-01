@@ -1,5 +1,4 @@
 <?php
-session_start();
 var_dump($_SESSION['idUtilisateur']);
 
 if(isset($_SESSION['idUtilisateur'])){

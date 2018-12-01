@@ -64,13 +64,6 @@ class ControllerUtilisateurs
       }
     }
 
-    public static function disconnect()
-    {
-      $pagetitle = 'Déconnexion';
-      $view = 'disconnect';
-      require File::build_path(array("view", "view.php"));
-    }
-
     public static function disconnected()
     {
       $pagetitle = 'Déconnecté';
