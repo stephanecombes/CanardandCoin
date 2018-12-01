@@ -44,30 +44,32 @@ class ControllerUtilisateurs
 
     public static function connect()
     {
-      $pagetitle = 'Connexion';
-      $view = 'connect';
-      require File::build_path(array("view", "view.php"));
+        $pagetitle = 'Connexion';
+        $view = 'connect';
+        require File::build_path(array("view", "view.php"));
     }
 
     public static function connected()
     {
-      $idUser = $_POST['idUtilisateur'];
-      $user = ModelUtilisateurs::select($idUser);
-      if(!$user){
-        $pagetitle = 'connexion ratée';
-        $view = 'failConnect';
-        require File::build_path(array("view", "view.php"));
-      }else{
-        $pagetitle = 'Connexion réussie';
-        $view = 'connected';
-        require File::build_path(array("view", "view.php"));
-      }
+        $idUser = $_POST['idUtilisateur'];
+        $user = ModelUtilisateurs::select($idUser);
+        if (!$user) {
+            $pagetitle = 'connexion ratée';
+            $view = 'failConnect';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $pagetitle = 'Connexion réussie';
+            $view = 'connected';
+            $_SESSION['idUtilisateur'] = $user->get('idUtilisateur');
+            require File::build_path(array("view", "view.php"));
+        }
     }
 
     public static function disconnected()
     {
-      $pagetitle = 'Déconnecté';
-      $view = 'disconnected';
-      require File::build_path(array("view", "view.php"));
+        session_unset('idUtilisateur');
+        $pagetitle = 'Déconnecté';
+        $view = 'disconnected';
+        require File::build_path(array("view", "view.php"));
     }
 }

@@ -1,10 +1,10 @@
 <?php
 var_dump($_SESSION['idUtilisateur']);
 
-if(isset($_SESSION['idUtilisateur'])){
-  echo 'déjà connecté';
-}else{
-  ?>
+if (isset($_SESSION['idUtilisateur'])) {
+    echo 'déjà connecté';
+} else {
+    ?>
   <form name="connexion" id="connexion" method="post" action="index.php?controller=utilisateurs&action=connected">
   	<fieldset>
       <legend>Se connecter : </legend>
