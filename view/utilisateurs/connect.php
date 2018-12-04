@@ -8,10 +8,14 @@ if (isset($_SESSION['idUtilisateur'])) {
       <legend>Se connecter : </legend>
       <p>
         <label for="idUtilisateur">ID utilisateur</label> :
+      </p>
+      <p>
         <input type="text" placeholder="Ex : 5" name="idUtilisateur" id="idUtilisateur_id" required/>
       </p>
       <p>
         <label for="mdpUtilisateur">Mot de passe :</label> :
+      </p>
+      <p>
         <input type="text" placeholder="Ex : ********" name="mdpUtilisateur" id="mdpUtilisateur_id" required/>
       </p>
       <p>

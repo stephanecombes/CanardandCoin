@@ -87,6 +87,8 @@ echo '<input type="text" placeholder="Ex : 16" name="ageUtilisateur" value ="' .
     </p>
     <p>
       <label for="idRole_id">idRole</label> :
+    </p>
+    <p>
 <?php
 echo '<input type="text" placeholder="Ex : 0" name="idRole" value ="' . $uIdRole . '" id="idRole_id" required/>';
 ?>

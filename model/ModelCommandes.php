@@ -17,11 +17,11 @@ class ModelCommandes extends Model
     public function __construct($data = null)
     {
         if (!is_null($data)) {
-            $this->dateCommande = $data['nomUtilisateur'];
-            $this->idStatut = $data['prenomUtilisateur'];
-            $this->montantCommande = $data['mailUtilisateur'];
-            $this->idAdresseLivraison = $data['ageUtilisateur'];
-            $this->idAdresseFacturation = $data['mdpUtilisateur'];
+            $this->dateCommande = $data['dateCommande'];
+            $this->idStatut = $data['idStatut'];
+            $this->montantCommande = $data['montantCommande'];
+            $this->idAdresseLivraison = $data['idAdresseLivraison'];
+            $this->idAdresseFacturation = $data['idAdresseFacturation'];
         }
     }
 

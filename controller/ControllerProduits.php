@@ -41,4 +41,29 @@ class ControllerProduits
         $produit->save();
         ControllerProduits::readAll();
     }
+
+    public static function addImage()
+    {
+      $pagetitle = 'Ajouter une image';
+      $view = 'addImage';
+      require File::build_path(array("view", "view.php"));
+    }
+
+    public static function imageAdded()
+    {
+      $pagetitle = 'Image ajoutée';
+      $view = 'imageAdded';
+
+      $req_sql = 'INSERT INTO cac_galerieimage(idProduit, idImage) VALUES(:idProduit, :idImage)';
+      $req_sql_prep = Model::$PDO->prepare($req_sql);
+
+      $values = array(
+        'idProduit' => $_POST['idProduit'],
+        'idImage' => $_POST['idImage'],
+      );
+
+      $req_sql_prep->execute($values);
+
+      require File::build_path(array("view", "view.php"));
+    }
 }

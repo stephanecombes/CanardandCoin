@@ -3,6 +3,7 @@ require_once File::build_path(array('controller', 'ControllerCommandes.php'));
 require_once File::build_path(array('controller', 'ControllerUtilisateurs.php'));
 require_once File::build_path(array('controller', 'ControllerProduits.php'));
 require_once File::build_path(array('controller', 'ControllerCategories.php'));
+require_once File::build_path(array('controller', 'ControllerImages.php'));
 
 //test controller vide
 if (isset($_GET['controller'])) { //si le controller n'est pas vide

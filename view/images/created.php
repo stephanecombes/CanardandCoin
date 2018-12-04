@@ -1,0 +1,1 @@
+<p>Image crée</p>

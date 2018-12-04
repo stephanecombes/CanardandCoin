@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title><?php $pagetitle;?></title>
-    <link rel="stylesheet" href="css/style3.css">
+    <link rel="stylesheet" href="css/style4.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Maven+Pro" />
   </head>
   <header>
@@ -14,14 +14,17 @@
       <a href="index.php?controller=commandes&action=readAll">Commandes</a>
       <a href="index.php?controller=Utilisateurs&action=readAll">Utilisateurs</a>
       <?php
-if (isset($_SESSION['idUtilisateur'])) {
-    echo '<a href="index.php?controller=Utilisateurs&action=disconnected">Déconnexion</a>';
-} else {
-    echo '<a href="index.php?controller=Utilisateurs&action=create">Inscription</a>';
-    echo '<a href="index.php?controller=Utilisateurs&action=connect">Connexion</a>';
-}
-?>
-
+      if (isset($_SESSION['idUtilisateur'])) {
+        if(ModelUtilisateurs::select($_SESSION['idUtilisateur'])->get('idRole') == 0){
+          echo '<a href="index.php?controller=images&action=create">Ajouter Image</a>';
+          echo '<a href="index.php?controller=images&action=readAll">Images</a>';
+        }
+          echo '<a href="index.php?controller=Utilisateurs&action=disconnected">Déconnexion</a>';
+      } else {
+          echo '<a href="index.php?controller=Utilisateurs&action=create">Inscription</a>';
+          echo '<a href="index.php?controller=Utilisateurs&action=connect">Connexion</a>';
+      }
+      ?>
     </nav>
     <nav class="burgerNav_class">
       <img id="logo_Burger" src="images/logo_burger.png" alt="logo burger">
@@ -51,8 +54,8 @@ if (isset($_SESSION['idUtilisateur'])) {
       require $filepath;
       ?>
     </div>
+    <footer class="footer_class">
+      <p>a footer</p>
+    </footer>
   </body>
-  <footer class="footer_class">
-    <p>a footer</p>
-  </footer>
 </html>
