@@ -1,0 +1,149 @@
+/*nav menu*/
+
+/* Add a black background color to the top navigation */
+.genericNav_class {
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.genericNav_class a {
+  font-family: Maven Pro;
+  float: right;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 45px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.img_logo{
+  max-height: 7em;
+  margin-top: 3px;
+  margin-left: 1em;
+}
+
+/*body*/
+.body_class {
+  margin:0px;
+  font-family: Maven Pro;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.div_body{
+  margin:5%;
+}
+
+.img_back{
+  height:5em;
+  width:100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*forms*/
+input[type=text] {
+    width: 300px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.2s ease-in-out;
+    transition: width 0.2s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 100%;
+}
+
+/*detail*/
+.detail{
+  margin-left: 5%;
+}
+
+/*list*/
+.list_block:hover {
+  border: 10px solid #555;
+}
+
+.list_block{
+  color:black;
+  text-decoration: none;
+  display:inline-block;
+  text-align:center;
+  margin: 25px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  width:250px;
+  height: 210px;
+  -webkit-transition: border 0.4s ease-in-out;
+  transition: border 0.4s ease-in-out;
+}
+
+.img_produit{
+  border: 1px solid #ddd;
+  padding: 5px;
+  text-align:center;
+  height: 125px;
+  border-radius: 50%;
+}
+
+/*footer*/
+
+.footer_class {
+  font-family: Maven Pro;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+/*responsive*/
+
+.burger_menu {
+    display:none;
+}
+
+#menuB {
+    display:none;
+}
+
+#logo_Burger{
+  display: none;
+}
+
+@media(max-width: 800px) {
+
+    #logo_Burger {
+        display: block;
+        width: 60px;
+        height:60px;
+    }
+
+    .genericNav_class {
+        display:none;
+    }
+
+   .burgerNav_class{
+        display: flex;
+        width: 60px;
+    }
+
+    .burgerNav_class:hover #menuB{
+        display: block;
+    }
+
+    #menuB {
+        position: absolute;
+        top: 65px;
+    }
+
+    #menuB {
+        display: none;
+    }
+}

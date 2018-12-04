@@ -1,6 +1,8 @@
+<h1>Détail du produit " <?php echo $p->get('nomProduit') ;?> " </h1>
 <?php
+
 require_once File::build_path(array('model', 'ModelProduits.php'));
-$idp = '<p>ID du produit : ' . $p->get('idProduit') . '</p>';
+$idp = '<p>Référence du produit : ' . $p->get('idProduit') . '</p>';
 $nomp = '<p>Nom du produit : ' . $p->get('nomProduit') . '</p>';
 $idcp = '<p>Catégorie du produit : ' . $p->get('idCategorie') . '</p>';
 $coulp = '<p>Couleur du produit : ' . $p->get('couleurProduit') . '</p>';
@@ -10,8 +12,8 @@ $poidsp = '<p>Poids du produit : ' . $p->get('poidsProduit') . '</p>';
 $agep = '<p>Age du produit : ' . $p->get('ageProduit') . '</p>';
 
 $detailProduit = $idp . $nomp . $idcp . $coulp . $descrp . $taillep . $poidsp . $agep;
-
+echo '<div class="detail">';
 echo '<p>' . $detailProduit . '</p>';
-
-echo "<p><a href=''>Ajouter au panier</a></p>"
+echo "<p><a href=''>Ajouter au panier</a></p>";
+echo '</div>';
 ?>
