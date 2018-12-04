@@ -13,11 +13,11 @@
       <a href="index.php?controller=produits&action=readAll">Produits</a>
       <a href="index.php?controller=commandes&action=readAll">Commandes</a>
       <a href="index.php?controller=Utilisateurs&action=readAll">Utilisateurs</a>
-      <a href="index.php?controller=Utilisateurs&action=create">Inscription</a>
       <?php
 if (isset($_SESSION['idUtilisateur'])) {
     echo '<a href="index.php?controller=Utilisateurs&action=disconnected">Déconnexion</a>';
 } else {
+    echo '<a href="index.php?controller=Utilisateurs&action=create">Inscription</a>';
     echo '<a href="index.php?controller=Utilisateurs&action=connect">Connexion</a>';
 }
 ?>
@@ -30,11 +30,11 @@ if (isset($_SESSION['idUtilisateur'])) {
         <div><a href="index.php?controller=produits&action=readAll">Produits</a></div>
         <div><a href="index.php?controller=commandes&action=readAll">Commandes</a></div>
         <div><a href="index.php?controller=Utilisateurs&action=readAll">Utilisateurs</a></div>
-        <div><a href="index.php?controller=Utilisateurs&action=create">Inscription</a></div>
         <?php
           if (isset($_SESSION['idUtilisateur'])) {
             echo '<a href="index.php?controller=Utilisateurs&action=disconnected">Déconnexion</a>';
           } else {
+            echo '<a href="index.php?controller=Utilisateurs&action=create">Inscription</a>';
             echo '<a href="index.php?controller=Utilisateurs&action=connect">Connexion</a>';
           }
         ?>

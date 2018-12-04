@@ -34,6 +34,8 @@ if ($uChamp == 'updated') {
     echo <<< EOT
     <p>
       <label for="idUtilisateur_id">Numéro client</label> :
+    </p>
+    <p>
       <input type="text" name="idUtilisateur" value="$uIdUtilisateur" id="idUtilisateur_id" readonly/>
     </p>
 EOT;
@@ -41,34 +43,46 @@ EOT;
 ?>
     <p>
       <label for="nomUtilisateur_id">Nom</label> :
+    </p>
+    <p>
 <?php
 echo '<input type="text" placeholder="Ex : Andrie" name="nomUtilisateur" value="' . $uNomUtilisateur . '" id="nomUtilisateur_id" required/>';
 ?>
     </p>
     <p>
       <label for="prenomUtilisateur_id">Prénom</label> :
+    </p>
+    <p>
 <?php
 echo '<input type="text" placeholder="Ex : Alex" name="prenomUtilisateur" value ="' . $uPrenomUtilisateur . '" id="prenomUtilisateur_id" required/>';
 ?>
     </p>
     <p>
       <label for="mailUtilisateur_id">Courriel</label> :
+    </p>
+    <p>
 <?php
 echo '<input type="text" placeholder="Ex : canard@and.coin" name="mailUtilisateur" value ="' . $uMailUtilisateur . '" id="mailUtilisateur_id" required/>';
 ?>
     </p>
     <p>
       <label for="ageUtilisateur_id">Age</label> :
+    </p>
+    <p>
 <?php
 echo '<input type="text" placeholder="Ex : 16" name="ageUtilisateur" value ="' . $uAgeUtilisateur . '" id="ageUtilisateur_id" required/>';
 ?>
     </p>
     <p>
       <label for="mdpUtilisateur_id">Mot de passe</label> :
+    </p>
+    <p>
       <input type="password" placeholder="Ex : *******" name="mdpUtilisateur" id="mdpUtilisateur_id" required/>
     </p>
     <p>
       <label for="mdpUtilisateurC_id">Confirmer le mot de passe</label> :
+    </p>
+    <p>
       <input type="password" placeholder="Ex : *******" name="mdpUtilisateurC" id="mdpUtilisateurC_id" required/>
     </p>
     <p>

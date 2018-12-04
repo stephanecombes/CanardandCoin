@@ -119,22 +119,22 @@ class ControllerUtilisateurs
     public static function connected()
     {
         $mot_de_passe_chiffre = Security::chiffrer($_POST['mdpUtilisateur']);
-        $test = ModelUtilisateurs::select($idUser);
-        if (!$user) {
+        $test = ModelUtilisateurs::select($_POST['idUtilisateur']);
+        if (!$test) {
             $pagetitle = 'connexion ratée';
             $view = 'failConnect';
             require File::build_path(array("view", "view.php"));
         } else {
             $pagetitle = 'Connexion réussie';
             $view = 'connected';
-            $_SESSION['idUtilisateur'] = $user->get('idUtilisateur');
+            $_SESSION['idUtilisateur'] = $test->get('idUtilisateur');
             require File::build_path(array("view", "view.php"));
         }
     }
 
     public static function disconnected()
     {
-        session_unset('idUtilisateur');
+        session_unset();
         $pagetitle = 'Déconnecté';
         $view = 'disconnected';
         require File::build_path(array("view", "view.php"));
