@@ -7,11 +7,22 @@ if (isset($_GET['login'])) {
 
 if ($u != false) {
     $uChamp = 'updated';
-    $uIdUtilisateur = htmlspecialchars($u->get('idUtilisateur'));
     $uLabel = 'Mettre à jour';
+    $uIdUtilisateur = htmlspecialchars($u->get('idUtilisateur'));
+    $uNomUtilisateur = htmlspecialchars($u->get('nomUtilisateur'));
+    $uPrenomUtilisateur = htmlspecialchars($u->get('prenomUtilisateur'));
+    $uAgeUtilisateur = htmlspecialchars($u->get('ageUtilisateur'));
+    $uMailUtilisateur = htmlspecialchars($u->get('mailUtilisateur'));
+    $uIdRole = htmlspecialchars($u->get('idRole'));
 } else {
     $uChamp = 'created';
     $uLabel = 'Créer';
+    $uIdUtilisateur = "";
+    $uNomUtilisateur = "";
+    $uPrenomUtilisateur = "";
+    $uAgeUtilisateur = "";
+    $uMailUtilisateur = "";
+    $uIdRole = "";
 }
 
 echo '<form method="post" action="index.php?controller=utilisateurs&action=' . $uChamp . '">';
@@ -22,7 +33,7 @@ echo '<form method="post" action="index.php?controller=utilisateurs&action=' . $
 if ($uChamp == 'updated') {
     echo <<< EOT
     <p>
-      <label for="idUtilisateur_id">id Utilisateur</label> :
+      <label for="idUtilisateur_id">Numéro client</label> :
       <input type="text" name="idUtilisateur" value="$uIdUtilisateur" id="idUtilisateur_id" readonly/>
     </p>
 EOT;
@@ -30,19 +41,27 @@ EOT;
 ?>
     <p>
       <label for="nomUtilisateur_id">Nom</label> :
-      <input type="text" placeholder="Ex : Andrie" name="nomUtilisateur" id="nomUtilisateur_id" required/>
+<?php
+echo '<input type="text" placeholder="Ex : Andrie" name="nomUtilisateur" value="' . $uNomUtilisateur . '" id="nomUtilisateur_id" required/>';
+?>
     </p>
     <p>
       <label for="prenomUtilisateur_id">Prénom</label> :
-      <input type="text" placeholder="Ex : Alex" name="prenomUtilisateur" id="prenomUtilisateur_id" required/>
+<?php
+echo '<input type="text" placeholder="Ex : Alex" name="prenomUtilisateur" value ="' . $uPrenomUtilisateur . '" id="prenomUtilisateur_id" required/>';
+?>
     </p>
     <p>
       <label for="mailUtilisateur_id">Courriel</label> :
-      <input type="text" placeholder="Ex : canard@and.coin" name="mailUtilisateur" id="mailUtilisateur_id" required/>
+<?php
+echo '<input type="text" placeholder="Ex : canard@and.coin" name="mailUtilisateur" value ="' . $uMailUtilisateur . '" id="mailUtilisateur_id" required/>';
+?>
     </p>
     <p>
       <label for="ageUtilisateur_id">Age</label> :
-      <input type="text" placeholder="Ex : 16" name="ageUtilisateur" id="ageUtilisateur_id" required/>
+<?php
+echo '<input type="text" placeholder="Ex : 16" name="ageUtilisateur" value ="' . $uAgeUtilisateur . '" id="ageUtilisateur_id" required/>';
+?>
     </p>
     <p>
       <label for="mdpUtilisateur_id">Mot de passe</label> :
@@ -54,7 +73,9 @@ EOT;
     </p>
     <p>
       <label for="idRole_id">idRole</label> :
-      <input type="text" placeholder="Ex : 0" name="idRole" id="idRole_id" required/>
+<?php
+echo '<input type="text" placeholder="Ex : 0" name="idRole" value ="' . $uIdRole . '" id="idRole_id" required/>';
+?>
     </p>
     <p>
 <?php

@@ -19,6 +19,9 @@ class ModelUtilisateurs extends Model
     public function __construct($data = null)
     {
         if (!is_null($data)) {
+            if (isset($data['idUtilisateur'])) {
+                $this->$idUtilisateur = $data['idUtilisateur'];
+            }
             $this->nomUtilisateur = $data['nomUtilisateur'];
             $this->prenomUtilisateur = $data['prenomUtilisateur'];
             $this->mailUtilisateur = $data['mailUtilisateur'];

@@ -6,6 +6,14 @@ class ControllerUtilisateurs
 {
     protected static $object = 'utilisateurs';
 
+    public static function readAll()
+    {
+        $pagetitle = 'Liste des utilisateurs';
+        $tab = ModelUtilisateurs::selectAll();
+        $view = 'list';
+        require_once File::build_path(array('view', 'view.php'));
+    }
+
     public static function read()
     {
         $pagetitle = 'Détail de l\'utilisateur';
@@ -19,12 +27,18 @@ class ControllerUtilisateurs
         }
     }
 
-    public static function readAll()
+    public static function delete()
     {
-        $pagetitle = 'Liste des utilisateurs';
-        $tab = ModelUtilisateurs::selectAll();
-        $view = 'list';
-        require_once File::build_path(array('view', 'view.php'));
+        if (isset($u) && Session::is_user($u->get('idUtilisateur'))) {
+            $id = $_GET['idUtilisateur'];
+            $pagetitle = 'Suppression d\'utilisateur';
+            $view = 'deleted';
+            ModelUtilisateurs::delete($id);
+            $tab_u = ModelUtilisateurs::selectAll();
+            require_once File::build_path(array('view', 'view.php'));
+        } else {
+            ControllerUtilisateur::connect();
+        }
     }
 
     public static function create()
@@ -52,6 +66,49 @@ class ControllerUtilisateurs
         }
     }
 
+    public static function update()
+    {
+        if (isset($u) && Session::is_user($u->get('idUtilisateur'))) {
+            $pagetitle = 'Modification d\'un utilisateur';
+            $view = 'update';
+            require_once File::build_path(array('view', 'view.php'));
+        } else {
+            ControllerUtilisateurs::connect();
+        }
+    }
+
+    public static function updated()
+    {
+        if (isset($u) && Session::is_user($u->get('idUtilisateur'))) {
+            if ($_POST['mdpUtilisateur'] != $_POST['mdpUtilisateurC']) {
+                echo 'Erreur les deux mots de passe ne correspondent pas';
+                $pagetitle = 'Modification d\'un utilisateur';
+                $view = 'update';
+                $_GET['login'] = $_POST['login'];
+                require_once File::build_path(array('view', 'view.php'));
+            } else {
+                $login = $_POST['idUtilisateur'];
+                $pagetitle = 'Liste des utilisateurs';
+                $tab_u = ModelUtilisateurs::selectAll();
+                $view = 'updated';
+                $data = array(
+                    'idUtilisateur' => $_POST['idUtilisateur'],
+                    'nomUtilisateur' => $_POST['nomUtilisateur'],
+                    'prenomUtilisateur' => $_POST['prenomUtilisateur'],
+                    'mdpUtilisateur' => Security::chiffrer($_POST['mdpUtilisateur']),
+                    'mailUtilisateur' => $_POST['mailUtilisateur'],
+                    'ageUtilisateur' => $_POST['ageUtilisateur'],
+                    'bloque' => $_POST['bloque'],
+                    'idRole' => $_POST['idRole'],
+                );
+                ModelUtilisateurs::update($data);
+                require_once File::build_path(array('view', 'view.php'));
+            }
+        } else {
+            ControllerUtilisateurs::connect();
+        }
+    }
+
     public static function connect()
     {
         $pagetitle = 'Connexion';
@@ -61,8 +118,8 @@ class ControllerUtilisateurs
 
     public static function connected()
     {
-        $idUser = $_POST['idUtilisateur'];
-        $user = ModelUtilisateurs::select($idUser);
+        $mot_de_passe_chiffre = Security::chiffrer($_POST['mdpUtilisateur']);
+        $test = ModelUtilisateurs::select($idUser);
         if (!$user) {
             $pagetitle = 'connexion ratée';
             $view = 'failConnect';
