@@ -11,4 +11,5 @@ if (!isset($_GET['action'])) {
     $_GET['action'] = 'readAll';
 }
 
+require_once File::build_path(array('lib', 'Session.php'));
 require_once File::build_path(array('controller', 'routeur.php'));
