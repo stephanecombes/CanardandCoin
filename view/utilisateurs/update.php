@@ -110,7 +110,7 @@ EOT;
         } else {
             $opt = '';
         }
-        echo '<option value="' . $value->idRole . '"' . $opt . '>' . $value->nomRole . '</option>';
+        echo '<option value="' . $value->idRole . '"' . $opt . '>' . htmlspecialchars($value->nomRole) . '</option>';
     }
 }
 echo <<< EOT

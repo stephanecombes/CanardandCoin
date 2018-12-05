@@ -49,4 +49,19 @@ class ModelUtilisateurs extends Model
         unset($u);
         return false;
     }
+
+    public static function checkEmail($email)
+    {
+        $table_name = Conf::getPrefix() . static::$object;
+        $sql = 'SELECT * FROM ' . $table_name . ' WHERE mailUtilisateur = :mailUtilisateur_tag;';
+        $rep_prep = Model::$PDO->prepare($sql);
+        $values = array('mailUtilisateur_tag' => $email);
+        $rep_prep->execute($values);
+        $tab_obj = $rep_prep->fetchAll(PDO::FETCH_OBJ);
+        if (!empty($tab_obj)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -57,13 +57,18 @@ class ControllerUtilisateurs
             $view = 'update';
             require_once File::build_path(array('view', 'view.php'));
         } else {
-            $_POST['mdpUtilisateur'] = Security::chiffrer($_POST['mdpUtilisateur']);
-            $utilisateur = new ModelUtilisateurs($_POST);
-            $utilisateur->save();
-            $pagetitle = 'Liste des utilisateurs';
-            $tab = ModelUtilisateurs::selectAll();
-            $view = 'created';
-            require_once File::build_path(array('view', 'view.php'));
+            if (!ModelUtilisateur::checkEmail($_POST['mailUtilisateur'])) {
+                $_POST['mdpUtilisateur'] = Security::chiffrer($_POST['mdpUtilisateur']);
+                $utilisateur = new ModelUtilisateurs($_POST);
+                $utilisateur->save();
+                $pagetitle = 'Liste des utilisateurs';
+                $tab = ModelUtilisateurs::selectAll();
+                $view = 'created';
+                require_once File::build_path(array('view', 'view.php'));
+            } else {
+                // TODO
+                // Message email deja existant
+            }
         }
     }
 
