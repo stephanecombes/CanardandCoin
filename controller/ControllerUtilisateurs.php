@@ -29,7 +29,7 @@ class ControllerUtilisateurs
 
     public static function delete()
     {
-        if (isset($u) && Session::is_user($u->get('idUtilisateur'))) {
+        if ((isset($u) && Session::is_user($u->get('idUtilisateur'))) || is_admin()) {
             $id = $_GET['idUtilisateur'];
             $pagetitle = 'Suppression d\'utilisateur';
             $view = 'deleted';
@@ -37,7 +37,7 @@ class ControllerUtilisateurs
             $tab_u = ModelUtilisateurs::selectAll();
             require_once File::build_path(array('view', 'view.php'));
         } else {
-            ControllerUtilisateur::connect();
+            ControllerUtilisateurs::connect();
         }
     }
 
@@ -68,7 +68,7 @@ class ControllerUtilisateurs
 
     public static function update()
     {
-        if (isset($u) && Session::is_user($u->get('idUtilisateur'))) {
+        if (isset($u) && Session::is_user($u->get('idUtilisateur')) || is_admin()) {
             $pagetitle = 'Modification d\'un utilisateur';
             $view = 'update';
             require_once File::build_path(array('view', 'view.php'));
@@ -79,7 +79,7 @@ class ControllerUtilisateurs
 
     public static function updated()
     {
-        if (isset($u) && Session::is_user($u->get('idUtilisateur'))) {
+        if (isset($u) && Session::is_user($u->get('idUtilisateur')) || is_admin()) {
             if ($_POST['mdpUtilisateur'] != $_POST['mdpUtilisateurC']) {
                 echo 'Erreur les deux mots de passe ne correspondent pas';
                 $pagetitle = 'Modification d\'un utilisateur';
