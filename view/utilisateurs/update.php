@@ -1,6 +1,6 @@
 <?php
-if (isset($_GET['login'])) {
-    $u = ModelUtilisateur::select($_GET['login']);
+if (isset($_GET['idUtilisateur'])) {
+    $u = ModelUtilisateurs::select($_GET['idUtilisateur']);
 } else {
     $u = false;
 }
@@ -85,28 +85,39 @@ echo '<input type="number" placeholder="Ex : 16" name="ageUtilisateur" value ="'
     <p>
       <input type="password" placeholder="Ex : *******" name="mdpUtilisateurC" id="mdpUtilisateurC_id" required/>
     </p>
+<?php
+if (Session::is_admin()) {
+    echo <<< EOT
     <p>
       <label for="idRole_id">Role </label> :
     </p>
     <p>
       <select name="idRole">
-<?php
-try {
-    $rep = Model::$PDO->query('SELECT * FROM ' . Conf::getPrefix() . 'roles');
-    $tab_role = $rep->fetchAll(PDO::FETCH_OBJ);
-} catch (PDOException $e) {
-    if (Conf::getDebug()) {
-        echo $e->getMessage(); // affiche un message d'erreur
-    } else {
-        echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+EOT;
+    try {
+        $rep = Model::$PDO->query('SELECT * FROM ' . Conf::getPrefix() . 'roles');
+        $tab_role = $rep->fetchAll(PDO::FETCH_OBJ);
+    } catch (PDOException $e) {
+        if (Conf::getDebug()) {
+            echo $e->getMessage(); // affiche un message d'erreur
+        } else {
+            echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+        }
+    }
+    foreach ($tab_role as $value) {
+        if ($value->idRole == $uIdRole) {
+            $opt = 'selected';
+        } else {
+            $opt = '';
+        }
+        echo '<option value="' . $value->idRole . '"' . $opt . '>' . $value->nomRole . '</option>';
     }
 }
-foreach ($tab_role as $key => $value) {
-    echo '<option value="' . $value->idRole . '">' . $value->nomRole . '</option>';
-}
-?>
+echo <<< EOT
       </select>
     </p>
+EOT;
+?>
     <p>
 <?php
 echo '<input type="submit" value="' . $uLabel . '" />';

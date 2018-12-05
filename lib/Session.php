@@ -8,6 +8,6 @@ class Session
 
     public static function is_admin()
     {
-        return (!empty($_SESSION['idRole']) && ($_SESSION['idRole'] == 0));
+        return (isset($_SESSION['idRole']) && (strcmp($_SESSION['idRole'], '0') == 0));
     }
 }

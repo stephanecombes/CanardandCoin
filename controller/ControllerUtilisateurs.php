@@ -29,7 +29,8 @@ class ControllerUtilisateurs
 
     public static function delete()
     {
-        if ((isset($u) && Session::is_user($u->get('idUtilisateur'))) || is_admin()) {
+        $u = ModelUtilisateurs::select($_GET['idUtilisateur']);
+        if ((isset($u) && Session::is_user($u->get('idUtilisateur'))) || Session::is_admin()) {
             $id = $_GET['idUtilisateur'];
             $pagetitle = 'Suppression d\'utilisateur';
             $view = 'deleted';
@@ -68,7 +69,8 @@ class ControllerUtilisateurs
 
     public static function update()
     {
-        if (isset($u) && Session::is_user($u->get('idUtilisateur')) || is_admin()) {
+        $u = ModelUtilisateurs::select($_GET['idUtilisateur']);
+        if ((isset($u) && Session::is_user($u->get('idUtilisateur'))) || Session::is_admin()) {
             $pagetitle = 'Modification d\'un utilisateur';
             $view = 'update';
             require_once File::build_path(array('view', 'view.php'));
@@ -79,7 +81,8 @@ class ControllerUtilisateurs
 
     public static function updated()
     {
-        if (isset($u) && Session::is_user($u->get('idUtilisateur')) || is_admin()) {
+        $u = ModelUtilisateurs::select($_GET['idUtilisateur']);
+        if ((isset($u) && Session::is_user($u->get('idUtilisateur'))) || Session::is_admin()) {
             if ($_POST['mdpUtilisateur'] != $_POST['mdpUtilisateurC']) {
                 echo 'Erreur les deux mots de passe ne correspondent pas';
                 $pagetitle = 'Modification d\'un utilisateur';
@@ -98,9 +101,10 @@ class ControllerUtilisateurs
                     'mdpUtilisateur' => Security::chiffrer($_POST['mdpUtilisateur']),
                     'mailUtilisateur' => $_POST['mailUtilisateur'],
                     'ageUtilisateur' => $_POST['ageUtilisateur'],
-                    'bloque' => $_POST['bloque'],
+                    // 'bloque' => $_POST['bloque'],
                     'idRole' => $_POST['idRole'],
                 );
+                $_SESSION['idRole'] = $_POST['idRole'];
                 ModelUtilisateurs::update($data);
                 require_once File::build_path(array('view', 'view.php'));
             }
