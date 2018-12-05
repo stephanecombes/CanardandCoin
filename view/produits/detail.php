@@ -28,18 +28,35 @@ if(!$images){
 <div class="general_detail_div">
   <div class="img_detail_div">
     <div class="slider">
-      <figure>
+      <div class="mySlides fade">
         <img src="<?php echo $imglink; ?>">
+      </div>
+
       <?php
       if($images && count($images) > 1){
         foreach ($images as $key => $value) {
           if($value->get('lienImage') != $images[0]->get('lienImage')){
-            echo '  <img src="' . $value->get('lienImage') . '">';
+            echo '<div class="mySlides fade">';
+            echo '<img src="' . $value->get('lienImage') . '">';
+            echo '</div>';
           }
         }
       }
-       ?>
-     </figure>
+
+       if($images && count($images) > 1){
+         echo '<a class="prev" onclick="plusSlides(-1)">&#10094;</a>';
+         echo '<a class="next" onclick="plusSlides(1)">&#10095;</a>';
+         echo '<div class="dot_class">';
+
+         $number = 1;
+         foreach ($images as $key => $value) {
+           echo '<span class="dot" onclick="currentSlide(' . $number . ')"></span>';
+           $number = $number + 1;
+         }
+         echo '</div>';
+       }
+      ?>
+
     </div>
   </div>
   <div class="descr_detail_div">

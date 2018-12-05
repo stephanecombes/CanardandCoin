@@ -5,6 +5,7 @@
     <title><?php $pagetitle;?></title>
     <link rel="stylesheet" href="css/style5.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Maven+Pro" />
+    <script src="js/carousel.js"></script>
   </head>
   <header>
     <nav class="genericNav_class">
@@ -59,3 +60,6 @@
     </footer>
   </body>
 </html>
+<script>
+showSlides(1);
+</script>
