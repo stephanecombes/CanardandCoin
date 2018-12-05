@@ -140,7 +140,7 @@ input[type=password]:focus {
   border: 10px solid #ddd;
 }
 
-/*img detail*/
+/*detail*/
 .general_detail_div{
   align-items: center;
   margin:10%;
@@ -153,7 +153,7 @@ input[type=password]:focus {
   margin-right: 5%;
 }
 
-.descr_img_detail_div{
+.descr_detail_div{
   width:40%;
   margin-left: 5%;
 }
@@ -164,6 +164,32 @@ input[type=password]:focus {
   border: 1px solid #ddd;
   width:100%;
 }
+
+/*Carousel*/
+
+
+.slider  {
+  width: 80%;
+  max-width: 1000px;
+  overflow-x: auto;
+}
+
+.slider figure {
+  position: relative;
+  width: 500%;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  left: 0;
+  text-align: left;
+}
+
+.slider figure img {
+  width: 20%;
+  height: auto;
+  float: left;
+}
+
 /*footer*/
 
 .footer_class {

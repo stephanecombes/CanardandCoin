@@ -12,8 +12,38 @@ $poidsp = '<p>Poids du produit : ' . $p->get('poidsProduit') . '</p>';
 $agep = '<p>Age du produit : ' . $p->get('ageProduit') . '</p>';
 
 $detailProduit = $idp . $nomp . $idcp . $coulp . $descrp . $taillep . $poidsp . $agep;
-echo '<div class="detail">';
-echo '<p>' . $detailProduit . '</p>';
-echo "<p><a href=''>Ajouter au panier</a></p>";
-echo '</div>';
+
+$req_sql = 'SELECT * FROM cac_galerieimage gal JOIN cac_images im ON gal.idImage = im.idImage WHERE idProduit = ' . $p->get('idProduit') . ';';
+$rep = Model::$PDO->query($req_sql);
+$rep->setFetchMode(PDO::FETCH_CLASS, 'ModelImages');
+$images = $rep->fetchAll();
+
+if(!$images){
+  $imglink = 'images/basic.png';
+}else{
+  $imglink = $images[0]->get('lienImage');
+}
+
 ?>
+<div class="general_detail_div">
+  <div class="img_detail_div">
+    <div class="slider">
+      <figure>
+        <img src="<?php echo $imglink; ?>">
+      <?php
+      if($images && count($images) > 1){
+        foreach ($images as $key => $value) {
+          if($value->get('lienImage') != $images[0]->get('lienImage')){
+            echo '  <img src="' . $value->get('lienImage') . '">';
+          }
+        }
+      }
+       ?>
+     </figure>
+    </div>
+  </div>
+  <div class="descr_detail_div">
+    <h2>Description : </h2>
+    <?php echo $detailProduit; ?>
+  </div>
+</div>
