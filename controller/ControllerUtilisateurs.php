@@ -50,7 +50,7 @@ class ControllerUtilisateurs
 
     public static function created()
     {
-        if ($_POST['mdpUtilisateur'] != $_POST['mdpUtilisateurC']) {
+        if (($_POST['mdpUtilisateur'] != $_POST['mdpUtilisateurC']) || !filter_var($_POST['mailUtilisateur'], FILTER_VALIDATE_EMAIL)) {
             echo 'Erreur les deux mots de passe ne correspondent pas';
             $pagetitle = 'Créer votre utilisateur';
             $view = 'update';

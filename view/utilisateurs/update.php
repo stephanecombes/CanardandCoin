@@ -36,7 +36,7 @@ if ($uChamp == 'updated') {
       <label for="idUtilisateur_id">Numéro client</label> :
     </p>
     <p>
-      <input type="text" name="idUtilisateur" value="$uIdUtilisateur" id="idUtilisateur_id" readonly/>
+      <input type="number" name="idUtilisateur" value="$uIdUtilisateur" id="idUtilisateur_id" readonly/>
     </p>
 EOT;
 }
@@ -62,7 +62,7 @@ echo '<input type="text" placeholder="Ex : Alex" name="prenomUtilisateur" value 
     </p>
     <p>
 <?php
-echo '<input type="text" placeholder="Ex : canard@and.coin" name="mailUtilisateur" value ="' . $uMailUtilisateur . '" id="mailUtilisateur_id" required/>';
+echo '<input type="email" placeholder="Ex : canard@and.coin" name="mailUtilisateur" value ="' . $uMailUtilisateur . '" id="mailUtilisateur_id" required/>';
 ?>
     </p>
     <p>
@@ -70,7 +70,7 @@ echo '<input type="text" placeholder="Ex : canard@and.coin" name="mailUtilisateu
     </p>
     <p>
 <?php
-echo '<input type="text" placeholder="Ex : 16" name="ageUtilisateur" value ="' . $uAgeUtilisateur . '" id="ageUtilisateur_id" required/>';
+echo '<input type="number" placeholder="Ex : 16" name="ageUtilisateur" value ="' . $uAgeUtilisateur . '" id="ageUtilisateur_id" required/>';
 ?>
     </p>
     <p>
@@ -86,12 +86,26 @@ echo '<input type="text" placeholder="Ex : 16" name="ageUtilisateur" value ="' .
       <input type="password" placeholder="Ex : *******" name="mdpUtilisateurC" id="mdpUtilisateurC_id" required/>
     </p>
     <p>
-      <label for="idRole_id">idRole</label> :
+      <label for="idRole_id">Role </label> :
     </p>
     <p>
+      <select name="idRole">
 <?php
-echo '<input type="text" placeholder="Ex : 0" name="idRole" value ="' . $uIdRole . '" id="idRole_id" required/>';
+try {
+    $rep = Model::$PDO->query('SELECT * FROM ' . Conf::getPrefix() . 'roles');
+    $tab_role = $rep->fetchAll(PDO::FETCH_OBJ);
+} catch (PDOException $e) {
+    if (Conf::getDebug()) {
+        echo $e->getMessage(); // affiche un message d'erreur
+    } else {
+        echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+    }
+}
+foreach ($tab_role as $key => $value) {
+    echo '<option value="' . $value->idRole . '">' . $value->nomRole . '</option>';
+}
 ?>
+      </select>
     </p>
     <p>
 <?php
