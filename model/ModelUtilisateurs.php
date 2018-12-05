@@ -36,4 +36,17 @@ class ModelUtilisateurs extends Model
     {
         return $this->$attribute;
     }
+
+    public static function checkPassword($login, $mot_de_passe_chiffre)
+    {
+        $u = ModelUtilisateurs::select($login);
+        if ($u != false) {
+            if ($mot_de_passe_chiffre == $u->get('mdpUtilisateur')) {
+                unset($u);
+                return true;
+            }
+        }
+        unset($u);
+        return false;
+    }
 }

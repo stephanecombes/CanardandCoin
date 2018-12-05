@@ -119,16 +119,16 @@ class ControllerUtilisateurs
     public static function connected()
     {
         $mot_de_passe_chiffre = Security::chiffrer($_POST['mdpUtilisateur']);
-        $test = ModelUtilisateurs::select($_POST['idUtilisateur']);
-        if (!$test) {
-            $pagetitle = 'connexion ratée';
-            $view = 'failConnect';
-            require File::build_path(array("view", "view.php"));
+        $test = ModelUtilisateurs::checkPassword($_POST['idUtilisateur'], $mot_de_passe_chiffre);
+        if ($test) {
+            $view = 'detail';
+            $u = ModelUtilisateurs::select($_POST['idUtilisateur']);
+            $_SESSION['idUtilisateur'] = $u->get('idUtilisateur');
+            $_SESSION['idRole'] = $u->get('idRole');
+            require_once File::build_path(array('view', 'view.php'));
         } else {
-            $pagetitle = 'Connexion réussie';
-            $view = 'connected';
-            $_SESSION['idUtilisateur'] = $test->get('idUtilisateur');
-            require File::build_path(array("view", "view.php"));
+            $view = 'failConnect';
+            require_once File::build_path(array('view', 'view.php'));
         }
     }
 
