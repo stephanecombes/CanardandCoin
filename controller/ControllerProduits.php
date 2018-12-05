@@ -29,7 +29,7 @@ class ControllerProduits
     public static function create()
     {
         $pagetitle = 'Création de produit';
-        $view = 'create';
+        $view = 'update';
         require File::build_path(array("view", "view.php"));
     }
 
@@ -40,6 +40,31 @@ class ControllerProduits
         $produit = new ModelProduits($_POST);
         $produit->save();
         ControllerProduits::readAll();
+    }
+
+    public static function update()
+    {
+      if(Session::is_admin()) {
+        $pagetitle = 'Modification d\'un produit';
+        $view = 'update';
+        require_once File::build_path(array('view', 'view.php'));
+      } else {
+            ControllerUtilisateurs::connect();
+      }
+    }
+
+    public static function delete()
+    {
+      if (Session::is_admin()) {
+          $id = $_GET['idProduit'];
+          $pagetitle = 'Suppression d\'un produit';
+          $view = 'deleted';
+          ModelProduits::delete($id);
+          $tab_u = ModelProduits::selectAll();
+          require_once File::build_path(array('view', 'view.php'));
+      } else {
+          ControllerUtilisateur::connect();
+      }
     }
 
     public static function addImage()
