@@ -13,7 +13,7 @@ $agep = '<p>Age du produit : ' . $p->get('ageProduit') . '</p>';
 
 $detailProduit = $idp . $nomp . $idcp . $coulp . $descrp . $taillep . $poidsp . $agep;
 
-$req_sql = 'SELECT * FROM cac_galerieimage gal JOIN cac_images im ON gal.idImage = im.idImage WHERE idProduit = ' . $p->get('idProduit') . ';';
+$req_sql = 'SELECT * FROM cac_galerieImage gal JOIN cac_images im ON gal.idImage = im.idImage WHERE idProduit = ' . $p->get('idProduit') . ';';
 $rep = Model::$PDO->query($req_sql);
 $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelImages');
 $images = $rep->fetchAll();

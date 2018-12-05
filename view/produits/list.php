@@ -2,7 +2,7 @@
 <?php
 
 foreach ($tab as $key => $value) {
-  $req_sql = 'SELECT * FROM cac_galerieimage gal JOIN cac_images im ON gal.idImage = im.idImage WHERE idProduit = ' . $value->get('idProduit') . ';';
+  $req_sql = 'SELECT * FROM cac_galerieImage gal JOIN cac_images im ON gal.idImage = im.idImage WHERE idProduit = ' . $value->get('idProduit') . ';';
   $rep = Model::$PDO->query($req_sql);
   $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelImages');
   $images = $rep->fetchAll();
