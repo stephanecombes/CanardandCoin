@@ -41,7 +41,6 @@ class ControllerCommandes
         $commande->save();
         ControllerCommandes::readAll();
     }
-}
 
     public static function delete()
     {
@@ -69,5 +68,6 @@ class ControllerCommandes
             ControllerUtilisateurs::connect();
         }
     }
+}
 
-    
+?>
