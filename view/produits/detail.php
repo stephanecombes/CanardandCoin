@@ -27,7 +27,7 @@ if(!$images){
 ?>
 <div class="general_detail_div">
   <div class="img_detail_div">
-    <div class="slider">
+    <div id="resize" mywidth="120" myheight="120" class="slider">
       <div class="mySlides fade">
         <img src="<?php echo $imglink; ?>">
       </div>
@@ -64,3 +64,7 @@ if(!$images){
     <?php echo $detailProduit; ?>
   </div>
 </div>
+<script>
+showSlides(1);
+Resize();
+</script>

@@ -3,9 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title><?php $pagetitle;?></title>
-    <link rel="stylesheet" href="css/style5.css">
+    <link rel="stylesheet" href="css/style6.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Maven+Pro" />
-    <script src="js/carousel.js"></script>
   </head>
   <header>
     <nav class="genericNav_class">
@@ -60,6 +59,5 @@
     </footer>
   </body>
 </html>
-<script>
-showSlides(1);
-</script>
+<script src="js/carousel.js"></script>
+<script src="js/autoResize.js"></script>

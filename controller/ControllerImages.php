@@ -35,7 +35,6 @@ class ControllerImages
 
     public static function created()
     {
-
         $url_img = 'images/images_produits/' . $_FILES['image']['name'];
         move_uploaded_file($_FILES['image']['tmp_name'], $url_img);
         $datas = array('lienImage' => $url_img,'descriptionImage' => $_POST['descriptionImage']);
