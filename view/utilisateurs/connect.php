@@ -16,7 +16,7 @@ if (isset($_SESSION['idUtilisateur'])) {
         <label for="mdpUtilisateur">Mot de passe :</label> :
       </p>
       <p>
-        <input type="text" placeholder="Ex : ********" name="mdpUtilisateur" id="mdpUtilisateur_id" required/>
+        <input type="password" placeholder="Ex : ********" name="mdpUtilisateur" id="mdpUtilisateur_id" required/>
       </p>
       <p>
         <input type="submit" value="Se connecter" />

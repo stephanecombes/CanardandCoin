@@ -59,6 +59,9 @@ class ControllerUtilisateurs
         } else {
             if (!ModelUtilisateurs::checkEmail($_POST['mailUtilisateur'])) {
                 $_POST['mdpUtilisateur'] = Security::chiffrer($_POST['mdpUtilisateur']);
+                if(!isset($_POST['idRole'])) {
+                    $_POST['idRole'] = 1;
+                }
                 $utilisateur = new ModelUtilisateurs($_POST);
                 $utilisateur->save();
                 $pagetitle = 'Liste des utilisateurs';
