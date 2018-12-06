@@ -1,0 +1,1 @@
+<p>La commande à bien été supprimé</p>

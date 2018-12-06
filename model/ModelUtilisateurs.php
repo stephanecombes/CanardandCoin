@@ -28,7 +28,7 @@ class ModelUtilisateurs extends Model
             $this->ageUtilisateur = $data['ageUtilisateur'];
             $this->mdpUtilisateur = $data['mdpUtilisateur'];
             $this->idRole = $data['idRole'];
-            $this->bloque = 0;
+            //$this->bloque = 0;
         }
     }
 

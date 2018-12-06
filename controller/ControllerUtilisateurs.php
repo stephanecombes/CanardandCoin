@@ -57,7 +57,7 @@ class ControllerUtilisateurs
             $view = 'update';
             require_once File::build_path(array('view', 'view.php'));
         } else {
-            if (!ModelUtilisateur::checkEmail($_POST['mailUtilisateur'])) {
+            if (!ModelUtilisateurs::checkEmail($_POST['mailUtilisateur'])) {
                 $_POST['mdpUtilisateur'] = Security::chiffrer($_POST['mdpUtilisateur']);
                 $utilisateur = new ModelUtilisateurs($_POST);
                 $utilisateur->save();
@@ -66,8 +66,7 @@ class ControllerUtilisateurs
                 $view = 'created';
                 require_once File::build_path(array('view', 'view.php'));
             } else {
-                // TODO
-                // Message email deja existant
+                echo 'Cet email est déjà utilisé';
             }
         }
     }

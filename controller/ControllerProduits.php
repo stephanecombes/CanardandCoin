@@ -53,6 +53,35 @@ class ControllerProduits
       }
     }
 
+    public static function updated()
+    {
+      $u = ModelProduits::select($_GET['idProduit']);
+        if (Session::is_admin()) {
+                $pagetitle = 'Modification d\'un produit';
+                $view = 'update';
+                $_GET['idProduit'] = $_POST['idProduit'];
+                require_once File::build_path(array('view', 'view.php'));
+                
+                $pagetitle = 'Liste des produits';
+                $tab_u = ModelProduits::selectAll();
+                $view = 'updated';
+                $data = array(
+                    'idProduit' => $_POST['idProduit'],
+                    'nomProduit' => $_POST['nomProduit'],
+                    'idCategorie' => $_POST['idCategorie'],
+                    'couleurProduit' => $_POST['couleurProduit'],
+                    'descriptionProduit' => $_POST['descriptionProduit'],
+                    'tailleProduit' => $_POST['tailleProduit'],
+                    'poidsProduit' => $_POST['poidsProduit'],
+                    'ageProduit' => $_POST['ageProduit'],
+                );
+                ModelProduits::update($data);
+                require_once File::build_path(array('view', 'view.php'));
+        } else {
+            ControllerUtilisateurs::connect();
+        }
+    }
+
     public static function delete()
     {
       if (Session::is_admin()) {

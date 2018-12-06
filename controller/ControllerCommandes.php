@@ -42,3 +42,32 @@ class ControllerCommandes
         ControllerCommandes::readAll();
     }
 }
+
+    public static function delete()
+    {
+        $u = ModelCommandes::select($_GET['idCommande']);
+        if (Session::is_admin()) {
+            $id = $_GET['idCommande'];
+            $pagetitle = 'Suppression d\'une commande';
+            $view = 'deleted';
+            ModelCommandes::delete($id);
+            $tab_u = ModelCommandes::selectAll();
+            require_once File::build_path(array('view', 'view.php'));
+        } else {
+            ControllerUtilisateurs::connect();
+        }
+    }
+
+        public static function update()
+    {
+        $u = ModelCommandes::select($_GET['idCommande']);
+        if (Session::is_admin()) {
+            $pagetitle = 'Modification d\'une commande';
+            $view = 'update';
+            require_once File::build_path(array('view', 'view.php'));
+        } else {
+            ControllerUtilisateurs::connect();
+        }
+    }
+
+    
