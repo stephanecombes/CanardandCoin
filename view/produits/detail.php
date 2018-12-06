@@ -1,6 +1,6 @@
 <h1>Détail du produit " <?php echo $p->get('nomProduit') ;?> " </h1>
 <?php
-
+$idProduitURL = rawurlencode($p->get('idProduit'));
 require_once File::build_path(array('model', 'ModelProduits.php'));
 $idp = '<p>Référence du produit : ' . $p->get('idProduit') . '</p>';
 $nomp = '<p>Nom du produit : ' . $p->get('nomProduit') . '</p>';
@@ -61,7 +61,10 @@ if(!$images){
   </div>
   <div class="descr_detail_div">
     <h2>Description : </h2>
-    <?php echo $detailProduit; ?>
+    <?php
+    echo $detailProduit;
+    echo '<a href=index.php?controller=produits&action=toPanier&idProduit=' . $idProduitURL . '>Ajouter au pannier</a>';
+    ?>
   </div>
 </div>
 <script>

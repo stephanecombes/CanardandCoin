@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title><?php $pagetitle;?></title>
-    <link rel="stylesheet" href="css/style6.css">
+    <link rel="stylesheet" href="css/style7.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Maven+Pro" />
   </head>
   <header>

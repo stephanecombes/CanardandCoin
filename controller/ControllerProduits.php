@@ -61,7 +61,7 @@ class ControllerProduits
                 $view = 'update';
                 $_GET['idProduit'] = $_POST['idProduit'];
                 require_once File::build_path(array('view', 'view.php'));
-                
+
                 $pagetitle = 'Liste des produits';
                 $tab_u = ModelProduits::selectAll();
                 $view = 'updated';
@@ -94,6 +94,17 @@ class ControllerProduits
       } else {
           ControllerUtilisateur::connect();
       }
+    }
+
+    public static function toPanier(){
+      if(isset($_SESSION['listProduit'])){
+        $actualSize = sizeOf($_SESSION['listProduit']);
+        $_SESSION['listProduit'][$actualSize + 1] = $_GET['idProduit'];
+      }else{
+        $_SESSION['listProduit'][0] = $_GET['idProduit'];
+      }
+      $view = 'panier';
+      require_once File::build_path(array('view', 'view.php'));
     }
 
     public static function addImage()
