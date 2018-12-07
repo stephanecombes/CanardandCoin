@@ -1,4 +1,4 @@
-<form method="post" action="panier.php">
+<form method="post" action="index.php?controller=produits&action=viewPanier">
 <table style="width: 400px">
 	<tr>
 		<td colspan="4">Votre panier</td>
@@ -12,9 +12,9 @@
 
 
 	<?php
-	if (creationPanier())
+	if (ControllerProduits::createPanier())
 	{
-		$nbArticles=count($_SESSION['panier']['libelleProduit']);
+		$nbArticles=count($_SESSION['panier']['idProduit']);
 		if ($nbArticles <= 0)
 		echo "<tr><td>Votre panier est vide </ td></tr>";
 		else
@@ -22,16 +22,16 @@
 			for ($i=0 ;$i < $nbArticles ; $i++)
 			{
 				echo "<tr>";
-				echo "<td>".htmlspecialchars($_SESSION['panier']['libelleProduit'][$i])."</ td>";
-				echo "<td><input type=\"text\" size=\"4\" name=\"q[]\" value=\"".htmlspecialchars($_SESSION['panier']['qteProduit'][$i])."\"/></td>";
-				echo "<td>".htmlspecialchars($_SESSION['panier']['prixProduit'][$i])."</td>";
-				echo "<td><a href=\"".htmlspecialchars("panier.php?action=suppression&l=".rawurlencode($_SESSION['panier']['libelleProduit'][$i]))."\">XX</a></td>";
+				echo "<td>".htmlspecialchars($_SESSION['panier']['idProduit'][$i])."</ td>";
+				echo "<td><input type=\"text\" size=\"4\" name=\"q[]\" value=\"".htmlspecialchars($_SESSION['panier']['quantity'][$i])."\"/></td>";
+				echo "<td>".htmlspecialchars($_SESSION['panier']['prix'][$i])."</td>";
+				echo "<td><a href=\"".htmlspecialchars("index.php?action=removeArticle&idProduit=".rawurlencode($_SESSION['panier']['idProduit'][$i]))."\">XX</a></td>";
 				echo "</tr>";
 			}
 
 			echo "<tr><td colspan=\"2\"> </td>";
 			echo "<td colspan=\"2\">";
-			echo "Total : ".MontantGlobal();
+			echo "Total : ".ControllerProduits::totalprice();
 			echo "</td></tr>";
 
 			echo "<tr><td colspan=\"4\">";

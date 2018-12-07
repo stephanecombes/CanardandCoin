@@ -97,30 +97,18 @@ class ControllerProduits
         }
     }
 
-<<<<<<< HEAD
     public static function createPanier(){
       if(!isset($_SESSION['panier'])){
         $_SESSION['panier']=array();
         $_SESSION['panier']['idProduit'] = array();
         $_SESSION['panier']['quantity'] = array();
         $_SESSION['panier']['prix'] = array();
-=======
-      if (Session::is_admin()) {
-          $id = $_GET['idProduit'];
-          $pagetitle = 'Suppression d\'un produit';
-          $view = 'deleted';
-          ModelProduits::delete($id);
-          $tab = ModelProduits::selectAll();
-          require_once File::build_path(array('view', 'view.php'));
-      } else {
-          ControllerUtilisateurs::connect();
->>>>>>> 16d9aad7823011d3f255eb45e0bcfa5dc739f427
       }
       return true;
     }
 
     public static function addArticle($idProduit, $quantity, $prix){
-      if(createPanier()){
+      if(ControllerProduits::createPanier()){
         $positionProduit = array_search($idProduit, $_SESSION['panier']['idProduit']);
 
         if($positionProduit !== false){
@@ -133,8 +121,9 @@ class ControllerProduits
       }
     }
 
-    public static function removeArticle($idProduit){
-      if(createPanier()){
+    public static function removeArticle(){
+      $idProduit = $_GET['idProduit'];
+      if(ControllerProduits::createPanier()){
         $temporaryPanier=array();
         $temporaryPanier['idProduit']=array();
         $temporaryPanier['quantity']=array();
@@ -150,10 +139,13 @@ class ControllerProduits
         $_SESSION['panier'] = $temporaryPanier;
         unset($temporaryPanier);
        }
+       $pagetitle = 'panier';
+       $view = 'panier';
+       require File::build_path(array("view", "view.php"));
      }
 
      public static function modifyQuantity($idProduit, $quantity){
-       if(createPanier()){
+       if(ControllerProduits::createPanier()){
          if($quantity > 0){
            $positionProduit = array_search($idProduit, $_SESSION['panier']['idProduit']);
 
@@ -161,7 +153,7 @@ class ControllerProduits
              $_SESSION['panier']['quantity'][$positionProduit] = $quantity;
            }
          }else{
-           removeArticle($idProduit);
+           ControllerProduits::removeArticle($idProduit);
          }
        }
      }
@@ -174,20 +166,27 @@ class ControllerProduits
        return $total;
      }
 
-     function removePanier(){
+     public static function removePanier(){
        unset($_SESSION['panier']);
      }
 
+    public static function viewPanier(){
+      for ($i = 0 ; $i < count($_SESSION['panier']['idProduit']) ; $i++){
+        ControllerProduits::modifyQuantity($_SESSION['panier']['idProduit'][$i],round($q[$i]));
+      }
+
+      $pagetitle = 'panier';
+      $view = 'panier';
+      require File::build_path(array("view", "view.php"));
+    }
+
     public static function toPanier()
     {
-        if (isset($_SESSION['listProduit'])) {
-            $actualSize = sizeOf($_SESSION['listProduit']);
-            $_SESSION['listProduit'][$actualSize + 1] = $_GET['idProduit'];
-        } else {
-            $_SESSION['listProduit'][0] = $_GET['idProduit'];
-        }
-        $view = 'panier';
-        require_once File::build_path(array('view', 'view.php'));
+      $produit = ModelProduits::select($_GET['idProduit']);
+      ControllerProduits::addArticle($_GET['idProduit'], 1, $produit->get('prixProduit'));
+      $pagetitle = 'Panier';
+      $view = 'panier';
+      require File::build_path(array("view", "view.php"));
     }
 
     public static function addImage()
