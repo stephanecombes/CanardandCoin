@@ -1,5 +1,5 @@
 <?php
-if (Session::is_admin()) {
+if (isset($_GET['idProduit']) && Session::is_admin()) {
     $u = ModelProduits::select($_GET['idProduit']);
 } else {
     $u = false;

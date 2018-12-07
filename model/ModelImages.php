@@ -23,7 +23,7 @@ class ModelImages extends Model
         return $this->$attribute;
     }
 
-    public static function delete(){
+    public static function delete($primary_value){
         $lien = "SELECT lienImage FROM $table_name WHERE $primary_key = :id_tag";
         $rep_prep = Model::$PDO->prepare($lien);
         $values = array('id_tag' => $primary_value);
@@ -31,22 +31,6 @@ class ModelImages extends Model
         if(file_exists($lien)){
             unlink($lien);
         }
-
-        $table_name = Conf::getPrefix() . static::$object;
-        $primary_key = static::$primary;
-
-        try {
-            $sql = "DELETE FROM $table_name WHERE $primary_key = :id_tag";
-            $rep_prep = Model::$PDO->prepare($sql);
-            $values = array('id_tag' => $primary_value);
-            $rep_prep->execute($values);
-
-        } catch (PDOException $e) {
-            if (Conf::getDebug()) {
-                echo $e->getMessage(); // affiche un message d'erreur
-            } else {
-                echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
-            }
-        }
+        parent::delete($primary_value);
     }
 }
