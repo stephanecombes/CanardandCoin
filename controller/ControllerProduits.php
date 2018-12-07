@@ -155,7 +155,6 @@ class ControllerProduits
             } else {
                 removeArticle($idProduit);
             }
->>>>>>> 8fd4d83410e237f708b731f39e7812aa1e6a19d2
         }
     }
 
