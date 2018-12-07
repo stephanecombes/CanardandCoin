@@ -9,8 +9,6 @@ if(Session::is_admin()){
     	echo '<p><a href=index.php?controller=utilisateurs&action=read&idUtilisateur=' . $idUtilisateurURL . '>' . $nomUtilisateur . '</a></p>';
 	}
 } else{
-	
+
 }
-
 ?>
-

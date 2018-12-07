@@ -97,24 +97,13 @@ class ControllerProduits
         }
     }
 
-<<<<<<< HEAD
+
     public static function createPanier(){
       if(!isset($_SESSION['panier'])){
         $_SESSION['panier']=array();
         $_SESSION['panier']['idProduit'] = array();
         $_SESSION['panier']['quantity'] = array();
         $_SESSION['panier']['prix'] = array();
-=======
-      if (Session::is_admin()) {
-          $id = $_GET['idProduit'];
-          $pagetitle = 'Suppression d\'un produit';
-          $view = 'deleted';
-          ModelProduits::delete($id);
-          $tab = ModelProduits::selectAll();
-          require_once File::build_path(array('view', 'view.php'));
-      } else {
-          ControllerUtilisateurs::connect();
->>>>>>> 16d9aad7823011d3f255eb45e0bcfa5dc739f427
       }
       return true;
     }
