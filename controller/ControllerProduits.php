@@ -55,15 +55,10 @@ class ControllerProduits
 
     public static function updated()
     {
-      $u = ModelProduits::select($_GET['idProduit']);
+      $u = ModelProduits::select($_POST['idProduit']);
         if (Session::is_admin()) {
-                $pagetitle = 'Modification d\'un produit';
-                $view = 'update';
-                $_GET['idProduit'] = $_POST['idProduit'];
-                require_once File::build_path(array('view', 'view.php'));
-
                 $pagetitle = 'Liste des produits';
-                $tab_u = ModelProduits::selectAll();
+                $tab = ModelProduits::selectAll();
                 $view = 'updated';
                 $data = array(
                     'idProduit' => $_POST['idProduit'],
@@ -89,7 +84,7 @@ class ControllerProduits
           $pagetitle = 'Suppression d\'un produit';
           $view = 'deleted';
           ModelProduits::delete($id);
-          $tab_u = ModelProduits::selectAll();
+          $tab = ModelProduits::selectAll();
           require_once File::build_path(array('view', 'view.php'));
       } else {
           ControllerUtilisateur::connect();

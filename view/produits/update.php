@@ -1,6 +1,6 @@
 <?php
 if (Session::is_admin()) {
-    $u = ModelProduit::select($_GET['idProduit']);
+    $u = ModelProduits::select($_GET['idProduit']);
 } else {
     $u = false;
 }
@@ -100,7 +100,7 @@ echo '<input type="text" placeholder="Ex : 21 kg" name="poidsProduit" value ="' 
     </p>
     <p>
 <?php
-echo '<input type="text" placeholder="Ex : 51 ans" name="ageProduit" value ="' . $uPoidsProduit . '" id="poidsProduit_id" required/>';
+echo '<input type="text" placeholder="Ex : 51 ans" name="ageProduit" value ="' . $uAgeProduit . '" id="ageProduit_id" required/>';
 ?>
     </p>
     <p>
