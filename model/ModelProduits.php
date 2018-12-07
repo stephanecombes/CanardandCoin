@@ -27,6 +27,7 @@ class ModelProduits extends Model
             $this->tailleProduit = $data['tailleProduit'];
             $this->poidsProduit = $data['poidsProduit'];
             $this->ageProduit = $data['ageProduit'];
+            $this->prixProduit = $data['prixProduit'];
         }
     }
 

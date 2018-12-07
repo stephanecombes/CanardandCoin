@@ -91,7 +91,7 @@ class ControllerProduits
           $tab = ModelProduits::selectAll();
           require_once File::build_path(array('view', 'view.php'));
       } else {
-          ControllerUtilisateur::connect();
+          ControllerUtilisateurs::connect();
       }
 
     }
