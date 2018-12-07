@@ -13,7 +13,7 @@ $agep = '<p>Age du produit : ' . $p->get('ageProduit') . '</p>';
 
 $detailProduit = $idp . $nomp . $idcp . $coulp . $descrp . $taillep . $poidsp . $agep;
 
-$req_sql = 'SELECT * FROM cac_galerieimage gal JOIN cac_images im ON gal.idImage = im.idImage WHERE idProduit = ' . $p->get('idProduit') . ';';
+$req_sql = 'SELECT * FROM cac_galerieImage gal JOIN cac_images im ON gal.idImage = im.idImage WHERE idProduit = ' . $p->get('idProduit') . ';';
 $rep = Model::$PDO->query($req_sql);
 $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelImages');
 $images = $rep->fetchAll();
@@ -62,12 +62,8 @@ if(!$images){
   <div class="descr_detail_div">
     <h2>Description : </h2>
     <?php
-      echo $detailProduit;
-      if(Session::is_admin()){
-        echo '<p><a href=index.php?controller=produits&action=update&idProduit=' . $idProduitURL . '>Modifier</a></p>';
-        echo '<p><a href=index.php?controller=produits&action=delete&idProduit=' . $idProduitURL . '>Supprimer</a></p>';
-      }
-      echo '<p><a href=index.php?controller=produits&action=toPanier&idProduit=' . $idProduitURL . '>Ajouter au panier</a></p>';
+    echo $detailProduit;
+    echo '<a href=index.php?controller=produits&action=toPanier&idProduit=' . $idProduitURL . '>Ajouter au pannier</a>';
     ?>
   </div>
 </div>

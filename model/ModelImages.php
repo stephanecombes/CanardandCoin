@@ -24,10 +24,10 @@ class ModelImages extends Model
     }
 
     public static function delete(){
-        lien = "SELECT lienImage FROM $table_name WHERE $primary_key = :id_tag";
+        $lien = "SELECT lienImage FROM $table_name WHERE $primary_key = :id_tag";
         $rep_prep = Model::$PDO->prepare($lien);
         $values = array('id_tag' => $primary_value);
-        $rep_prep->execute($values);                
+        $rep_prep->execute($values);
         if(file_exists($lien)){
             unlink($lien);
         }
