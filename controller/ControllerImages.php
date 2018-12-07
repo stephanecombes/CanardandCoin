@@ -45,4 +45,19 @@ class ControllerImages
         $view = 'created';
         require_once File::build_path(array('view', 'view.php'));
     }
+
+    public static function delete()
+    {
+        $u = ModelImages::select($_GET['idImage']);
+        if (Session::is_admin()) {
+            $id = $_GET['idImage'];
+            $pagetitle = 'Suppression d\'une image';
+            $view = 'deleted';
+            ModelImages::delete($id);
+            $tab_u = ModelImages::selectAll();
+            require_once File::build_path(array('view', 'view.php'));
+        } else {
+            ControllerUtilisateurs::connect();
+        }
+    }
 }
