@@ -13,6 +13,7 @@
       <a href="index.php?controller=produits&action=readAll">Produits</a>
       <a href="index.php?controller=commandes&action=readAll">Commandes</a>
       <a href="index.php?controller=Utilisateurs&action=readAll">Utilisateurs</a>
+      <a href="index.php?controller=produits&action=viewPanier">Panier</a>
       <?php
       if (isset($_SESSION['idUtilisateur'])) {
         if(ModelUtilisateurs::select($_SESSION['idUtilisateur'])->get('idRole') == 0){

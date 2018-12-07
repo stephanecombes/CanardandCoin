@@ -96,13 +96,37 @@ class ControllerProduits
       }
     }
 
-    public static function toPanier(){
-      if(isset($_SESSION['listProduit'])){
-        $actualSize = sizeOf($_SESSION['listProduit']);
-        $_SESSION['listProduit'][$actualSize + 1] = $_GET['idProduit'];
-      }else{
-        $_SESSION['listProduit'][0] = $_GET['idProduit'];
+    public static function creationPanier(){
+      if (!isset($_SESSION['panier'])){
+        $_SESSION['panier']=array();
+        $_SESSION['panier']['idProduit'] = array();
+        $_SESSION['panier']['qteProduit'] = array();
       }
+        return true;
+    }
+
+    public static function toPanier(){
+      ControllerProduits::creationPanier();
+      $actualSize = 0;
+      $pagetitle = 'Ajout d\'un produit au panier';
+      foreach ($_SESSION['panier']['idProduit'] as $key => $value) {
+        $actualSize += 1;
+
+        if($value == $_GET['idProduit']){
+          $_SESSION['panier']['qteProduit'][$actualSize] +=1;
+        }else{
+          $_SESSION['panier']['idProduit'][$actualSize] = $_GET['idProduit'];
+          $_SESSION['panier']['qteProduit'][$actualSize] = 1;
+        }
+      }
+      var_dump($_SESSION['panier']);
+
+      $view = 'panier';
+      require_once File::build_path(array('view', 'view.php'));
+    }
+
+    public static function viewPanier(){
+      $pagetitle = 'Panier';
       $view = 'panier';
       require_once File::build_path(array('view', 'view.php'));
     }
