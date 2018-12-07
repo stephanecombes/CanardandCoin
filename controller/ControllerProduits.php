@@ -44,17 +44,18 @@ class ControllerProduits
 
     public static function update()
     {
-      if(Session::is_admin()) {
-        $pagetitle = 'Modification d\'un produit';
-        $view = 'update';
-        require_once File::build_path(array('view', 'view.php'));
-      } else {
+        if (Session::is_admin()) {
+            $pagetitle = 'Modification d\'un produit';
+            $view = 'update';
+            require_once File::build_path(array('view', 'view.php'));
+        } else {
             ControllerUtilisateurs::connect();
-      }
+        }
     }
 
     public static function updated()
     {
+
       $u = ModelProduits::select($_POST['idProduit']);
         if (Session::is_admin()) {
                 $pagetitle = 'Liste des produits';
@@ -69,6 +70,8 @@ class ControllerProduits
                     'tailleProduit' => $_POST['tailleProduit'],
                     'poidsProduit' => $_POST['poidsProduit'],
                     'ageProduit' => $_POST['ageProduit'],
+                    'prixProduit' => $_POST['prixProduit'],
+
                 );
                 ModelProduits::update($data);
                 require_once File::build_path(array('view', 'view.php'));
@@ -79,6 +82,7 @@ class ControllerProduits
 
     public static function delete()
     {
+
       if (Session::is_admin()) {
           $id = $_GET['idProduit'];
           $pagetitle = 'Suppression d\'un produit';
@@ -89,41 +93,43 @@ class ControllerProduits
       } else {
           ControllerUtilisateur::connect();
       }
+
     }
 
-    public static function toPanier(){
-      if(isset($_SESSION['listProduit'])){
-        $actualSize = sizeOf($_SESSION['listProduit']);
-        $_SESSION['listProduit'][$actualSize + 1] = $_GET['idProduit'];
-      }else{
-        $_SESSION['listProduit'][0] = $_GET['idProduit'];
-      }
-      $view = 'panier';
-      require_once File::build_path(array('view', 'view.php'));
+    public static function toPanier()
+    {
+        if (isset($_SESSION['listProduit'])) {
+            $actualSize = sizeOf($_SESSION['listProduit']);
+            $_SESSION['listProduit'][$actualSize + 1] = $_GET['idProduit'];
+        } else {
+            $_SESSION['listProduit'][0] = $_GET['idProduit'];
+        }
+        $view = 'panier';
+        require_once File::build_path(array('view', 'view.php'));
     }
 
     public static function addImage()
     {
-      $pagetitle = 'Ajouter une image';
-      $view = 'addImage';
-      require File::build_path(array("view", "view.php"));
+        $pagetitle = 'Ajouter une image';
+        $view = 'addImage';
+        require File::build_path(array("view", "view.php"));
     }
 
     public static function imageAdded()
     {
-      $pagetitle = 'Image ajoutée';
-      $view = 'imageAdded';
+        $pagetitle = 'Image ajoutée';
+        $view = 'imageAdded';
 
-      $req_sql = 'INSERT INTO cac_galerieimage(idProduit, idImage) VALUES(:idProduit, :idImage)';
-      $req_sql_prep = Model::$PDO->prepare($req_sql);
+        $req_sql = 'INSERT INTO cac_galerieimage(idProduit, idImage) VALUES(:idProduit, :idImage)';
+        $req_sql_prep = Model::$PDO->prepare($req_sql);
 
-      $values = array(
-        'idProduit' => $_POST['idProduit'],
-        'idImage' => $_POST['idImage'],
-      );
+        $values = array(
+            'idProduit' => $_POST['idProduit'],
+            'idImage' => $_POST['idImage'],
+        );
 
-      $req_sql_prep->execute($values);
+        $req_sql_prep->execute($values);
 
-      require File::build_path(array("view", "view.php"));
+        require File::build_path(array("view", "view.php"));
     }
 }

@@ -16,7 +16,7 @@ if ($u != false) {
     $uTailleProduit = htmlspecialchars($u->get('tailleProduit'));
     $uPoidsProduit = htmlspecialchars($u->get('poidsProduit'));
     $uAgeProduit = htmlspecialchars($u->get('ageProduit'));
-
+    $uPrixProduit = htmlspecialchars($u->get('prixProduit'));
 } else {
     $uChamp = 'created';
     $uLabel = 'Créer';
@@ -28,7 +28,7 @@ if ($u != false) {
     $uTailleProduit = "";
     $uPoidsProduit = "";
     $uAgeProduit = "";
-
+    $uPrixProduit = "";
 }
 
 echo '<form method="post" action="index.php?controller=produits&action=' . $uChamp . '">';
@@ -69,6 +69,14 @@ echo '<input type="text" placeholder="Ex : 1" name="idCategorie" value ="' . $uI
     <p>
 <?php
 echo '<input type="text" placeholder="Ex : bleu" name="couleurProduit" value ="' . $uCouleurProduit . '" id="couleurProduit_id" required/>';
+?>
+    </p>
+    <p>
+      <label for="prixProduit_id">Prix</label> :
+    </p>
+    <p>
+<?php
+echo '<input type="text" placeholder="Ex : 12,50" name="prixProduit" value ="' . $uPrixProduit . '" id="prixProduit_id" required/>';
 ?>
     </p>
     <p>
