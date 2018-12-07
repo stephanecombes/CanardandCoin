@@ -64,7 +64,10 @@ if(!$images){
     <h2>Description : </h2>
     <?php
     echo $detailProduit;
-    echo '<a href=index.php?controller=produits&action=toPanier&idProduit=' . $idProduitURL . '>Ajouter au panier</a>';
+    echo '<p><a href=index.php?controller=produits&action=toPanier&idProduit=' . $idProduitURL . '>Ajouter au panier</a></p>';
+    echo '<p><a href=index.php?controller=produits&action=update&idProduit=' . $idProduitURL . '>Modifier</a></p>';
+    echo '<p><a href=index.php?controller=produits&action=delete&idProduit=' . $idProduitURL . '>Supprimer</a></p>';
+
     ?>
   </div>
 </div>

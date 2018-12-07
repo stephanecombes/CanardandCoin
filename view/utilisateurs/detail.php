@@ -1,3 +1,5 @@
+<h1>Détail de l'utilisateur </h1>
+
 <?php
 require_once File::build_path(array('model', 'ModelUtilisateurs.php'));
 $idu = '<p>ID de l\'utilisateur : ' . $u->get('idUtilisateur') . '</p>';
