@@ -112,10 +112,20 @@ class Model
         $primary_key = static::$primary;
 
         try {
+            if($table_name = "cac_images"){
+                $lien = "SELECT lienImage FROM $table_name WHERE $primary_key = :id_tag";
+                $rep_prep = Model::$PDO->prepare($lien);
+                $values = array('id_tag' => $primary_key);
+                $rep_prep->execute($values);                
+                if(file_exists($lien)){
+                    unlink($lien);
+                }
+            }
             $sql = "DELETE FROM $table_name WHERE $primary_key = :id_tag";
             $rep_prep = Model::$PDO->prepare($sql);
             $values = array('id_tag' => $primary_key);
             $rep_prep->execute($values);
+
         } catch (PDOException $e) {
             if (Conf::getDebug()) {
                 echo $e->getMessage(); // affiche un message d'erreur
