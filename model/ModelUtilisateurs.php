@@ -51,16 +51,24 @@ class ModelUtilisateurs extends Model
     // Verifie si une adresse email existe deja dans la base de donnée
     public static function checkEmail($email)
     {
-        $table_name = Conf::getPrefix() . static::$object;
-        $sql = 'SELECT * FROM ' . $table_name . ' WHERE mailUtilisateur = :mailUtilisateur_tag;';
-        $req_prep = Model::$PDO->prepare($sql);
-        $values = array('mailUtilisateur_tag' => $email);
-        $req_prep->execute($values);
-        $tab_obj = $req_prep->fetchAll(PDO::FETCH_OBJ);
-        if (!empty($tab_obj)) {
-            return true;
-        } else {
-            return false;
+        try {
+            $table_name = Conf::getPrefix() . static::$object;
+            $sql = 'SELECT * FROM ' . $table_name . ' WHERE mailUtilisateur = :mailUtilisateur_tag;';
+            $req_prep = Model::$PDO->prepare($sql);
+            $values = array('mailUtilisateur_tag' => $email);
+            $req_prep->execute($values);
+            $tab_obj = $req_prep->fetchAll(PDO::FETCH_OBJ);
+            if (!empty($tab_obj)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            if (Conf::getDebug()) {
+                echo $e->getMessage(); // affiche un message d'erreur
+            } else {
+                echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+            }
         }
     }
 
@@ -73,5 +81,11 @@ class ModelUtilisateurs extends Model
         $values = array('mailUtilisateur_tag' => $email);
         $req_prep->execute($values);
         $tab_obj = $req_prep->fetchALL(PDO::FETCH_OBJ);
+
+        if ($empty($tab_obj)) {
+            return $tab_obj[0];
+        } else {
+            return false;
+        }
     }
 }
