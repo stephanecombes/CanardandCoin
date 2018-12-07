@@ -75,17 +75,25 @@ class ModelUtilisateurs extends Model
     // Trouve un id utilisateur à partir d'une adresse email
     public static function getIdbyEmail($email)
     {
-        $table_name = conf::getPrefix() . static::$object;
-        $sql = 'SELECT idUtilisateur FROM ' . $table_name . ' WHERE mailUtilisateur = :mailUtilisateur_tag;';
-        $req_prep = Model::$PDO->prepare($sql);
-        $values = array('mailUtilisateur_tag' => $email);
-        $req_prep->execute($values);
-        $tab_obj = $req_prep->fetchALL(PDO::FETCH_OBJ);
+        try {
+            $table_name = conf::getPrefix() . static::$object;
+            $sql = 'SELECT idUtilisateur FROM ' . $table_name . ' WHERE mailUtilisateur = :mailUtilisateur_tag;';
+            $req_prep = Model::$PDO->prepare($sql);
+            $values = array('mailUtilisateur_tag' => $email);
+            $req_prep->execute($values);
+            $tab_obj = $req_prep->fetchALL(PDO::FETCH_OBJ);
 
-        if ($empty($tab_obj)) {
-            return $tab_obj[0];
-        } else {
-            return false;
+            if (!empty($tab_obj)) {
+                return $tab_obj[0]->idUtilisateur;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            if (Conf::getDebug()) {
+                echo $e->getMessage(); // affiche un message d'erreur
+            } else {
+                echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+            }
         }
     }
 }

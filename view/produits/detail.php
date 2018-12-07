@@ -14,7 +14,7 @@ $agep = '<p>Age du produit : ' . $p->get('ageProduit') . '</p>';
 
 $detailProduit = $idp . $nomp . $idcp . $coulp . $descrp . $prixp . $taillep . $poidsp . $agep;
 
-$req_sql = 'SELECT * FROM cac_galerieImage gal JOIN cac_images im ON gal.idImage = im.idImage WHERE idProduit = ' . $p->get('idProduit') . ';';
+$req_sql = 'SELECT * FROM cac_galerieimage gal JOIN cac_images im ON gal.idImage = im.idImage WHERE idProduit = ' . $p->get('idProduit') . ';';
 $rep = Model::$PDO->query($req_sql);
 $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelImages');
 $images = $rep->fetchAll();
@@ -64,7 +64,7 @@ if(!$images){
     <h2>Description : </h2>
     <?php
     echo $detailProduit;
-    echo '<a href=index.php?controller=produits&action=toPanier&idProduit=' . $idProduitURL . '>Ajouter au pannier</a>';
+    echo '<a href=index.php?controller=produits&action=toPanier&idProduit=' . $idProduitURL . '>Ajouter au panier</a>';
     ?>
   </div>
 </div>
