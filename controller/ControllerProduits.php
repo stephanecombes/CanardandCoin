@@ -97,86 +97,80 @@ class ControllerProduits
         }
     }
 
-<<<<<<< HEAD
-    public static function createPanier(){
-      if(!isset($_SESSION['panier'])){
-        $_SESSION['panier']=array();
-        $_SESSION['panier']['idProduit'] = array();
-        $_SESSION['panier']['quantity'] = array();
-        $_SESSION['panier']['prix'] = array();
-=======
-      if (Session::is_admin()) {
-          $id = $_GET['idProduit'];
-          $pagetitle = 'Suppression d\'un produit';
-          $view = 'deleted';
-          ModelProduits::delete($id);
-          $tab = ModelProduits::selectAll();
-          require_once File::build_path(array('view', 'view.php'));
-      } else {
-          ControllerUtilisateurs::connect();
->>>>>>> 16d9aad7823011d3f255eb45e0bcfa5dc739f427
-      }
-      return true;
+    public static function createPanier()
+    {
+        if (!isset($_SESSION['panier'])) {
+            $_SESSION['panier'] = array();
+            $_SESSION['panier']['idProduit'] = array();
+            $_SESSION['panier']['quantity'] = array();
+            $_SESSION['panier']['prix'] = array();
+        }
+        return true;
     }
 
-    public static function addArticle($idProduit, $quantity, $prix){
-      if(createPanier()){
-        $positionProduit = array_search($idProduit, $_SESSION['panier']['idProduit']);
+    public static function addArticle($idProduit, $quantity, $prix)
+    {
+        if (createPanier()) {
+            $positionProduit = array_search($idProduit, $_SESSION['panier']['idProduit']);
 
-        if($positionProduit !== false){
-          $_SESSION['panier']['quantity'][$positionProduit] += 1;
-        }else{
-          array_push($_SESSION['panier']['idProduit'], $idProduit);
-          array_push($_SESSION['panier']['quantity'], $quantity);
-          array_push($_SESSION['panier']['prix'], $prix);
+            if ($positionProduit !== false) {
+                $_SESSION['panier']['quantity'][$positionProduit] += 1;
+            } else {
+                array_push($_SESSION['panier']['idProduit'], $idProduit);
+                array_push($_SESSION['panier']['quantity'], $quantity);
+                array_push($_SESSION['panier']['prix'], $prix);
+            }
         }
-      }
     }
 
-    public static function removeArticle($idProduit){
-      if(createPanier()){
-        $temporaryPanier=array();
-        $temporaryPanier['idProduit']=array();
-        $temporaryPanier['quantity']=array();
-        $temporaryPanier['prix']=array();
+    public static function removeArticle($idProduit)
+    {
+        if (createPanier()) {
+            $temporaryPanier = array();
+            $temporaryPanier['idProduit'] = array();
+            $temporaryPanier['quantity'] = array();
+            $temporaryPanier['prix'] = array();
 
-        for($i = 0; $i < count($_SESSION['panier']['idProduit']); $i++){
-          if ($_SESSION['panier']['idProduit'][$i] !== $idProduit){
-            array_push( $temporaryPanier['idProduit'],$_SESSION['panier']['idProduit'][$i]);
-            array_push( $temporaryPanier['quantity'],$_SESSION['panier']['quantity'][$i]);
-            array_push( $temporaryPanier['prix'],$_SESSION['panier']['prix'][$i]);
-          }
+            for ($i = 0; $i < count($_SESSION['panier']['idProduit']); $i++) {
+                if ($_SESSION['panier']['idProduit'][$i] !== $idProduit) {
+                    array_push($temporaryPanier['idProduit'], $_SESSION['panier']['idProduit'][$i]);
+                    array_push($temporaryPanier['quantity'], $_SESSION['panier']['quantity'][$i]);
+                    array_push($temporaryPanier['prix'], $_SESSION['panier']['prix'][$i]);
+                }
+            }
+            $_SESSION['panier'] = $temporaryPanier;
+            unset($temporaryPanier);
         }
-        $_SESSION['panier'] = $temporaryPanier;
-        unset($temporaryPanier);
-       }
-     }
+    }
 
-     public static function modifyQuantity($idProduit, $quantity){
-       if(createPanier()){
-         if($quantity > 0){
-           $positionProduit = array_search($idProduit, $_SESSION['panier']['idProduit']);
+    public static function modifyQuantity($idProduit, $quantity)
+    {
+        if (createPanier()) {
+            if ($quantity > 0) {
+                $positionProduit = array_search($idProduit, $_SESSION['panier']['idProduit']);
 
-           if($positionProduit !== false){
-             $_SESSION['panier']['quantity'][$positionProduit] = $quantity;
-           }
-         }else{
-           removeArticle($idProduit);
-         }
-       }
-     }
+                if ($positionProduit !== false) {
+                    $_SESSION['panier']['quantity'][$positionProduit] = $quantity;
+                }
+            } else {
+                removeArticle($idProduit);
+            }
+        }
+    }
 
-     public static function totalPrice(){
-       $total = 0;
-       for($i = 0; $i < count($_SESSION['panier']['idProduit']); $i++){
-         $total += $_SESSION['panier']['quantity'][$i] * $_SESSION['panier']['prix'][$i];
-       }
-       return $total;
-     }
+    public static function totalPrice()
+    {
+        $total = 0;
+        for ($i = 0; $i < count($_SESSION['panier']['idProduit']); $i++) {
+            $total += $_SESSION['panier']['quantity'][$i] * $_SESSION['panier']['prix'][$i];
+        }
+        return $total;
+    }
 
-     function removePanier(){
-       unset($_SESSION['panier']);
-     }
+    public function removePanier()
+    {
+        unset($_SESSION['panier']);
+    }
 
     public static function toPanier()
     {
