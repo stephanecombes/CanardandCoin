@@ -52,14 +52,14 @@ class ControllerUtilisateurs
     public static function created()
     {
         if (($_POST['mdpUtilisateur'] != $_POST['mdpUtilisateurC']) || !filter_var($_POST['mailUtilisateur'], FILTER_VALIDATE_EMAIL)) {
-            echo 'Erreur les deux mots de passe ne correspondent pas';
+            echo '<p>Erreur les deux mots de passe ne correspondent pas</p>';
             $pagetitle = 'Créer votre utilisateur';
             $view = 'update';
             require_once File::build_path(array('view', 'view.php'));
         } else {
             if (!ModelUtilisateurs::checkEmail($_POST['mailUtilisateur'])) {
                 $_POST['mdpUtilisateur'] = Security::chiffrer($_POST['mdpUtilisateur']);
-                if(!isset($_POST['idRole'])) {
+                if (!isset($_POST['idRole'])) {
                     $_POST['idRole'] = 1;
                 }
                 $utilisateur = new ModelUtilisateurs($_POST);
@@ -69,7 +69,7 @@ class ControllerUtilisateurs
                 $view = 'created';
                 require_once File::build_path(array('view', 'view.php'));
             } else {
-                echo 'Cet email est déjà utilisé';
+                echo '<p>Cet email est déjà utilisé</p>';
             }
         }
     }
@@ -96,7 +96,7 @@ class ControllerUtilisateurs
                 $view = 'update';
                 $_GET['login'] = $_POST['login'];
                 require_once File::build_path(array('view', 'view.php'));
-            } else {
+            } else if (filter_var($_POST['mailUtilisateur'], FILTER_VALIDATE_EMAIL)) {
                 $login = $_POST['idUtilisateur'];
                 $pagetitle = 'Liste des utilisateurs';
                 $tab_u = ModelUtilisateurs::selectAll();
@@ -114,6 +114,8 @@ class ControllerUtilisateurs
                 $_SESSION['idRole'] = $_POST['idRole'];
                 ModelUtilisateurs::update($data);
                 require_once File::build_path(array('view', 'view.php'));
+            } else {
+                echo '<p>Courriel incorrect</p>';
             }
         } else {
             ControllerUtilisateurs::connect();
@@ -129,11 +131,12 @@ class ControllerUtilisateurs
 
     public static function connected()
     {
+        $idUser = ModelUtilisateurs::getIdbyEmail($_POST['mailUtilisateur']);
         $mot_de_passe_chiffre = Security::chiffrer($_POST['mdpUtilisateur']);
-        $test = ModelUtilisateurs::checkPassword($_POST['idUtilisateur'], $mot_de_passe_chiffre);
+        $test = ModelUtilisateurs::checkPassword($idUser, $mot_de_passe_chiffre);
         if ($test) {
             $view = 'detail';
-            $u = ModelUtilisateurs::select($_POST['idUtilisateur']);
+            $u = ModelUtilisateurs::select($idUser);
             $_SESSION['idUtilisateur'] = $u->get('idUtilisateur');
             $_SESSION['idRole'] = $u->get('idRole');
             require_once File::build_path(array('view', 'view.php'));

@@ -59,7 +59,6 @@ class ControllerCommandes
 
     public static function update()
     {
-       // $u = ModelCommandes::select($_GET['idCommande']);
         if (Session::is_admin()) {
             $pagetitle = 'Modification d\'une commande';
             $view = 'update';
@@ -71,30 +70,29 @@ class ControllerCommandes
 
     public static function updated()
     {
-      $u = ModelCommandes::select($_GET['idCommande']);
+        $u = ModelCommandes::select($_GET['idCommande']);
         if (Session::is_user($u->get('idUtilisateur'))) {
-                $pagetitle = 'Modification d\'une commande';
-                $view = 'update';
-                $_GET['idCommande'] = $_POST['idCommande'];
-                require_once File::build_path(array('view', 'view.php'));
-                
-                $pagetitle = 'Liste des commandes';
-                $tab_u = ModelCommandes::selectAll();
-                $view = 'updated';
-                $data = array(
-                    'idCommande' => $_POST['idCommande'],
-                    'idUtilisateur' => $_POST['idUtilisateur'],
-                    'dateCommande' => $_POST['dateCommande'],
-                    'idStatut' => $_POST['idStatut'],
-                    'montantCommande' => $_POST['montantCommande'],
-                    'idAdresseLivraison' => $_POST['idAdresseLivraison'],
-                    'idAdresseFacturation' => $_POST['idAdresseFacturation'],
-                );
-                ModelCommandes::update($data);
-                require_once File::build_path(array('view', 'view.php'));
+            $pagetitle = 'Modification d\'une commande';
+            $view = 'update';
+            $_GET['idCommande'] = $_POST['idCommande'];
+            require_once File::build_path(array('view', 'view.php'));
+
+            $pagetitle = 'Liste des commandes';
+            $tab_u = ModelCommandes::selectAll();
+            $view = 'updated';
+            $data = array(
+                'idCommande' => $_POST['idCommande'],
+                'idUtilisateur' => $_POST['idUtilisateur'],
+                'dateCommande' => $_POST['dateCommande'],
+                'idStatut' => $_POST['idStatut'],
+                'montantCommande' => $_POST['montantCommande'],
+                'idAdresseLivraison' => $_POST['idAdresseLivraison'],
+                'idAdresseFacturation' => $_POST['idAdresseFacturation'],
+            );
+            ModelCommandes::update($data);
+            require_once File::build_path(array('view', 'view.php'));
         } else {
             ControllerUtilisateurs::connect();
         }
-    }}
-
-?>
+    }
+}
