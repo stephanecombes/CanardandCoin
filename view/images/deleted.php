@@ -1,0 +1,1 @@
+<p>L'image à bien été supprimée</p>

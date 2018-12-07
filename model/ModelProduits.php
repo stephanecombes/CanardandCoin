@@ -10,6 +10,7 @@ class ModelProduits extends Model
     private $idCategorie;
     private $couleurProduit;
     private $descriptionProduit;
+    private $prixProduit;
     private $tailleProduit;
     private $poidsProduit;
     private $ageProduit;

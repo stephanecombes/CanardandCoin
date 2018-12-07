@@ -4,14 +4,7 @@ require_once File::build_path(array('config', 'Conf.php'));
 class Model
 {
     public static $PDO;
-    /*
-    public function __construct($data){
-    $class_name = 'Model' . ucfirst(static::$object);
-    foreach($data as $key => $values){
-    $this->$key = $values;
-    }
-    }
-     */
+
     public static function Init()
     {
         //Récupération des données nécéssaires à la connexion à la base de données.
@@ -34,21 +27,6 @@ class Model
 
         //On active le mode d'affichage des erreurs, et le lancement d'exception en cas d'erreurs.
         self::$PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    }
-
-    //getter générique.
-    /*
-    public static function get($nomAttribut)
-    {
-    $class_name = 'Model' . ucfirst(static::$object);
-    return $class_name->$nomAttribut;
-    }
-     */
-    //setter générique.
-    public static function set($nomAttribut, $valeur)
-    {
-        $class_name = 'Model' . ucfirst(static::$object);
-        $class_name->$nomAttribut = $valeur;
     }
 
     // fonction pour avoir un object suivant sa clef primaire
@@ -134,10 +112,20 @@ class Model
         $primary_key = static::$primary;
 
         try {
+            if($table_name = "cac_images"){
+                $lien = "SELECT lienImage FROM $table_name WHERE $primary_key = :id_tag";
+                $rep_prep = Model::$PDO->prepare($lien);
+                $values = array('id_tag' => $primary_key);
+                $rep_prep->execute($values);                
+                if(file_exists($lien)){
+                    unlink($lien);
+                }
+            }
             $sql = "DELETE FROM $table_name WHERE $primary_key = :id_tag";
             $rep_prep = Model::$PDO->prepare($sql);
             $values = array('id_tag' => $primary_key);
             $rep_prep->execute($values);
+
         } catch (PDOException $e) {
             if (Conf::getDebug()) {
                 echo $e->getMessage(); // affiche un message d'erreur
