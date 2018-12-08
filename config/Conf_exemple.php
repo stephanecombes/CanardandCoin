@@ -4,16 +4,16 @@ class Conf
     private static $databases = array(
         // Le nom d'hote est webinfo a l'IUT
         // ou localhost sur votre machine
-        'hostname' => 'localhost',
+        'hostname' => ' ',
         // A l'IUT, vous avez une BDD nommee comme votre login
         // Sur votre machine, vous devrez creer une BDD
-        'database' => 'combess',
+        'database' => ' ',
         // A l'IUT, c'est votre login
         // Sur votre machine, vous avez surement un compte 'root'
-        'login' => 'root',
+        'login' => ' ',
         // A l'IUT, c'est votre mdp (INE par defaut)
         // Sur votre machine personelle, vous avez creez ce mdp a l'installation
-        'password' => '',
+        'password' => ' ',
         // Prefixe des tables
         'prefix' => 'cac_',
     );
@@ -27,7 +27,6 @@ class Conf
 
     public static function getLogin()
     {
-        //en PHP l'indice d'un tableau n'est pas forcement un chiffre.
         return self::$databases['login'];
     }
 
@@ -51,7 +50,7 @@ class Conf
         return self::$databases['prefix'];
     }
 
-    public static function getBaseURL()
+    public function getBaseURL()
     {
         $currentPath = $_SERVER['PHP_SELF'];
         $pathInfo = pathinfo($currentPath);
