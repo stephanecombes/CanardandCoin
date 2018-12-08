@@ -1,7 +1,9 @@
-<h1>Nos produits </h1>
 <?php
 if (Session::is_admin()) {
+	echo '<h1>Liste des produits </h1>';
     echo '<p><a href=index.php?controller=produits&action=create>Ajouter un produit</a></p>';
+}else{
+	echo '<h1>Nos produits </h1>';
 }
 
 foreach ($tab as $key => $value) {

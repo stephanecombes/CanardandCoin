@@ -64,10 +64,12 @@ if(!$images){
     <h2>Description : </h2>
     <?php
     echo $detailProduit;
-    echo '<p><a href=index.php?controller=produits&action=toPanier&idProduit=' . $idProduitURL . '>Ajouter au panier</a></p>';
-    echo '<p><a href=index.php?controller=produits&action=update&idProduit=' . $idProduitURL . '>Modifier</a></p>';
-    echo '<p><a href=index.php?controller=produits&action=delete&idProduit=' . $idProduitURL . '>Supprimer</a></p>';
-
+	if(Session::is_admin()){
+		echo '<p><a href=index.php?controller=produits&action=update&idProduit=' . $idProduitURL . '>Modifier</a></p>';
+		echo '<p><a href=index.php?controller=produits&action=delete&idProduit=' . $idProduitURL . '>Supprimer</a></p>';
+	} else {
+		echo '<p><a href=index.php?controller=produits&action=toPanier&idProduit=' . $idProduitURL . '>Ajouter au panier</a></p>';
+	}
     ?>
   </div>
 </div>

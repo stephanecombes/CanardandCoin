@@ -1,5 +1,3 @@
-<h1>Détail de l'utilisateur </h1>
-
 <?php
 require_once File::build_path(array('model', 'ModelUtilisateurs.php'));
 $idu = '<p>ID de l\'utilisateur : ' . $u->get('idUtilisateur') . '</p>';
@@ -11,4 +9,16 @@ $roleu = '<p>Rôle de l\'utilisateur : ' . $u->get('idRole') . '</p>';
 
 $detailutilisateur = $idu . $nomu . $prenomu . $mailu . $ageu . $roleu;
 
-echo '<p>' . $detailutilisateur . '</p>';
+if(Session::is_admin()){
+	echo '<h1>Détail de l\'utilisateur </h1>';
+	echo '<p>' . $detailutilisateur . '</p>';
+	echo '<p><a href=index.php?controller=utilisateurs&action=update&idUtilisateur=' . $idUtilisateurURL . '>Modifier</a></p>';
+	echo '<p><a href=index.php?controller=utilisateurs&action=delete&idUtilisateur=' . $idUtilisateurURL . '>Supprimer</a></p>';
+} else if (isset($_SESSION['idUtilisateur'])) {
+	echo '<h1>Mon profil </h1>';
+	echo '<p><a href=index.php?controller=utilisateurs&action=update&idUtilisateur=' . $idUtilisateurURL . '>Modifier</a></p>';
+	echo '<p>' . $detailutilisateur . '</p>';
+}else{
+	echo 'Vous n\'avez pas les droits requis';
+}
+

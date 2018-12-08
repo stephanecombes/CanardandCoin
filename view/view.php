@@ -10,7 +10,11 @@
   <header>
     <!-- Principal nav -->
     <ul class="principal_nav">
-      <li><a href="index.php?controller=produits&action=viewPanier">Panier</a></li>
+	<?php
+	if(!Session::is_admin()){
+		echo '<li><a href="index.php?controller=produits&action=viewPanier">Panier</a></li>';
+	}
+	?>
       <li><a href="index.php?controller=produits&action=readAll">Produits</a></li>
       <li><a href="index.php?controller=commandes&action=readAll">Commandes</a></li>
       <?php

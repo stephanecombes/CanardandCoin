@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "\\config",
+    "\\controller",
+    "\\lib",
+    "\\model",
+    "\\sql"
+  ],
+  "PreviewInSolutionExplorer": false
+}
