@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title><?php $pagetitle;?></title>
-    <link rel="stylesheet" href="css/style11.css">
+    <link rel="stylesheet" href="css/style12.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Maven+Pro" />
   </head>
   <header>
