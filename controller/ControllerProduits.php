@@ -121,8 +121,7 @@ class ControllerProduits
       }
     }
 
-    public static function removeArticle(){
-      $idProduit = $_GET['idProduit'];
+    public static function removeArticle($idProduit){
       if(ControllerProduits::createPanier()){
         $temporaryPanier=array();
         $temporaryPanier['idProduit']=array();
@@ -170,11 +169,32 @@ class ControllerProduits
        unset($_SESSION['panier']);
      }
 
-    public static function viewPanier(){
-      for ($i = 0 ; $i < count($_SESSION['panier']['idProduit']) ; $i++){
-        ControllerProduits::modifyQuantity($_SESSION['panier']['idProduit'][$i],round($q[$i]));
-      }
+     public static function deleteArticle(){
+       $l = (isset($_POST['l'])? $_POST['l']:  (isset($_GET['l'])? $_GET['l']:null )) ;
+       $l = preg_replace('#\v#', '',$l);
+       ControllerProduits::removeArticle($l);
+     }
 
+     public static function modifyArticleQuantity(){
+       $q = (isset($_POST['q'])? $_POST['q']:  (isset($_GET['q'])? $_GET['q']:null )) ;
+       if (is_array($q)){
+          $quantity = array();
+          $i=0;
+          foreach ($q as $contenu){
+             $quantity[$i++] = intval($contenu);
+          }
+       }else{
+         $q = intval($q);
+       }
+       for ($i = 0 ; $i < count($quantity) ; $i++){
+         ControllerProduits::modifyQuantity($_SESSION['panier']['idProduit'][$i],round($quantity[$i]));
+       }
+       $pagetitle = 'panier';
+       $view = 'panier';
+       require File::build_path(array("view", "view.php"));
+     }
+
+    public static function viewPanier(){
       $pagetitle = 'panier';
       $view = 'panier';
       require File::build_path(array("view", "view.php"));

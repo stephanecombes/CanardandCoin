@@ -61,8 +61,6 @@ input[type=text] {
     border: 2px solid #ccc;
     border-radius: 4px;
     padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.2s ease-in-out;
-    transition: width 0.2s ease-in-out;
 }
 
 input[type=password] {
@@ -71,8 +69,22 @@ input[type=password] {
     border: 2px solid #ccc;
     border-radius: 4px;
     padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.2s ease-in-out;
-    transition: width 0.2s ease-in-out;
+}
+
+input[type=email] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    padding: 12px 20px 12px 40px;
+}
+
+input[type=number] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    padding: 12px 20px 12px 40px;
 }
 
 /*detail*/
