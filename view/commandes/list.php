@@ -4,3 +4,4 @@ foreach ($tab as $key => $value) {
     $idCommandeURL = rawurlencode($value->get('idCommande'));
     echo '<p><a href=index.php?controller=commandes&action=read&idCommande=' . $idCommandeURL . '>' . $idCommande . '</a></p>';
 }
+?>
