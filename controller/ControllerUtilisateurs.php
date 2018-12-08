@@ -145,7 +145,7 @@ class ControllerUtilisateurs
             $type = 'E_PASSWORD';
             $view = 'error';
             require File::build_path(array("view", "view.php"));
-        } else if (ModelUtilisateurs::checkEmail($_POST['mailUtilisateur']) && (ModelUtilisateurs::getIdbyEmail($_POST['mailUtilisateur'])) != $_SESSION['idUtilisateur']) {
+        } else if (ModelUtilisateurs::checkEmail($_POST['mailUtilisateur']) && (ModelUtilisateurs::getIdbyEmail($_POST['mailUtilisateur'])) != $u - get('idUtilisateur')) {
             $lastForm = $_POST;
             $pagetitle = 'Courriel déja utilisé';
             $type = 'E_EMAIL_IN_USE';
