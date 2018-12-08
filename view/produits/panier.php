@@ -1,5 +1,4 @@
 <form method="post" action="index.php?controller=produits&action=modifyArticleQuantity">
-	<table class="table_panier">
 		<?php
 		if (ControllerProduits::createPanier()){
 			$nbArticles=count($_SESSION['panier']['idProduit']);
@@ -7,6 +6,7 @@
 			echo "<p>Votre panier est vide </p>";
 			else
 			{
+				echo '<table class="table_panier">';
 				echo '<p>Votre panier :</p>';
 				echo '<tr>';
 				echo	'<th>Libellé</th>';
@@ -30,9 +30,9 @@
 				echo '<td colspan="2">';
 				echo '<p>Total : ' . ControllerProduits::totalprice() . ' €</p>';
 				echo '</td></tr>';
+				echo '</table>';
+				echo '<div class="input_panier"><input type="submit" value="Actualiser"/></div>';
 			}
 		}
-	echo '</table>';
-	echo '<div class="input_panier"><input type="submit" value="Actualiser"/></div>';
 	?>
 </form>
