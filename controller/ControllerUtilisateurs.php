@@ -56,7 +56,6 @@ class ControllerUtilisateurs
 
     public static function create()
     {
-        $nonce = Security::generateRandomHex();
         $pagetitle = 'Création d\'un utilisateur';
         $view = 'update';
         require File::build_path(array("view", "view.php"));
@@ -76,24 +75,26 @@ class ControllerUtilisateurs
             $type = 'E_PASSWORD';
             $view = 'error';
             require File::build_path(array("view", "view.php"));
-        } else if (!ModelUtilisateurs::checkEmail($_POST['mailUtilisateur'])) {
+        } else if (ModelUtilisateurs::checkEmail($_POST['mailUtilisateur'])) {
             $lastForm = $_POST;
             $pagetitle = 'Courriel déja utilisé';
             $type = 'E_EMAIL_IN_USE';
             $view = 'error';
             require File::build_path(array("view", "view.php"));
         } else {
+
             $_POST['mdpUtilisateur'] = Security::chiffrer($_POST['mdpUtilisateur']);
             if (!isset($_POST['idRole'])) {
                 $_POST['idRole'] = 1;
             }
-            $_POST['nonce'] = $nonce;
+            $_POST['nonce'] = Security::generateRandomHex();
             $utilisateur = new ModelUtilisateurs($_POST);
             $utilisateur->save();
             $pagetitle = 'Liste des utilisateurs';
             $tab = ModelUtilisateurs::selectAll();
             $view = 'created';
-            $utilisateurURL = 'http://.../index.php?action=validate&idUtilisateur=' . rawurlencode($utilisateur->get('idUtilisateur')) . '&nonce=' . rawurlencode($utilisateur->get('nonce'));
+            $utilisateurURL = Conf::getBaseURL() . 'index.php?controller=utilisateurs&action=validate&idUtilisateur=' . rawurlencode(ModelUtilisateurs::getIdbyEmail($utilisateur->get('mailUtilisateur'))) . '&nonce=' . rawurlencode($utilisateur->get('nonce'));
+            var_dump($utilisateurURL);
             $texteCourriel = '<p>Bonjour, vous êtes récement inscrit au site Canard and Coin, veuillez cliquer sur le lien suivant pour valider votre compte</p>';
             $texteCourriel .= '<p><a href="' . $utilisateurURL . '">' . $utilisateurURL . '</a></p>';
             $texteCourriel .= '<p>Cordialement</p>';
@@ -239,7 +240,7 @@ class ControllerUtilisateurs
         } else if ($nonce == $_GET['nonce']) {
             $pagetitle = 'Validation effectuée';
             $view = 'validated';
-            ModelUtilisateurs::setNonceNULL($idUtilisateur);
+            ModelUtilisateurs::setNonceNULL($_GET['idUtilisateur']);
             require File::build_path(array("view", "view.php"));
         }
     }

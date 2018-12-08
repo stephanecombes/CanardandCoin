@@ -4,16 +4,16 @@ class Conf
     private static $databases = array(
         // Le nom d'hote est webinfo a l'IUT
         // ou localhost sur votre machine
-        'hostname' => 'localhost',
+        'hostname' => 'webinfo',
         // A l'IUT, vous avez une BDD nommee comme votre login
         // Sur votre machine, vous devrez creer une BDD
         'database' => 'combess',
         // A l'IUT, c'est votre login
         // Sur votre machine, vous avez surement un compte 'root'
-        'login' => 'root',
+        'login' => 'combess',
         // A l'IUT, c'est votre mdp (INE par defaut)
         // Sur votre machine personelle, vous avez creez ce mdp a l'installation
-        'password' => '',
+        'password' => 'aMeLie00%%',
         // Prefixe des tables
         'prefix' => 'cac_',
     );
@@ -51,7 +51,7 @@ class Conf
         return self::$databases['prefix'];
     }
 
-    public static function getBaseURL()
+    public function getBaseURL()
     {
         $currentPath = $_SERVER['PHP_SELF'];
         $pathInfo = pathinfo($currentPath);
