@@ -15,7 +15,7 @@ class Security
         return self::$seed;
     }
 
-    public function generateRandomHex()
+    public static function generateRandomHex()
     {
         // Generate a 32 digits hexadecimal number
         $numbytes = 16; // Because 32 digits hexadecimal = 16 bytes
