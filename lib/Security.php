@@ -1,7 +1,6 @@
 <?php
 class Security
 {
-
     private static $seed = 'iZ5nMtJzkGzFUN1bnCG1';
 
     public static function chiffrer($texte_en_clair)

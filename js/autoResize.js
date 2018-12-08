@@ -10,16 +10,16 @@ var Resize = function () {
     y: objet.getAttribute("myheight")
   };
   var n_size = {
-    x: p_size.x * c_size.x/100,
-    y: p_size.y * c_size.y/100
+    x: p_size.x * c_size.x / 100,
+    y: p_size.y * c_size.y / 100
   };
 
   if (n_size.x <= n_size.y) {
-    objet.style.width = n_size.x+"px";
-    objet.style.height = n_size.x+"px";
+    objet.style.width = n_size.x + "px";
+    objet.style.height = n_size.x + "px";
   } else {
-    objet.style.width = n_size.y+"px";
-    objet.style.height = n_size.y+"px";
+    objet.style.width = n_size.y + "px";
+    objet.style.height = n_size.y + "px";
   }
   console.log(n_size);
 };

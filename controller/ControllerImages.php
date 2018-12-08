@@ -37,7 +37,7 @@ class ControllerImages
     {
         $url_img = 'images/images_produits/' . $_FILES['image']['name'];
         move_uploaded_file($_FILES['image']['tmp_name'], $url_img);
-        $datas = array('lienImage' => $url_img,'descriptionImage' => $_POST['descriptionImage']);
+        $datas = array('lienImage' => $url_img, 'descriptionImage' => $_POST['descriptionImage']);
         $image = new ModelImages($datas);
         $image->save();
         $pagetitle = 'Liste des images';
