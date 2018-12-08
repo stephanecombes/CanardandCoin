@@ -14,15 +14,33 @@ if ($u != false) {
     $uAgeUtilisateur = htmlspecialchars($u->get('ageUtilisateur'));
     $uMailUtilisateur = htmlspecialchars($u->get('mailUtilisateur'));
     $uIdRole = htmlspecialchars($u->get('idRole'));
+} else if (isset($lastForm) && !isset($up)) {
+    $uChamp = 'created';
+    $uLabel = 'Créer';
+    $uIdUtilisateur = '';
+    $uNomUtilisateur = htmlspecialchars($lastForm['nomUtilisateur']);
+    $uPrenomUtilisateur = htmlspecialchars($lastForm['prenomUtilisateur']);
+    $uAgeUtilisateur = htmlspecialchars($lastForm['ageUtilisateur']);
+    $uMailUtilisateur = htmlspecialchars($lastForm['mailUtilisateur']);
+    $uIdRole = '';
+} else if (isset($lastForm) && isset($up)) {
+    $uChamp = 'updated';
+    $uLabel = 'Mettre à jour';
+    $uIdUtilisateur = htmlspecialchars($lastForm['idUtilisateur']);
+    $uNomUtilisateur = htmlspecialchars($lastForm['nomUtilisateur']);
+    $uPrenomUtilisateur = htmlspecialchars($lastForm['prenomUtilisateur']);
+    $uAgeUtilisateur = htmlspecialchars($lastForm['ageUtilisateur']);
+    $uMailUtilisateur = htmlspecialchars($lastForm['mailUtilisateur']);
+    $uIdRole = htmlspecialchars($lastForm['idRole']);
 } else {
     $uChamp = 'created';
     $uLabel = 'Créer';
-    $uIdUtilisateur = "";
-    $uNomUtilisateur = "";
-    $uPrenomUtilisateur = "";
-    $uAgeUtilisateur = "";
-    $uMailUtilisateur = "";
-    $uIdRole = "";
+    $uIdUtilisateur = '';
+    $uNomUtilisateur = '';
+    $uPrenomUtilisateur = '';
+    $uAgeUtilisateur = '';
+    $uMailUtilisateur = '';
+    $uIdRole = '';
 }
 
 echo '<form method="post" action="index.php?controller=utilisateurs&action=' . $uChamp . '">';

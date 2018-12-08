@@ -16,12 +16,15 @@ class ControllerUtilisateurs
 
     public static function read()
     {
-        $pagetitle = 'Détail de l\'utilisateur';
         $u = ModelUtilisateurs::select($_GET['idUtilisateur']);
         if ($u != false) {
+            $pagetitle = 'Détail de l\'utilisateur';
             $view = 'detail';
             require File::build_path(array("view", "view.php"));
         } else {
+            $idUtilisateur = $_GET['idUtilisateur'];
+            $pagetitle = 'Erreur d\'utilisateur';
+            $type = 'E_USER';
             $view = 'error';
             require File::build_path(array("view", "view.php"));
         }
@@ -30,15 +33,24 @@ class ControllerUtilisateurs
     public static function delete()
     {
         $u = ModelUtilisateurs::select($_GET['idUtilisateur']);
-        if ((isset($u) && Session::is_user($u->get('idUtilisateur'))) || Session::is_admin()) {
+        if ($u != false && (Session::is_user($u->get('idUtilisateur')) || Session::is_admin())) {
             $id = $_GET['idUtilisateur'];
             $pagetitle = 'Suppression d\'utilisateur';
             $view = 'deleted';
             ModelUtilisateurs::delete($id);
             $tab_u = ModelUtilisateurs::selectAll();
             require_once File::build_path(array('view', 'view.php'));
+        } else if (!$u) {
+            $idUtilisateur = $_GET['idUtilisateur'];
+            $pagetitle = 'Erreur d\'utilisateur';
+            $type = 'E_USER';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
         } else {
-            ControllerUtilisateurs::connect();
+            $pagetitle = 'Erreur';
+            $type = 'E_ACCESS';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
         }
     }
 
@@ -51,74 +63,109 @@ class ControllerUtilisateurs
 
     public static function created()
     {
-        if (($_POST['mdpUtilisateur'] != $_POST['mdpUtilisateurC']) || !filter_var($_POST['mailUtilisateur'], FILTER_VALIDATE_EMAIL)) {
-            echo '<p>Erreur les deux mots de passe ne correspondent pas</p>';
-            $pagetitle = 'Créer votre utilisateur';
-            $view = 'update';
-            require_once File::build_path(array('view', 'view.php'));
+        if (!filter_var($_POST['mailUtilisateur'], FILTER_VALIDATE_EMAIL)) {
+            $lastForm = $_POST;
+            $pagetitle = 'Erreur courriel incorrect';
+            $type = 'E_EMAIL';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
+        } else if ($_POST['mdpUtilisateur'] != $_POST['mdpUtilisateurC']) {
+            $lastForm = $_POST;
+            $pagetitle = 'Erreur mots de passe ne correspondent pas';
+            $type = 'E_PASSWORD';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
+        } else if (!ModelUtilisateurs::checkEmail($_POST['mailUtilisateur'])) {
+            $lastForm = $_POST;
+            $pagetitle = 'Courriel déja utilisé';
+            $type = 'E_EMAIL_IN_USE';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
         } else {
-            if (!ModelUtilisateurs::checkEmail($_POST['mailUtilisateur'])) {
-                $_POST['mdpUtilisateur'] = Security::chiffrer($_POST['mdpUtilisateur']);
-                if (!isset($_POST['idRole'])) {
-                    $_POST['idRole'] = 1;
-                }
-                $utilisateur = new ModelUtilisateurs($_POST);
-                $utilisateur->save();
-                $pagetitle = 'Liste des utilisateurs';
-                $tab = ModelUtilisateurs::selectAll();
-                $view = 'created';
-                require_once File::build_path(array('view', 'view.php'));
-            } else {
-                echo '<p>Cet email est déjà utilisé</p>';
+            $_POST['mdpUtilisateur'] = Security::chiffrer($_POST['mdpUtilisateur']);
+            if (!isset($_POST['idRole'])) {
+                $_POST['idRole'] = 1;
             }
+            $utilisateur = new ModelUtilisateurs($_POST);
+            $utilisateur->save();
+            $pagetitle = 'Liste des utilisateurs';
+            $tab = ModelUtilisateurs::selectAll();
+            $view = 'created';
+            require_once File::build_path(array('view', 'view.php'));
         }
     }
 
     public static function update()
     {
         $u = ModelUtilisateurs::select($_GET['idUtilisateur']);
-        if ((isset($u) && Session::is_user($u->get('idUtilisateur'))) || Session::is_admin()) {
+        if ($u != false && (Session::is_user($u->get('idUtilisateur'))) || Session::is_admin()) {
             $pagetitle = 'Modification d\'un utilisateur';
             $view = 'update';
             require_once File::build_path(array('view', 'view.php'));
+        } else if (!$u) {
+            $idUtilisateur = $_GET['idUtilisateur'];
+            $pagetitle = 'Erreur d\'utilisateur';
+            $type = 'E_USER';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
         } else {
-            ControllerUtilisateurs::connect();
+            $pagetitle = 'Erreur';
+            $type = 'E_ACCESS';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
         }
     }
 
     public static function updated()
     {
-        $u = ModelUtilisateurs::select($_GET['idUtilisateur']);
-        if ((isset($u) && Session::is_user($u->get('idUtilisateur'))) || Session::is_admin()) {
-            if ($_POST['mdpUtilisateur'] != $_POST['mdpUtilisateurC']) {
-                echo 'Erreur les deux mots de passe ne correspondent pas';
-                $pagetitle = 'Modification d\'un utilisateur';
-                $view = 'update';
-                $_GET['login'] = $_POST['login'];
-                require_once File::build_path(array('view', 'view.php'));
-            } else if (filter_var($_POST['mailUtilisateur'], FILTER_VALIDATE_EMAIL)) {
-                $login = $_POST['idUtilisateur'];
-                $pagetitle = 'Liste des utilisateurs';
-                $tab_u = ModelUtilisateurs::selectAll();
-                $view = 'updated';
-                $data = array(
-                    'idUtilisateur' => $_POST['idUtilisateur'],
-                    'nomUtilisateur' => $_POST['nomUtilisateur'],
-                    'prenomUtilisateur' => $_POST['prenomUtilisateur'],
-                    'mdpUtilisateur' => Security::chiffrer($_POST['mdpUtilisateur']),
-                    'mailUtilisateur' => $_POST['mailUtilisateur'],
-                    'ageUtilisateur' => $_POST['ageUtilisateur'],
-                    // 'bloque' => $_POST['bloque'],
-                    'idRole' => $_POST['idRole'],
-                );
-                $_SESSION['idRole'] = $_POST['idRole'];
-                ModelUtilisateurs::update($data);
-                require_once File::build_path(array('view', 'view.php'));
-            } else {
-                echo '<p>Courriel incorrect</p>';
-            }
+        $up = true;
+        $u = ModelUtilisateurs::select($_POST['idUtilisateur']);
+        if (!filter_var($_POST['mailUtilisateur'], FILTER_VALIDATE_EMAIL)) {
+            $lastForm = $_POST;
+            $pagetitle = 'Erreur courriel incorrect';
+            $type = 'E_EMAIL';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
+        } else if (!$u) {
+            $idUtilisateur = $_POST['idUtilisateur'];
+            $pagetitle = 'Erreur d\'utilisateur';
+            $type = 'E_USER';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
+        } else if ($_POST['mdpUtilisateur'] != $_POST['mdpUtilisateurC']) {
+            $lastForm = $_POST;
+            $pagetitle = 'Erreur mots de passe ne correspondent pas';
+            $type = 'E_PASSWORD';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
+        } else if (ModelUtilisateurs::checkEmail($_POST['mailUtilisateur']) && (ModelUtilisateurs::getIdbyEmail($_POST['mailUtilisateur'])) != $_SESSION['idUtilisateur']) {
+            $lastForm = $_POST;
+            $pagetitle = 'Courriel déja utilisé';
+            $type = 'E_EMAIL_IN_USE';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
+        } else if ($u != false && (Session::is_user($u->get('idUtilisateur')) || Session::is_admin())) {
+            $login = $_POST['idUtilisateur'];
+            $pagetitle = 'Liste des utilisateurs';
+            $tab_u = ModelUtilisateurs::selectAll();
+            $view = 'updated';
+            $data = array(
+                'idUtilisateur' => $_POST['idUtilisateur'],
+                'nomUtilisateur' => $_POST['nomUtilisateur'],
+                'prenomUtilisateur' => $_POST['prenomUtilisateur'],
+                'mdpUtilisateur' => Security::chiffrer($_POST['mdpUtilisateur']),
+                'mailUtilisateur' => $_POST['mailUtilisateur'],
+                'ageUtilisateur' => $_POST['ageUtilisateur'],
+                'idRole' => $_POST['idRole'],
+            );
+            $_SESSION['idRole'] = $_POST['idRole'];
+            ModelUtilisateurs::update($data);
+            require_once File::build_path(array('view', 'view.php'));
         } else {
-            ControllerUtilisateurs::connect();
+            $pagetitle = 'Erreur';
+            $type = 'E_ACCESS';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
         }
     }
 
