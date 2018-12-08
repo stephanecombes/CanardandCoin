@@ -56,6 +56,7 @@ class ControllerUtilisateurs
 
     public static function create()
     {
+        $nonce = Security::generateRandomHex();
         $pagetitle = 'Création d\'un utilisateur';
         $view = 'update';
         require File::build_path(array("view", "view.php"));
@@ -86,11 +87,17 @@ class ControllerUtilisateurs
             if (!isset($_POST['idRole'])) {
                 $_POST['idRole'] = 1;
             }
+            $_POST['nonce'] = $nonce;
             $utilisateur = new ModelUtilisateurs($_POST);
             $utilisateur->save();
             $pagetitle = 'Liste des utilisateurs';
             $tab = ModelUtilisateurs::selectAll();
             $view = 'created';
+            $utilisateurURL = 'http://.../index.php?action=validate&idUtilisateur=' . rawurlencode($utilisateur->get('idUtilisateur')) . '&nonce=' . rawurlencode($utilisateur->get('nonce'));
+            $texteCourriel = '<p>Bonjour, vous êtes récement inscrit au site Canard and Coin, veuillez cliquer sur le lien suivant pour valider votre compte</p>';
+            $texteCourriel .= '<p><a href="' . $utilisateurURL . '">' . $utilisateurURL . '</a></p>';
+            $texteCourriel .= '<p>Cordialement</p>';
+            mail($utilisateur->get('mailUtilisateur'), 'Validation de votre compte Canard and Coin', $texteCourriel);
             require_once File::build_path(array('view', 'view.php'));
         }
     }
@@ -178,18 +185,25 @@ class ControllerUtilisateurs
 
     public static function connected()
     {
-        $idUser = ModelUtilisateurs::getIdbyEmail($_POST['mailUtilisateur']);
+        $idUtilisateur = ModelUtilisateurs::getIdbyEmail($_POST['mailUtilisateur']);
         $mot_de_passe_chiffre = Security::chiffrer($_POST['mdpUtilisateur']);
-        $test = ModelUtilisateurs::checkPassword($idUser, $mot_de_passe_chiffre);
-        if ($test) {
+        $test = ModelUtilisateurs::checkPassword($idUtilisateur, $mot_de_passe_chiffre);
+        if ($test && ModelUtilisateurs::isNonceNull($idUtilisateur)) {
             $view = 'detail';
-            $u = ModelUtilisateurs::select($idUser);
+            $u = ModelUtilisateurs::select($idUtilisateur);
             $_SESSION['idUtilisateur'] = $u->get('idUtilisateur');
             $_SESSION['idRole'] = $u->get('idRole');
             require_once File::build_path(array('view', 'view.php'));
+        } else if (!ModelUtilisateurs::isNonceNull($idUtilisateur)) {
+            $pagetitle = 'Erreur';
+            $type = 'E_NONCE';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
         } else {
-            $view = 'failConnect';
-            require_once File::build_path(array('view', 'view.php'));
+            $pagetitle = 'Erreur de connexion';
+            $type = 'E_CONNECT';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
         }
     }
 
@@ -199,5 +213,34 @@ class ControllerUtilisateurs
         $pagetitle = 'Déconnecté';
         $view = 'disconnected';
         require File::build_path(array("view", "view.php"));
+    }
+
+    public static function validate()
+    {
+        $u = ModelUtilisateurs::select($_GET['idUtilisateur']);
+        $nonce = ModelUtilisateurs::getNonceById($_GET['idUtilisateur']);
+
+        if ($u == false) {
+            $idUtilisateur = $_GET['idUtilisateur'];
+            $pagetitle = 'Erreur d\'utilisateur';
+            $type = 'E_USER';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
+        } else if ($nonce == false) {
+            $pagetitle = 'Courriel déja validé';
+            $type = 'E_NONCE_NULL';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
+        } else if ($nonce != $_GET['nonce']) {
+            $pagetitle = 'La clé de validation ne correspond pas à cet utilisateur';
+            $type = 'E_NONCE_DONT_MATCH';
+            $view = 'error';
+            require File::build_path(array("view", "view.php"));
+        } else if ($nonce == $_GET['nonce']) {
+            $pagetitle = 'Validation effectuée';
+            $view = 'validated';
+            ModelUtilisateurs::setNonceNULL($idUtilisateur);
+            require File::build_path(array("view", "view.php"));
+        }
     }
 }
