@@ -10,7 +10,7 @@ if (isset($_SESSION['idUtilisateur'])) {
         <label for="idUtilisateur">Courriel</label> :
       </p>
       <p>
-        <input type="email" placeholder="Ex : 5" name="mailUtilisateur" id="mailUtilisateur_id" required/>
+        <input type="email" placeholder="Ex : canard@coincoin.fr" name="mailUtilisateur" id="mailUtilisateur_id" required/>
       </p>
       <p>
         <label for="mdpUtilisateur">Mot de passe :</label> :

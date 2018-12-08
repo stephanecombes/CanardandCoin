@@ -50,7 +50,7 @@ class Conf
         return self::$databases['prefix'];
     }
 
-    public function getBaseURL()
+    public static function getBaseURL()
     {
         $currentPath = $_SERVER['PHP_SELF'];
         $pathInfo = pathinfo($currentPath);

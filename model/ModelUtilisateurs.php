@@ -11,6 +11,11 @@ class ModelUtilisateurs extends Model
     private $mailUtilisateur;
     private $ageUtilisateur;
     private $mdpUtilisateur;
+    private $ligne1AddresseUtilisateur;
+    private $ligne2AddresseUtilisateur;
+    private $ligne3AddresseUtilisateur;
+    private $cpUtilisateur;
+    private $villeUtilisateur;
     private $idRole;
     private $nonce;
     protected static $object = 'utilisateurs';
@@ -27,6 +32,15 @@ class ModelUtilisateurs extends Model
             $this->mailUtilisateur = $data['mailUtilisateur'];
             $this->ageUtilisateur = $data['ageUtilisateur'];
             $this->mdpUtilisateur = $data['mdpUtilisateur'];
+            $this->ligne1AddresseUtilisateur = $data['ligne1AddresseUtilisateur'];
+            if (isset($data['ligne2AddresseUtilisateur'])) {
+                $this->ligne2AddresseUtilisateur = $data['ligne2AddresseUtilisateur'];
+            }
+            if (isset($data['ligne3AddresseUtilisateur'])) {
+                $this->ligne3AddresseUtilisateur = $data['ligne3AddresseUtilisateur'];
+            }
+            $this->cpUtilisateur = $data['cpUtilisateur'];
+            $this->villeUtilisateur = $data['villeUtilisateur'];
             $this->idRole = $data['idRole'];
             $this->nonce = $data['nonce'];
         }

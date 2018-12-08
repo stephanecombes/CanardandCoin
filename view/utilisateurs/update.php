@@ -14,6 +14,11 @@ if ($u != false) {
     $uAgeUtilisateur = htmlspecialchars($u->get('ageUtilisateur'));
     $uMailUtilisateur = htmlspecialchars($u->get('mailUtilisateur'));
     $uIdRole = htmlspecialchars($u->get('idRole'));
+    $uLigne1AddresseUtilisateur = htmlspecialchars($u->get('ligne1AddresseUtilisateur'));
+    $uLigne2AddresseUtilisateur = htmlspecialchars($u->get('ligne2AddresseUtilisateur'));
+    $uLigne3AddresseUtilisateur = htmlspecialchars($u->get('ligne3AddresseUtilisateur'));
+    $uCpUtilisateur = htmlspecialchars($u->get('cpUtilisateur'));
+    $uVilleUtilisateur = htmlspecialchars($u->get('villeUtilisateur'));
 } else if (isset($lastForm) && !isset($up)) {
     $uChamp = 'created';
     $uLabel = 'Créer';
@@ -23,6 +28,11 @@ if ($u != false) {
     $uAgeUtilisateur = htmlspecialchars($lastForm['ageUtilisateur']);
     $uMailUtilisateur = htmlspecialchars($lastForm['mailUtilisateur']);
     $uIdRole = '';
+    $uLigne1AddresseUtilisateur = htmlspecialchars($lastForm['ligne1AddresseUtilisateur']);
+    $uLigne2AddresseUtilisateur = htmlspecialchars($lastForm['ligne2AddresseUtilisateur']);
+    $uLigne3AddresseUtilisateur = htmlspecialchars($lastForm['ligne3AddresseUtilisateur']);
+    $uCpUtilisateur = htmlspecialchars($lastForm['cpUtilisateur']);
+    $uVilleUtilisateur = htmlspecialchars($lastForm['villeUtilisateur']);
 } else if (isset($lastForm) && isset($up)) {
     $uChamp = 'updated';
     $uLabel = 'Mettre à jour';
@@ -32,6 +42,11 @@ if ($u != false) {
     $uAgeUtilisateur = htmlspecialchars($lastForm['ageUtilisateur']);
     $uMailUtilisateur = htmlspecialchars($lastForm['mailUtilisateur']);
     $uIdRole = htmlspecialchars($lastForm['idRole']);
+    $uLigne1AddresseUtilisateur = htmlspecialchars($lastForm['ligne1AddresseUtilisateur']);
+    $uLigne2AddresseUtilisateur = htmlspecialchars($lastForm['ligne2AddresseUtilisateur']);
+    $uLigne3AddresseUtilisateur = htmlspecialchars($lastForm['ligne3AddresseUtilisateur']);
+    $uCpUtilisateur = htmlspecialchars($lastForm['cpUtilisateur']);
+    $uVilleUtilisateur = htmlspecialchars($lastForm['villeUtilisateur']);
 } else {
     $uChamp = 'created';
     $uLabel = 'Créer';
@@ -41,6 +56,11 @@ if ($u != false) {
     $uAgeUtilisateur = '';
     $uMailUtilisateur = '';
     $uIdRole = '';
+    $uLigne1AddresseUtilisateur = '';
+    $uLigne2AddresseUtilisateur = '';
+    $uLigne3AddresseUtilisateur = '';
+    $uCpUtilisateur = '';
+    $uVilleUtilisateur = '';
 }
 
 echo '<form method="post" action="index.php?controller=utilisateurs&action=' . $uChamp . '">';
@@ -81,6 +101,46 @@ echo '<input type="text" placeholder="Ex : Alex" name="prenomUtilisateur" value 
     <p>
 <?php
 echo '<input type="email" placeholder="Ex : canard@and.coin" name="mailUtilisateur" value ="' . $uMailUtilisateur . '" id="mailUtilisateur_id" required/>';
+?>
+    </p>
+    <p>
+      <label for="ligne1AddresseUtilisateur_id">Ligne adresse 1</label> :
+    </p>
+    <p>
+<?php
+echo '<input type="text" placeholder="Ex : 99 rue d\'Occitanie" name="ligne1AddresseUtilisateur" value ="' . $uLigne1AddresseUtilisateur . '" id="ligne1AddresseUtilisateur_id" required/>';
+?>
+    </p>
+    <p>
+      <label for="ligne2AddresseUtilisateur_id">Ligne adresse 2</label> :
+    </p>
+    <p>
+<?php
+echo '<input type="text" placeholder="Ex : Campus IUT" name="ligne2AddresseUtilisateur" value ="' . $uLigne2AddresseUtilisateur . '" id="ligne2AddresseUtilisateur_id"/>';
+?>
+    </p>
+    <p>
+      <label for="ligne3AddresseUtilisateur_id">Ligne adresse 3</label> :
+    </p>
+    <p>
+<?php
+echo '<input type="text" placeholder="Ex : Bureau 116" name="ligne3AddresseUtilisateur" value ="' . $uLigne3AddresseUtilisateur . '" id="ligne3AddresseUtilisateur_id"/>';
+?>
+    </p>
+    <p>
+      <label for="cpUtilisateur_id">Code postal</label> :
+    </p>
+    <p>
+<?php
+echo '<input type="text" placeholder="Ex : 34090" name="cpUtilisateur" value ="' . $uCpUtilisateur . '" id="cpUtilisateur_id" required/>';
+?>
+    </p>
+    <p>
+      <label for="villeUtilisateur_id">Ville</label> :
+    </p>
+    <p>
+<?php
+echo '<input type="text" placeholder="Ex : Montpellier" name="villeUtilisateur" value ="' . $uVilleUtilisateur . '" id="villeUtilisateur_id" required/>';
 ?>
     </p>
     <p>
