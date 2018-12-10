@@ -20,9 +20,12 @@
       <?php
       if (isset($_SESSION['idUtilisateur'])) {
         if(Session::is_admin()){
-          echo '<li><a href="index.php?controller=utilisateurs&action=admin">Administration</a></li>';
-        }
-		echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Uilisateurs</a></li>';
+			echo '<li><a href="index.php?controller=utilisateurs&action=admin">Administration</a></li>';
+			echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Uilisateurs</a></li>';
+
+        }else{
+			echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Mon profil</a></li>';
+		}
 		echo '<li><a href="index.php?controller=Utilisateurs&action=disconnected">Déconnexion</a></li>';
       } else {
           echo '<li><a href="index.php?controller=Utilisateurs&action=create">Inscription</a></li>';
@@ -39,10 +42,12 @@
       <a href="index.php?controller=commandes&action=readAll">Commandes</a>
       <?php
       if (isset($_SESSION['idUtilisateur'])) {
-        if(ModelUtilisateurs::select($_SESSION['idUtilisateur'])->get('idRole') == 0){
+        if(Session::is_admin()){
 			echo '<a href="index.php?controller=utilisateurs&action=admin">Administration</a>';
-        }
-		echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Uilisateurs</a></li>';
+			echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Uilisateurs</a></li>';
+        }else{
+			echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Mon profil</a></li>';
+		}
         echo '<a href="index.php?controller=Utilisateurs&action=disconnected">Déconnexion</a>';
       } else {
 			echo '<a href="index.php?controller=Utilisateurs&action=create">Inscription</a>';
