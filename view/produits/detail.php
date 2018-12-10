@@ -7,10 +7,10 @@ $nomp = '<p>Nom du produit : ' . $p->get('nomProduit') . '</p>';
 $idcp = '<p>Catégorie du produit : ' . $p->get('idCategorie') . '</p>';
 $coulp = '<p>Couleur du produit : ' . $p->get('couleurProduit') . '</p>';
 $descrp = '<p>Description du produit : ' . $p->get('descriptionProduit') . '</p>';
-$prixp = '<p>Prix du produit : ' . $p->get('prixProduit') . '</p>';
-$taillep = '<p>Taille du produit : ' . $p->get('tailleProduit') . '</p>';
-$poidsp = '<p>Poids du produit : ' . $p->get('poidsProduit') . '</p>';
-$agep = '<p>Age du produit : ' . $p->get('ageProduit') . '</p>';
+$prixp = '<p>Prix du produit : ' . $p->get('prixProduit') . ' €</p>';
+$taillep = '<p>Taille du produit : ' . $p->get('tailleProduit') . ' m</p>';
+$poidsp = '<p>Poids du produit : ' . $p->get('poidsProduit') . ' kg</p>';
+$agep = '<p>Age du produit : ' . $p->get('ageProduit') . ' ans</p>';
 
 $detailProduit = $idp . $nomp . $idcp . $coulp . $descrp . $prixp . $taillep . $poidsp . $agep;
 

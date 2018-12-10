@@ -92,7 +92,7 @@ echo '<input type="text" placeholder="Ex : Joli canard bleu en porcelaine" name=
     </p>
     <p>
 <?php
-echo '<input type="text" placeholder="Ex : 1.54 m" name="tailleProduit" value ="' . $uTailleProduit . '" id="tailleProduit_id" required/>';
+echo '<input type="text" placeholder="Ex : 1.54" name="tailleProduit" value ="' . $uTailleProduit . '" id="tailleProduit_id" required/>';
 ?>
     </p>
     <p>
@@ -100,7 +100,7 @@ echo '<input type="text" placeholder="Ex : 1.54 m" name="tailleProduit" value ="
     </p>
     <p>
 <?php
-echo '<input type="text" placeholder="Ex : 21 kg" name="poidsProduit" value ="' . $uPoidsProduit . '" id="poidsProduit_id" required/>';
+echo '<input type="text" placeholder="Ex : 21" name="poidsProduit" value ="' . $uPoidsProduit . '" id="poidsProduit_id" required/>';
 ?>
     </p>
     <p>
@@ -108,7 +108,7 @@ echo '<input type="text" placeholder="Ex : 21 kg" name="poidsProduit" value ="' 
     </p>
     <p>
 <?php
-echo '<input type="text" placeholder="Ex : 51 ans" name="ageProduit" value ="' . $uAgeProduit . '" id="ageProduit_id" required/>';
+echo '<input type="text" placeholder="Ex : 51" name="ageProduit" value ="' . $uAgeProduit . '" id="ageProduit_id" required/>';
 ?>
     </p>
     <p>
