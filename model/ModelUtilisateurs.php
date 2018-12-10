@@ -56,6 +56,7 @@ class ModelUtilisateurs extends Model
         $u = ModelUtilisateurs::select($login);
         if ($u != false) {
             if ($mot_de_passe_chiffre == $u->get('mdpUtilisateur')) {
+
                 unset($u);
                 return true;
             }

@@ -4,13 +4,13 @@ $idu = '<p>ID de l\'utilisateur : ' . $u->get('idUtilisateur') . '</p>';
 $nomu = '<p>Nom de l\'utilisateur : ' . $u->get('nomUtilisateur') . '</p>';
 $prenomu = '<p>Prénom de l\'utilisateur : ' . $u->get('prenomUtilisateur') . '</p>';
 $mailu = '<p>Mail de l\'utilisateur : ' . $u->get('mailUtilisateur') . '</p>';
-$adresseu = '<p>Adresse de l\'utilisateur : ' . $u->get('ligne1AddresseUtilisateur') . '</p>';
+$adresseu = '<p>Adresse de l\'utilisateur : ' . $u->get('ligne1AddresseUtilisateur');
 
 if(!empty($u->get('ligne2AddresseUtilisateur'))){
-	$adresseu += ', ' . $u->get('ligne2AddresseUtilisateur');
+	$adresseu = $adresseu . ', ' . $u->get('ligne2AddresseUtilisateur');
 }
 if(!empty($u->get('ligne3AddresseUtilisateur'))){
-	$adresseu += ', ' . $u->get('ligne3AddresseUtilisateur');
+	$adresseu = $adresseu . ', ' . $u->get('ligne3AddresseUtilisateur') . '</p>';
 
 }
 
