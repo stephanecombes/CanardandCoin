@@ -39,7 +39,7 @@ class ControllerProduits
         $view = 'created';
         $produit = new ModelProduits($_POST);
         $produit->save();
-        ControllerProduits::readAll();
+        require File::build_path(array("view", "view.php"));
     }
 
     public static function update()
