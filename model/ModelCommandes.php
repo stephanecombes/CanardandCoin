@@ -9,8 +9,6 @@ class ModelCommandes extends Model
     private $dateCommande;
     private $idStatut;
     private $montantCommande;
-    private $idAdresseLivraison;
-    private $idAdresseFacturation;
     protected static $object = 'commandes';
     protected static $primary = 'idCommande';
 
@@ -18,10 +16,9 @@ class ModelCommandes extends Model
     {
         if (!is_null($data)) {
             $this->dateCommande = $data['dateCommande'];
+            $this->idUtilisateur = $data['idUtilisateur'];
             $this->idStatut = $data['idStatut'];
             $this->montantCommande = $data['montantCommande'];
-            $this->idAdresseLivraison = $data['idAdresseLivraison'];
-            $this->idAdresseFacturation = $data['idAdresseFacturation'];
         }
     }
 

@@ -95,4 +95,48 @@ class ControllerCommandes
             ControllerUtilisateurs::connect();
         }
     }
+
+    public static function command(){
+      $idUser = $_SESSION['idUtilisateur'];
+      $date = date('Y/m/d');
+      $sqlDate = str_replace('/', '-', $date);
+      $statut = 1;
+      $montant = ControllerProduits::totalPrice();
+
+      $data = $arrayName = array('dateCommande' => $sqlDate ,
+                                'idStatut' => $statut,
+                                'idUtilisateur' => $idUser,
+                                'montantCommande' => $montant,
+                              );
+
+
+      $commande = new ModelCommandes($data);
+      $commande->save();
+
+      $new_commande = Model::$PDO->query("SELECT * FROM cac_commandes ORDER BY 'date' DESC, 'time' DESC LIMIT 1");
+      $new_commande->setFetchMode(PDO::FETCH_CLASS, 'ModelCommandes');
+      $fetchCommande = $new_commande->fetchAll();
+      $objectCommande = $fetchCommande[0];
+      $idCommande = $objectCommande->get('idCommande');
+
+      foreach ($_SESSION['panier']['idProduit'] as $key => $value) {
+        $positionProduit = array_search($value, $_SESSION['panier']['idProduit']);
+
+        $idProduit = $value;
+        $quantitéProduits = $_SESSION['panier']['quantity'][$positionProduit];
+
+        $sql = 'INSERT INTO cac_lignecommande(idCommande, idProduit, quantitéProduits) VALUES(:idCommande, :idProduit, :quantitéProduits)';
+        $req_prep = Model::$PDO->prepare($sql);
+
+        $values = array(
+          'idCommande' => $idCommande,
+          'idProduit' => $idProduit,
+          'quantitéProduits' => $quantitéProduits,
+        );
+
+        var_dump($values);
+        var_dump($req_prep);
+        $req_prep->execute($values);
+      }
+    }
 }

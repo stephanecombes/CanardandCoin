@@ -36,3 +36,4 @@
 		}
 	?>
 </form>
+<a href="index.php?controller=commandes&action=command">Passer commande</a>
