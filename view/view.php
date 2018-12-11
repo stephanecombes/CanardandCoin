@@ -21,12 +21,13 @@
       if (isset($_SESSION['idUtilisateur'])) {
         if(Session::is_admin()){
 			echo '<li><a href="index.php?controller=utilisateurs&action=admin">Administration</a></li>';
-			echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Uilisateurs</a></li>';
-
+			echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Utilisateurs</a></li>';
+      echo '<li><a href="index.php?controller=images&action=create">Images</a></li>';
+      echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Utilisateurs</a></li>';
         }else{
 			echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Mon profil</a></li>';
 		}
-		echo '<li><a href="index.php?controller=Utilisateurs&action=disconnected">Déconnexion</a></li>';
+		      echo '<li><a href="index.php?controller=Utilisateurs&action=disconnected">Déconnexion</a></li>';
       } else {
           echo '<li><a href="index.php?controller=Utilisateurs&action=create">Inscription</a></li>';
           echo '<li><a href="index.php?controller=Utilisateurs&action=connect">Connexion</a></li>';
@@ -48,7 +49,7 @@
         }else{
 			echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Mon profil</a></li>';
 		}
-        echo '<a href="index.php?controller=Utilisateurs&action=disconnected">Déconnexion</a>';
+      echo '<a href="index.php?controller=Utilisateurs&action=disconnected">Déconnexion</a>';
       } else {
 			echo '<a href="index.php?controller=Utilisateurs&action=create">Inscription</a>';
 			echo '<a href="index.php?controller=Utilisateurs&action=connect">Connexion</a>';

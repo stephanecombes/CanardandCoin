@@ -234,7 +234,7 @@ class ControllerProduits
         $req_sql_prep = Model::$PDO->prepare($req_sql);
 
         $values = array(
-            'idProduit' => $_POST['idProduit'],
+            'idProduit' => $_GET['idProduit'],
             'idImage' => $_POST['idImage'],
         );
 
