@@ -8,6 +8,12 @@ if(Session::is_admin()){
 	}
 }else{
 	echo '<h1>Mes commandes</h1>';
-	//afficher les commandes correspondantes � l'utilisateur connect�
+	foreach ($tab as $key => $value) {
+		if($value->get('idUtilisateur') === $_SESSION['idUtilisateur']){
+			$idCommande = htmlspecialchars($value->get('idCommande'));
+			$idCommandeURL = rawurlencode($value->get('idCommande'));
+			echo '<p><a href=index.php?controller=commandes&action=read&idCommande=' . $idCommandeURL . '>' . $idCommande . '</a></p>';
+		}
+	}
 }
 ?>

@@ -97,14 +97,17 @@ class ControllerCommandes
     }
 
     public static function payCommand(){
-      $pagetitle = 'Paiement d\'une commande';
-      $view = 'payCommand';
-      require_once File::build_path(array('view', 'view.php'));
+      if(isset($_SESSION['idUtilisateur'])){
+        $pagetitle = 'Paiement d\'une commande';
+        $view = 'payCommand';
+        require_once File::build_path(array('view', 'view.php'));
+      }else{
+        ControllerUtilisateurs::connect();
+      }
     }
 
     public static function command(){
       if($_SESSION['idUtilisateur'] !== null){
-        var_dump($_SESSION['idUtilisateur']);
 
         try{
           $idUser = $_SESSION['idUtilisateur'];
@@ -143,7 +146,6 @@ class ControllerCommandes
         $fetchCommande = $new_commande->fetchAll();
         $objectCommande = $fetchCommande[0];
         $idCommande = $objectCommande->get('idCommande');
-        var_dump($idCommande);
 
         foreach ($_SESSION['panier']['idProduit'] as $key => $value) {
           $positionProduit = array_search($value, $_SESSION['panier']['idProduit']);
@@ -168,6 +170,7 @@ class ControllerCommandes
             }
           }
         }
+        ControllerCommandes::readAll();
       }else{
         ControllerUtilisateurs::connect();
       }

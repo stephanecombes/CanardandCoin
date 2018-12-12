@@ -136,9 +136,6 @@ class ControllerProduits
             $_SESSION['panier'] = $temporaryPanier;
             unset($temporaryPanier);
         }
-        $pagetitle = 'panier';
-        $view = 'panier';
-        require File::build_path(array("view", "view.php"));
     }
 
     public static function modifyQuantity($idProduit, $quantity)
@@ -190,7 +187,9 @@ class ControllerProduits
             $q = intval($q);
         }
         for ($i = 0; $i < count($quantity); $i++) {
+          if(isset($_SESSION['panier']['idProduit'][$i])){
             ControllerProduits::modifyQuantity($_SESSION['panier']['idProduit'][$i], round($quantity[$i]));
+          }
         }
         $pagetitle = 'panier';
         $view = 'panier';
