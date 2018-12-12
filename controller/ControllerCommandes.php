@@ -96,47 +96,80 @@ class ControllerCommandes
         }
     }
 
+    public static function payCommand(){
+      $pagetitle = 'Paiement d\'une commande';
+      $view = 'payCommand';
+      require_once File::build_path(array('view', 'view.php'));
+    }
+
     public static function command(){
-      $idUser = $_SESSION['idUtilisateur'];
-      $date = date('Y/m/d');
-      $sqlDate = str_replace('/', '-', $date);
-      $statut = 1;
-      $montant = ControllerProduits::totalPrice();
+      if($_SESSION['idUtilisateur'] !== null){
+        var_dump($_SESSION['idUtilisateur']);
 
-      $data = $arrayName = array('dateCommande' => $sqlDate ,
-                                'idStatut' => $statut,
-                                'idUtilisateur' => $idUser,
-                                'montantCommande' => $montant,
-                              );
+        try{
+          $idUser = $_SESSION['idUtilisateur'];
+          $date = date('Y/m/d');
+          $sqlDate = str_replace('/', '-', $date);
+          $statut = 1;
+          $montant = ControllerProduits::totalPrice();
+
+          $data = $arrayName = array('dateCommande' => $sqlDate ,
+                                    'idStatut' => $statut,
+                                    'idUtilisateur' => $idUser,
+                                    'montantCommande' => $montant,
+                                  );
 
 
-      $commande = new ModelCommandes($data);
-      $commande->save();
+          $commande = new ModelCommandes($data);
+          $commande->save();
+        }catch(PDOException $e){
+          if (Conf::getDebug()) {
+              echo $e->getMessage(); // affiche un message d'erreur
+          } else {
+              echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+          }
+        }
+        try {
+          $new_commande = Model::$PDO->query("SELECT * FROM cac_commandes ORDER BY idCommande DESC LIMIT 1");
+        } catch (\Exception $e) {
+          if (Conf::getDebug()) {
+              echo $e->getMessage(); // affiche un message d'erreur
+          } else {
+              echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+          }
+        }
 
-      $new_commande = Model::$PDO->query("SELECT * FROM cac_commandes ORDER BY 'date' DESC, 'time' DESC LIMIT 1");
-      $new_commande->setFetchMode(PDO::FETCH_CLASS, 'ModelCommandes');
-      $fetchCommande = $new_commande->fetchAll();
-      $objectCommande = $fetchCommande[0];
-      $idCommande = $objectCommande->get('idCommande');
+        $new_commande->setFetchMode(PDO::FETCH_CLASS, 'ModelCommandes');
+        $fetchCommande = $new_commande->fetchAll();
+        $objectCommande = $fetchCommande[0];
+        $idCommande = $objectCommande->get('idCommande');
+        var_dump($idCommande);
 
-      foreach ($_SESSION['panier']['idProduit'] as $key => $value) {
-        $positionProduit = array_search($value, $_SESSION['panier']['idProduit']);
+        foreach ($_SESSION['panier']['idProduit'] as $key => $value) {
+          $positionProduit = array_search($value, $_SESSION['panier']['idProduit']);
 
-        $idProduit = $value;
-        $quantitéProduits = $_SESSION['panier']['quantity'][$positionProduit];
+          $idProduit = $value;
+          $quantiteProduits = $_SESSION['panier']['quantity'][$positionProduit];
+          try{
+            $sql = 'INSERT INTO cac_lignecommande(idCommande, idProduit, quantiteProduits) VALUES(:idCommande, :idProduit, :quantiteProduits)';
+            $req_prep = Model::$PDO->prepare($sql);
 
-        $sql = 'INSERT INTO cac_lignecommande(idCommande, idProduit, quantitéProduits) VALUES(:idCommande, :idProduit, :quantitéProduits)';
-        $req_prep = Model::$PDO->prepare($sql);
-
-        $values = array(
-          'idCommande' => $idCommande,
-          'idProduit' => $idProduit,
-          'quantitéProduits' => $quantitéProduits,
-        );
-
-        var_dump($values);
-        var_dump($req_prep);
-        $req_prep->execute($values);
+            $values = array(
+              'idCommande' => $idCommande,
+              'idProduit' => $idProduit,
+              'quantiteProduits' => $quantiteProduits,
+            );
+            $req_prep->execute($values);
+          }catch(PDOException $e) {
+            if (Conf::getDebug()) {
+              echo $e->getMessage(); // affiche un message d'erreur
+            } else {
+              echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+            }
+          }
+        }
+      }else{
+        ControllerUtilisateurs::connect();
       }
     }
 }

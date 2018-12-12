@@ -20,7 +20,7 @@
 					$nomProduit = $produit->get('nomProduit');
 					echo '<tr>';
 					echo '<td><a href="index.php?controller=produits&action=read&idProduit=' . $_SESSION['panier']['idProduit'][$i] . '">' . htmlspecialchars($nomProduit) . '</a></ td>';
-					echo '<td><input type="text" size="4" name="q[]" value="' .htmlspecialchars($_SESSION['panier']['quantity'][$i]) . '"></td>';
+					echo '<td><input type="number" size="4" name="q[]" value="' .htmlspecialchars($_SESSION['panier']['quantity'][$i]) . '"></td>';
 					echo '<td>' . htmlspecialchars($_SESSION['panier']['prix'][$i]) . ' €</td>';
 					echo '<td><a href="' . htmlspecialchars('index.php?controller=produits&action=deleteArticle&l=' . rawurlencode($_SESSION['panier']['idProduit'][$i])) . '">Supprimer</a></td>';
 					echo '</tr>';
@@ -36,4 +36,4 @@
 		}
 	?>
 </form>
-<a href="index.php?controller=commandes&action=command">Passer commande</a>
+<a href="index.php?controller=commandes&action=payCommand">Passer commande</a>

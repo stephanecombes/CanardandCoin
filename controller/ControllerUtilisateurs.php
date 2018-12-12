@@ -195,11 +195,10 @@ class ControllerUtilisateurs
         $mot_de_passe_chiffre = Security::chiffrer($_POST['mdpUtilisateur']);
         $test = ModelUtilisateurs::checkPassword($idUtilisateur, $mot_de_passe_chiffre);
         if ($test && ModelUtilisateurs::isNonceNull($idUtilisateur)) {
-            $view = 'detail';
             $u = ModelUtilisateurs::select($idUtilisateur);
             $_SESSION['idUtilisateur'] = $u->get('idUtilisateur');
             $_SESSION['idRole'] = $u->get('idRole');
-            require_once File::build_path(array('view', 'view.php'));
+            ControllerProduits::viewPanier();
         } else if (!ModelUtilisateurs::isNonceNull($idUtilisateur)) {
             $pagetitle = 'Erreur';
             $type = 'E_NONCE';
