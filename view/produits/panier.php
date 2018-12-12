@@ -32,7 +32,7 @@
 				echo '</td></tr>';
 				echo '</table>';
 				echo '<div class="input_panier"><input type="submit" value="Actualiser"/></div>';
-				echo '<a href="index.php?controller=commandes&action=payCommand">Passer commande</a>';
+				echo '<a class="button" href="index.php?controller=commandes&action=payCommand">Passer commande</a>';
 			}
 		}
 	?>

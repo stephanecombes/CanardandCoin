@@ -65,11 +65,11 @@ if(!$images){
     <?php
     echo $detailProduit;
 	if(Session::is_admin()){
-    echo '<p><a href=index.php?controller=produits&action=addImage&idProduit=' . $idProduitURL . '>Ajouter une image</a></p>';
-		echo '<p><a href=index.php?controller=produits&action=update&idProduit=' . $idProduitURL . '>Modifier</a></p>';
-		echo '<p><a href=index.php?controller=produits&action=delete&idProduit=' . $idProduitURL . '>Supprimer</a></p>';
+    echo '<a class="button" href=index.php?controller=produits&action=addImage&idProduit=' . $idProduitURL . '>Ajouter une image</a>';
+		echo '<a class="button" href=index.php?controller=produits&action=update&idProduit=' . $idProduitURL . '>Modifier</a>';
+		echo '<a class="button" href=index.php?controller=produits&action=delete&idProduit=' . $idProduitURL . '>Supprimer</a>';
   }
-  echo '<p><a href=index.php?controller=produits&action=toPanier&idProduit=' . $idProduitURL . '>Ajouter au panier</a></p>';
+    echo '<a class="button" href=index.php?controller=produits&action=toPanier&idProduit=' . $idProduitURL . '>Ajouter au panier</a>';
     ?>
   </div>
 </div>

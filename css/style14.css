@@ -2,10 +2,19 @@ html{
   height: 100%;
 }
 
-a {color:black;}      /* unvisited link */
-a:visited {color:black;}  /* visited link */
-a:hover {color:black;}  /* mouse over link */
-a:active {color:black;}  /* selected link */
+a {color:black;}
+
+.button{
+  width:175px;
+  display: block;
+  background-color:#668cff;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  margin:10px;
+  text-align: center;
+  text-decoration: none;
+}
 
 /*nav menu*/
 
@@ -152,7 +161,7 @@ input[type=submit]{
 
 /*tableau panier*/
 
-.table_panier{
+.table_panier {
   margin: auto;
   width: 80%;
 }

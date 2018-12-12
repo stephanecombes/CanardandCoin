@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title><?php $pagetitle;?></title>
-    <link rel="stylesheet" href="css/style12.css">
+    <link rel="stylesheet" href="css/style14.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Maven+Pro" />
   </head>
   <header>
@@ -15,22 +15,18 @@
 		echo '<li><a href="index.php?controller=produits&action=viewPanier">Panier</a></li>';
 	}
 	?>
-      <li><a href="index.php?controller=produits&action=readAll">Produits</a></li>
-      <li><a href="index.php?controller=commandes&action=readAll">Commandes</a></li>
+      <li><a href="index.php?controller=produits&action=readAll">Nos produits</a></li>
       <?php
       if (isset($_SESSION['idUtilisateur'])) {
         if(Session::is_admin()){
-			echo '<li><a href="index.php?controller=utilisateurs&action=admin">Administration</a></li>';
-			echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Utilisateurs</a></li>';
-      echo '<li><a href="index.php?controller=images&action=create">Images</a></li>';
-      echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Utilisateurs</a></li>';
+			    echo '<li><a href="index.php?controller=utilisateurs&action=admin">Administration</a></li>';
         }else{
-			echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Mon profil</a></li>';
-		}
-		      echo '<li><a href="index.php?controller=Utilisateurs&action=disconnected">Déconnexion</a></li>';
+			    echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Mon profil</a></li>';
+		    }
+		    echo '<li><a href="index.php?controller=Utilisateurs&action=disconnected">Déconnexion</a></li>';
       } else {
-          echo '<li><a href="index.php?controller=Utilisateurs&action=create">Inscription</a></li>';
-          echo '<li><a href="index.php?controller=Utilisateurs&action=connect">Connexion</a></li>';
+        echo '<li><a href="index.php?controller=Utilisateurs&action=create">Inscription</a></li>';
+        echo '<li><a href="index.php?controller=Utilisateurs&action=connect">Connexion</a></li>';
       }
       ?>
       <li class="img_logo"><a href="index.php" ><img class="img_logo" src="images/logo.png" alt="logo"></a></li>
@@ -38,14 +34,11 @@
     <!-- secondary nav -->
     <div class="secondary_nav" id="secondary_nav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a href="index.php?controller=produits&action=viewPanier">Panier</a>
-      <a href="index.php?controller=produits&action=readAll">Produits</a>
-      <a href="index.php?controller=commandes&action=readAll">Commandes</a>
+      <a href="index.php?controller=produits&action=readAll">Nos produits</a>
       <?php
       if (isset($_SESSION['idUtilisateur'])) {
         if(Session::is_admin()){
 			echo '<a href="index.php?controller=utilisateurs&action=admin">Administration</a>';
-			echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Uilisateurs</a></li>';
         }else{
 			echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Mon profil</a></li>';
 		}

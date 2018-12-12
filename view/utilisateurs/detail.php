@@ -25,11 +25,11 @@ $idUtilisateurURL = rawurlencode($_SESSION['idUtilisateur']);
 if (Session::is_admin()) {
     echo '<h1>Détail de l\'utilisateur </h1>';
     echo '<p>' . $detailutilisateur . '</p>';
-    echo '<p><a href=index.php?controller=utilisateurs&action=update&idUtilisateur=' . $idUtilisateurURL . '>Modifier</a></p>';
-    echo '<p><a href=index.php?controller=utilisateurs&action=delete&idUtilisateur=' . $idUtilisateurURL . '>Supprimer</a></p>';
+    echo '<a class="button" href=index.php?controller=utilisateurs&action=update&idUtilisateur=' . $idUtilisateurURL . '>Modifier</a>';
+    echo '<a class="button" href=index.php?controller=utilisateurs&action=delete&idUtilisateur=' . $idUtilisateurURL . '>Supprimer</a>';
 } else if (isset($_SESSION['idUtilisateur'])) {
     echo '<h1>Mon profil </h1>';
-    echo '<p><a href=index.php?controller=utilisateurs&action=update&idUtilisateur=' . $idUtilisateurURL . '>Modifier</a></p>';
+    echo '<a class="button" href=index.php?controller=utilisateurs&action=update&idUtilisateur=' . $idUtilisateurURL . '>Modifier</a>';
     echo '<p>' . $detailutilisateur . '</p>';
 } else {
     echo 'Vous n\'avez pas les droits requis';

@@ -198,7 +198,11 @@ class ControllerUtilisateurs
             $u = ModelUtilisateurs::select($idUtilisateur);
             $_SESSION['idUtilisateur'] = $u->get('idUtilisateur');
             $_SESSION['idRole'] = $u->get('idRole');
-            ControllerProduits::viewPanier();
+            if(Session::is_admin()){
+              ControllerUtilisateurs::admin();
+            }else{
+              ControllerProduits::viewPanier();
+            }
         } else if (!ModelUtilisateurs::isNonceNull($idUtilisateur)) {
             $pagetitle = 'Erreur';
             $type = 'E_NONCE';
@@ -247,5 +251,15 @@ class ControllerUtilisateurs
             ModelUtilisateurs::setNonceNULL($_GET['idUtilisateur']);
             require File::build_path(array("view", "view.php"));
         }
+    }
+
+    public static function admin(){
+      if(Session::is_admin()){
+        $pagetitle = 'Panneau d\'administration';
+        $view = 'adminPannel';
+        require File::build_path(array("view", "view.php"));
+      }else{
+        ControllerProduits::readAll();
+      }
     }
 }
