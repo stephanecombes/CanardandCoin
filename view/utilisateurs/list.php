@@ -6,8 +6,8 @@ if (Session::is_admin()) {
     echo '<table class="table_panier">';
     echo '<p>Liste des utilisateurs :</p>';
     echo '<tr>';
-    echo	'<th>n°</th>';
-    echo	'<th>nom utilisateur</th>';
+    echo '<th>n°</th>';
+    echo '<th>nom utilisateur</th>';
     echo '</tr>';
     foreach ($tab as $key => $value) {
         $nomUtilisateur = htmlspecialchars($value->get('nomUtilisateur'));

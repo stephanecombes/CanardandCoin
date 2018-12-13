@@ -14,7 +14,7 @@ echo '<p>' . $detailcommande . '</p>';
 echo '</div>';
 $values = array('idCommande' => $co->get('idCommande'));
 
-$sql = 'SELECT * FROM cac_lignecommande WHERE idCommande = :idCommande' ;
+$sql = 'SELECT * FROM cac_lignecommande WHERE idCommande = :idCommande';
 
 $sql_prep = Model::$PDO->prepare($sql);
 $sql_prep->execute($values);
@@ -27,20 +27,19 @@ echo '<h2>Produits commandés :</h2>';
 
 echo '<table class="table_panier">';
 echo '<tr>';
-echo	'<th>N°</th>';
-echo	'<th>ID commande</th>';
-echo	'<th>ID produit</th>';
-echo	'<th>quantité</th>';
+echo '<th>N°</th>';
+echo '<th>ID commande</th>';
+echo '<th>ID produit</th>';
+echo '<th>quantité</th>';
 echo '</tr>';
 
-
 foreach ($array_tab as $key => $value) {
-  echo '<tr>';
-  echo '<td>' . ($key + 1) . '</td>';
-  echo '<td>' . $value['idCommande'] . '</td>';
-  echo '<td>' . $value['idProduit'] . '</td>';
-  echo '<td>' . $value['quantiteProduits'] . '</td>';
-  echo '</tr>';
+    echo '<tr>';
+    echo '<td>' . ($key + 1) . '</td>';
+    echo '<td>' . $value['idCommande'] . '</td>';
+    echo '<td>' . $value['idProduit'] . '</td>';
+    echo '<td>' . $value['quantiteProduits'] . '</td>';
+    echo '</tr>';
 }
 echo '</table>';
 ?>

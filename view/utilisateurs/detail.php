@@ -6,11 +6,11 @@ $prenomu = '<p>Prénom de l\'utilisateur : ' . $u->get('prenomUtilisateur') . '<
 $mailu = '<p>Mail de l\'utilisateur : ' . $u->get('mailUtilisateur') . '</p>';
 $adresseu = '<p>Adresse de l\'utilisateur : ' . $u->get('ligne1AddresseUtilisateur');
 
-if(!empty($u->get('ligne2AddresseUtilisateur'))){
-	$adresseu = $adresseu . ', ' . $u->get('ligne2AddresseUtilisateur');
+if (!empty($u->get('ligne2AddresseUtilisateur'))) {
+    $adresseu = $adresseu . ', ' . $u->get('ligne2AddresseUtilisateur');
 }
-if(!empty($u->get('ligne3AddresseUtilisateur'))){
-	$adresseu = $adresseu . ', ' . $u->get('ligne3AddresseUtilisateur') . '</p>';
+if (!empty($u->get('ligne3AddresseUtilisateur'))) {
+    $adresseu = $adresseu . ', ' . $u->get('ligne3AddresseUtilisateur') . '</p>';
 
 }
 

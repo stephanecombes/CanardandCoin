@@ -21,14 +21,8 @@ if (class_exists($controller_class)) { //si le controller existe
     //on récupère les méthodes du controller
     $controllerMethods = get_class_methods($controller_class);
 } else { //si le controller n'existe pas
-    //on renvoit la view erreur
-
-    /// A FAIRE
-    /// A FAIRE
-    /// A FAIRE
-    /// A FAIRE
-    /// A FAIRE
-
+    $controller_class = 'ControllerProduits';
+    ControllerProduits::error('E_CONTROLLER_NOTFOUND');
     die();
 }
 
@@ -40,13 +34,8 @@ if (in_array($_GET['action'], $controllerMethods)) { //si la fonction appelée e
     $controller_class::$action();
 
 } else { //si la fonction appelée n'existe pas
-    //on renvoit la view erreur
-
-    /// A FAIRE
-    /// A FAIRE
-    /// A FAIRE
-    /// A FAIRE
-    /// A FAIRE
-
+    //on renvoit la view erreurF
+    $controller_class = 'ControllerProduits';
+    ControllerProduits::error('E_CONTROLLER_NOTFOUND');
     die();
 }
