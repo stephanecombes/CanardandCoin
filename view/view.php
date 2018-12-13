@@ -15,12 +15,12 @@
 		echo '<li><a href="index.php?controller=produits&action=viewPanier">Panier</a></li>';
 	}
 	?>
-      <li><a href="index.php?controller=produits&action=readAll">Nos produits</a></li>
       <?php
       if (isset($_SESSION['idUtilisateur'])) {
         if(Session::is_admin()){
 			    echo '<li><a href="index.php?controller=utilisateurs&action=admin">Administration</a></li>';
         }else{
+          echo '<li><a href="index.php?controller=produits&action=readAll">Nos produits</a></li>';
 			    echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Mon profil</a></li>';
 		    }
 		    echo '<li><a href="index.php?controller=Utilisateurs&action=disconnected">Déconnexion</a></li>';
@@ -34,12 +34,12 @@
     <!-- secondary nav -->
     <div class="secondary_nav" id="secondary_nav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a href="index.php?controller=produits&action=readAll">Nos produits</a>
       <?php
       if (isset($_SESSION['idUtilisateur'])) {
         if(Session::is_admin()){
 			echo '<a href="index.php?controller=utilisateurs&action=admin">Administration</a>';
         }else{
+      echo '<li><a href="index.php?controller=produits&action=readAll">Nos produits</a></li>';
 			echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Mon profil</a></li>';
 		}
       echo '<a href="index.php?controller=Utilisateurs&action=disconnected">Déconnexion</a>';

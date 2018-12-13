@@ -175,4 +175,49 @@ class ControllerCommandes
         ControllerUtilisateurs::connect();
       }
     }
+
+    public static function changeStatut(){
+      if(Session::is_admin()){
+          $pagetitle = 'Changement d\'un statut';
+          $view = 'changeStatut';
+          require_once File::build_path(array('view', 'view.php'));
+      }else{
+        echo 'Vous n\'avez pas les droits <a href="index.php"> retour a la page d\'accueil </a>';
+      }
+    }
+
+    public static function statusName($idCommande){
+      $sql = 'SELECT nomStatut FROM cac_commandes co JOIN cac_statut st ON co.idStatut = st.idStatut WHERE co.idCommande = :idCommande';
+      $sql_prep = Model::$PDO->prepare($sql);
+      $value = array('idCommande' => $idCommande);
+      $sql_prep->execute($value);
+      $sql_prep->setFetchMode(PDO::FETCH_ASSOC);
+      $tab = $sql_prep->fetchAll();
+      return $tab[0]['nomStatut'];
+    }
+
+    public static function actualiseStatut(){
+      if(Session::is_admin()){
+          try{
+            $sql = 'UPDATE cac_commandes SET idStatut = :idStatut WHERE idCommande = :idCommande';
+            $sql_prep = Model::$PDO->prepare($sql);
+
+            $values = array(
+              'idStatut' => $_GET['idStatut'],
+              'idCommande' => $_GET['idCommande'],
+            );
+            $sql_prep->execute($values);
+          }catch(PDOException $e) {
+            if (Conf::getDebug()) {
+              echo $e->getMessage(); // affiche un message d'erreur
+            } else {
+              echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+            }
+          }
+        ControllerCommandes::readAll();
+      }else{
+        echo 'Vous n\'avez pas les droits<a href="index.php"> retour a la page d\'accueil </a>';
+      }
+
+    }
 }
