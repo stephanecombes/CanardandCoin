@@ -2,9 +2,10 @@
 		<?php
 		if (ControllerProduits::createPanier()){
 			$nbArticles=count($_SESSION['panier']['idProduit']);
-			if ($nbArticles <= 0)
+			if ($nbArticles <= 0) {
 			echo "<p>Votre panier est vide </p>";
-			else
+			echo '<a class="button" href="index.php?controller=produits&action=readAll">Liste des produits</a>';
+			} else
 			{
 				echo '<table class="table_panier">';
 				echo '<p>Votre panier :</p>';

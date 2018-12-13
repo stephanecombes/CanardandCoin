@@ -20,7 +20,7 @@ $ageu = '<p>Age de l\'utilisateur : ' . $u->get('ageUtilisateur') . '</p>';
 $roleu = '<p>Rôle de l\'utilisateur : ' . $u->get('idRole') . '</p>';
 
 $detailutilisateur = $idu . $nomu . $prenomu . $mailu . $adresseu . $cpu . $villeu . $ageu . $roleu;
-$idUtilisateurURL = rawurlencode($_SESSION['idUtilisateur']);
+$idUtilisateurURL = rawurlencode($u->get('idUtilisateur'));
 
 if (Session::is_admin()) {
     echo '<h1>Détail de l\'utilisateur </h1>';
