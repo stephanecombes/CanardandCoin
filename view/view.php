@@ -1,5 +1,5 @@
 <!doctype html>
-<?php ControllerProduits::createPanier(); ?>
+<?php ControllerProduits::createPanier();?>
 <html lang="fr">
   <head>
     <meta charset="utf-8">
@@ -11,10 +11,10 @@
     <!-- Principal nav -->
     <ul class="principal_nav">
 	<?php
-	if(!Session::is_admin()){
-		echo '<li><a href="index.php?controller=produits&action=viewPanier">Panier</a></li>';
-	}
-	?>
+if (!Session::is_admin()) {
+    echo '<li><a href="index.php?controller=produits&action=viewPanier">Panier</a></li>';
+}
+?>
       <?php
       if (isset($_SESSION['idUtilisateur'])) {
         if(Session::is_admin()){
@@ -60,9 +60,9 @@
   <body class="body_class">
     <div class="div_body">
     <?php
-      $filepath = File::build_path(array("view", static::$object, "$view.php"));
-      require $filepath;
-      ?>
+$filepath = File::build_path(array("view", static::$object, "$view.php"));
+require $filepath;
+?>
     </div>
     <footer class="footer_class">
       <hr>

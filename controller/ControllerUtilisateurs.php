@@ -94,7 +94,6 @@ class ControllerUtilisateurs
             $tab = ModelUtilisateurs::selectAll();
             $view = 'created';
             $utilisateurURL = Conf::getBaseURL() . 'index.php?controller=utilisateurs&action=validate&idUtilisateur=' . rawurlencode(ModelUtilisateurs::getIdbyEmail($utilisateur->get('mailUtilisateur'))) . '&nonce=' . rawurlencode($utilisateur->get('nonce'));
-            var_dump($utilisateurURL);
             $texteCourriel = '<p>Bonjour, vous êtes récement inscrit au site Canard and Coin, veuillez cliquer sur le lien suivant pour valider votre compte</p>';
             $texteCourriel .= '<p><a href="' . $utilisateurURL . '">' . $utilisateurURL . '</a></p>';
             $texteCourriel .= '<p>Cordialement</p>';
@@ -198,10 +197,10 @@ class ControllerUtilisateurs
             $u = ModelUtilisateurs::select($idUtilisateur);
             $_SESSION['idUtilisateur'] = $u->get('idUtilisateur');
             $_SESSION['idRole'] = $u->get('idRole');
-            if(Session::is_admin()){
-              ControllerUtilisateurs::admin();
-            }else{
-              ControllerProduits::viewPanier();
+            if (Session::is_admin()) {
+                ControllerUtilisateurs::admin();
+            } else {
+                ControllerProduits::viewPanier();
             }
         } else if (!ModelUtilisateurs::isNonceNull($idUtilisateur)) {
             $pagetitle = 'Erreur';
@@ -253,13 +252,14 @@ class ControllerUtilisateurs
         }
     }
 
-    public static function admin(){
-      if(Session::is_admin()){
-        $pagetitle = 'Panneau d\'administration';
-        $view = 'adminPannel';
-        require File::build_path(array("view", "view.php"));
-      }else{
-        ControllerProduits::readAll();
-      }
+    public static function admin()
+    {
+        if (Session::is_admin()) {
+            $pagetitle = 'Panneau d\'administration';
+            $view = 'adminPannel';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            ControllerProduits::readAll();
+        }
     }
 }

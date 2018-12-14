@@ -188,9 +188,9 @@ class ControllerProduits
             $q = intval($q);
         }
         for ($i = 0; $i < count($quantity); $i++) {
-          if(isset($_SESSION['panier']['idProduit'][$i])){
-            ControllerProduits::modifyQuantity($_SESSION['panier']['idProduit'][$i], round($quantity[$i]));
-          }
+            if (isset($_SESSION['panier']['idProduit'][$i])) {
+                ControllerProduits::modifyQuantity($_SESSION['panier']['idProduit'][$i], round($quantity[$i]));
+            }
         }
         $pagetitle = 'panier';
         $view = 'panier';
@@ -236,5 +236,12 @@ class ControllerProduits
         $req_sql_prep->execute($values);
 
         require File::build_path(array("view", "view.php"));
+    }
+
+    public static function error()
+    {
+        $pagetitle = 'ERREUR';
+        $view = 'error';
+        require File::build_path(array('view', 'view.php'));
     }
 }

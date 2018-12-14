@@ -1,13 +1,14 @@
 <?php
 echo '<table class="table_panier">';
 echo '<tr>';
-echo	'<th>N°</th>';
-echo	'<th>ID commande</th>';
-echo	'<th>ID utilisateur</th>';
-echo	'<th>date commande</th>';
-echo	'<th>statut</th>';
-echo	'<th>montant</th>';
+echo '<th>N°</th>';
+echo '<th>ID commande</th>';
+echo '<th>ID utilisateur</th>';
+echo '<th>date commande</th>';
+echo '<th>statut</th>';
+echo '<th>montant</th>';
 echo '</tr>';
+<<<<<<< HEAD
 if(Session::is_admin()){
 	echo '<h1>Listes des commandes</h1>';
 	foreach ($tab as $key => $value) {
@@ -36,7 +37,30 @@ if(Session::is_admin()){
 				echo	'<td>' . $value->get('montantCommande') . '</td>';
 				echo '</tr>';
 	}
+=======
+if (Session::is_admin()) {
+    echo '<h1>Listes des commandes</h1>';
+    foreach ($tab as $key => $value) {
+        $idCommandeURL = rawurlencode($value->get('idCommande'));
+        echo '<tr>';
+        echo '<td>' . ($key + 1) . '</td>';
+        echo '<td><a href=index.php?controller=commandes&action=read&idCommande=' . $idCommandeURL . '>' . $value->get('idCommande') . '</a></td>';
+        echo '<td>' . $value->get('idUtilisateur') . '</td>';
+        echo '<td>' . $value->get('dateCommande') . '</td>';
+        echo '<td><a href="index.php?controller=commandes&action=changeStatut&idCommande=' . $idCommandeURL . '">' . ControllerCommandes::statusName($value->get('idCommande')) . '</td></a>';
+        echo '<td>' . $value->get('montantCommande') . '</td>';
+        echo '</tr>';
+    }
+} else {
+    echo '<h1>Mes commandes</h1>';
+    foreach ($tab as $key => $value) {
+        if ($value->get('idUtilisateur') === $_SESSION['idUtilisateur']) {
+            $idCommande = htmlspecialchars($value->get('idCommande'));
+            $idCommandeURL = rawurlencode($value->get('idCommande'));
+            echo '<p><a href=index.php?controller=commandes&action=read&idCommande=' . $idCommandeURL . '>' . $idCommande . '</a></p>';
+        }
+    }
+>>>>>>> 150742a2b94e105a016e2645d97ea473dab3679f
 }
 }
 echo '</table>';
-?>
