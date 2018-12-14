@@ -145,7 +145,7 @@ class ControllerUtilisateurs
             $type = 'E_PASSWORD';
             $view = 'error';
             require File::build_path(array("view", "view.php"));
-        } else if (ModelUtilisateurs::checkEmail($_POST['mailUtilisateur']) && (ModelUtilisateurs::getIdbyEmail($_POST['mailUtilisateur'])) != $u - get('idUtilisateur')) {
+        } else if (ModelUtilisateurs::checkEmail($_POST['mailUtilisateur']) && (ModelUtilisateurs::getIdbyEmail($_POST['mailUtilisateur'])) != $u -> get('idUtilisateur')) {
             $lastForm = $_POST;
             $pagetitle = 'Courriel déja utilisé';
             $type = 'E_EMAIL_IN_USE';
@@ -156,6 +156,11 @@ class ControllerUtilisateurs
             $pagetitle = 'Liste des utilisateurs';
             $tab_u = ModelUtilisateurs::selectAll();
             $view = 'updated';
+            if(!Session::is_admin()){
+              $idru = $u->get('idRole');
+            }else{
+              $idru = $_POST['idRole'];
+            }
             $data = array(
                 'idUtilisateur' => $_POST['idUtilisateur'],
                 'nomUtilisateur' => $_POST['nomUtilisateur'],
@@ -168,9 +173,8 @@ class ControllerUtilisateurs
                 'villeUtilisateur' => $_POST['villeUtilisateur'],
                 'mailUtilisateur' => $_POST['mailUtilisateur'],
                 'ageUtilisateur' => $_POST['ageUtilisateur'],
-                'idRole' => $_POST['idRole'],
+                'idRole' => $idru,
             );
-            $_SESSION['idRole'] = $_POST['idRole'];
             ModelUtilisateurs::update($data);
             require_once File::build_path(array('view', 'view.php'));
         } else {
