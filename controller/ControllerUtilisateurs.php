@@ -94,7 +94,6 @@ class ControllerUtilisateurs
             $tab = ModelUtilisateurs::selectAll();
             $view = 'created';
             $utilisateurURL = Conf::getBaseURL() . 'index.php?controller=utilisateurs&action=validate&idUtilisateur=' . rawurlencode(ModelUtilisateurs::getIdbyEmail($utilisateur->get('mailUtilisateur'))) . '&nonce=' . rawurlencode($utilisateur->get('nonce'));
-            var_dump($utilisateurURL);
             $texteCourriel = '<p>Bonjour, vous êtes récement inscrit au site Canard and Coin, veuillez cliquer sur le lien suivant pour valider votre compte</p>';
             $texteCourriel .= '<p><a href="' . $utilisateurURL . '">' . $utilisateurURL . '</a></p>';
             $texteCourriel .= '<p>Cordialement</p>';
