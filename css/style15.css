@@ -28,7 +28,7 @@ a {color:black;}
 
 
 .principal_nav li {
-  font-family: Maven Pro;
+  font-family: "Maven Pro";
   float: right;
 }
 
@@ -94,7 +94,7 @@ a {color:black;}
   display:flex;
   flex-direction: column;
   margin:0px;
-  font-family: Maven Pro;
+  font-family: "Maven Pro";
   background-color: transparent;
   background-repeat: no-repeat;
   background-size: cover;
@@ -149,7 +149,7 @@ input[type=number] {
 }
 
 input[type=submit]{
-  font-family: Maven Pro;
+  font-family: "Maven Pro";
   background-color: #6666ff;
   border: none;
   color: white;
