@@ -27,9 +27,16 @@ if(Session::is_admin()){
 		if($value->get('idUtilisateur') === $_SESSION['idUtilisateur']){
 			$idCommande = htmlspecialchars($value->get('idCommande'));
 			$idCommandeURL = rawurlencode($value->get('idCommande'));
-			echo '<p><a href=index.php?controller=commandes&action=read&idCommande=' . $idCommandeURL . '>' . $idCommande . '</a></p>';
-		}
+				echo '<tr>';
+				echo	'<td>' . ($key + 1 ) . '</td>';
+				echo	'<td><a href=index.php?controller=commandes&action=read&idCommande=' . $idCommandeURL . '>' . $value->get('idCommande') . '</a></td>';
+				echo	'<td>' . $value->get('idUtilisateur') . '</td>';
+				echo	'<td>' . $value->get('dateCommande') . '</td>';
+				echo	'<td>' . ControllerCommandes::statusName($value->get('idCommande')) . '</td>';
+				echo	'<td>' . $value->get('montantCommande') . '</td>';
+				echo '</tr>';
 	}
+}
 }
 echo '</table>';
 ?>

@@ -18,6 +18,7 @@ foreach ($tab as $key => $value) {
     } else {
         $imglink = $images[0]->get('lienImage');
     }
+
     echo '<a class="list_block" href=index.php?controller=produits&action=read&idProduit=' . $idProduitURL . '>';
     echo '<img class="img_produit" src="' . $imglink . '">';
     echo '<p>' . $nomProduit . '</p>';

@@ -172,6 +172,7 @@ class ControllerProduits
         $l = (isset($_POST['l']) ? $_POST['l'] : (isset($_GET['l']) ? $_GET['l'] : null));
         $l = preg_replace('#\v#', '', $l);
         ControllerProduits::removeArticle($l);
+        ControllerProduits::viewPanier();
     }
 
     public static function modifyArticleQuantity()

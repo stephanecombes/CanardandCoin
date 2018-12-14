@@ -1,7 +1,7 @@
 <?php
-$c = ModelCategories::select($_GET['idCategorie']);
 
-if ($c != false) {
+if (isset($_GET['idCategorie'])) {
+    $c = ModelCategories::select($_GET['idCategorie']);
     $cChamp = 'updated';
     $cIdCategorie = htmlspecialchars($c->get('idCategorie'));
     $cNomCategorie = htmlspecialchars($c->get('nomCategorie'));
@@ -15,7 +15,7 @@ if ($c != false) {
 ?>
 
 <?php
-echo '<form method="post" action="index.php?controller=categories&action=' . $cChamp . '>';
+echo '<form method="post" action="index.php?controller=categories&action=' . $cChamp . '">';
 ?>
 	<fieldset>
 		<legend>Categorie :</legend>
@@ -24,7 +24,7 @@ if ($cChamp == 'updated') {
     echo <<< EOT
 		<p>
 			<label for="idCategorie_id">Id Categorie</label> :
-			<input type="text" placeholder="Ex : 1" name="idCategorie_id" id="idCategorie_id" value= $cIdCategorie readonly/>
+			<input type="text" placeholder="Ex : 1" name="idCategorie" id="idCategorie_id" value= $cIdCategorie readonly/>
 		</p>
 EOT;
 }
@@ -32,12 +32,12 @@ EOT;
 		<p>
 			<label for="nomCategorie_id">Nom Categorie</label> :
 <?php
-echo '<input type="text" placeholder="Ex : Canard..." name="nomCategorie_id" id="nomCategorie_id" value=' . $cNomCategorie . ' required/>';
+echo '<input type="text" placeholder="Ex : Canard..." name="nomCategorie" id="nomCategorie_id" value=' . $cNomCategorie . ' required/>';
 ?>
 		</p>
 		<p>
 <?php
-echo '<input type="submit" value=' . $cLabel . '/>';
+echo '<input type="submit" value=' . $cLabel . '>';
 ?>
 		</p>
 	</fieldset>

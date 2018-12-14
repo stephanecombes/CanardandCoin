@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title><?php $pagetitle;?></title>
-    <link rel="stylesheet" href="css/style15.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Maven+Pro" />
   </head>
   <header>
@@ -20,6 +20,7 @@
         if(Session::is_admin()){
 			    echo '<li><a href="index.php?controller=utilisateurs&action=admin">Administration</a></li>';
         }else{
+          echo '<li><a href="index.php?controller=commandes&action=readAll">Mes commandes</a></li>';
           echo '<li><a href="index.php?controller=produits&action=readAll">Nos produits</a></li>';
 			    echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Mon profil</a></li>';
 		    }
@@ -27,6 +28,7 @@
       } else {
         echo '<li><a href="index.php?controller=Utilisateurs&action=create">Inscription</a></li>';
         echo '<li><a href="index.php?controller=Utilisateurs&action=connect">Connexion</a></li>';
+        echo '<li><a href="index.php?controller=produits&action=readAll">Nos produits</a></li>';
       }
       ?>
       <li class="img_logo"><a href="index.php" ><img class="img_logo" src="images/logo.png" alt="logo"></a></li>
@@ -39,6 +41,7 @@
         if(Session::is_admin()){
 			echo '<a href="index.php?controller=utilisateurs&action=admin">Administration</a>';
         }else{
+          echo '<a href="index.php?controller=commandes&action=readAll">Mes commandes</a>';
       echo '<li><a href="index.php?controller=produits&action=readAll">Nos produits</a></li>';
 			echo '<li><a href="index.php?controller=utilisateurs&action=readAll">Mon profil</a></li>';
 		}
@@ -46,6 +49,7 @@
       } else {
 			echo '<a href="index.php?controller=Utilisateurs&action=create">Inscription</a>';
 			echo '<a href="index.php?controller=Utilisateurs&action=connect">Connexion</a>';
+      echo '<a href="index.php?controller=produits&action=readAll">Nos produits</a>';
       }
       ?>
     </div>
@@ -61,7 +65,9 @@
       ?>
     </div>
     <footer class="footer_class">
-      <p>a footer</p>
+      <hr>
+      <p><h1>Société canard and coin</h1></p>
+      <p>Tous droits presque réservés</p>
     </footer>
   </body>
 </html>
