@@ -19,10 +19,12 @@ if (isset($_SESSION['idUtilisateur'])) {
         <input type="password" placeholder="Ex : ********" name="mdpUtilisateur" id="mdpUtilisateur_id" required/>
       </p>
       <p>
-        <input type="submit" value="Se connecter" />
+        <input type="submit" class="button" value="Se connecter" />
       </p>
   	</fieldset>
   </form>
+  <p>Vous n'avez pas de compte? </p>
+  <a class="button" href=index.php?controller=utilisateurs&action=create>S'inscrire</a>
   <?php
 }
 ?>
