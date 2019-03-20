@@ -1,3 +1,10 @@
 # Canard and Coin
 
-Projet PHP / SQL Réalisé par Tilo PAPIN, Thomas SANZ et Stéphane COMBES
+
+PHP Project :
+Online shop for the third semester of Technology University Degree in Computing Science.
+
+
+Stéphane COMBÉS (myself)
+Tilo PAPIN
+Thomas SANZ
